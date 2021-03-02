@@ -1,7 +1,10 @@
+const { default: Home } = require("./pages/Home");
 
 function App() {
   return (
-    <h1>Cocoliche</h1>
+    <>
+      <Home />
+    </>
   );
 }
 
