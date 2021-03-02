@@ -3,19 +3,23 @@ const path = require('path')
 
 const eventController = {
   addEvent: async (req, res) => {
-    const { title, descripcion, articleCategory } = req.body
-    const { name, profilePicture, _id } = req.user
+    console.log(req.body.title)
+    console.log(req.files)
+    const { title, descripcion, category, dateEvent } = req.body
+    //const { name, profilePicture, _id } = req.user
     const file = req.files.file
     const articlePictureUbicacion = `/assets/eventsPics/${file.md5}.jpg`
     const articleSave = new Event({
       title,
       descripcion,
       picture: articlePictureUbicacion,
-      author: {
-        name,
-        profilePicture,
-        idUser: _id
-      },
+      category,
+      dateEvent
+      // author: {
+      //   name,
+      //   profilePicture,
+      //   idUser: _id
+      // },
     })
 
     file.mv(path.join(__dirname, `../frontend/public/assets/eventsPics/${file.md5}.jpg`), error => {

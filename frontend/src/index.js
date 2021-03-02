@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 // Importing Sass with Bootstrap CSS
 import './App.scss';
-import store from './redux/reducers/rootReducer';
+import store from './redux/reducers/rootReducer'
 ReactDOM.render(
   <Provider store={store}>
     <App />

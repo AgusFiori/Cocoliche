@@ -4,19 +4,22 @@ import { API } from './../../components/Api';
 
 const eventsActions = {
     newEvent: (newEvent, file, token) => {
-      console.log(newEvent)
+      console.log(newEvent, file)
         return async (dispatch, getState) => {
           try{
             const form = new FormData()
             form.append('title',newEvent.title)
-            form.append('descripcion',newEvent.descripcion)
+            form.append('descripcion',newEvent.description)
             form.append('category',newEvent.category)
+            form.append('dateEvent',newEvent.date)
             form.append('file', file.result)
-            const respuesta = await axios.post(`${API}/events`, form, {
-                 headers:{
-                     'Authorization': `Bearer ${token}`,
-                     'Content-Type':'multipart/formdata'
-             }})
+            const respuesta = await axios.post(`${API}/events`, form, 
+            // {
+            //      headers:{
+            //          'Authorization': `Bearer ${token}`,
+            //          'Content-Type':'multipart/formdata'
+            //  }}
+             )
              if (!respuesta.data.success) {
                  return respuesta.data
              }
@@ -24,101 +27,9 @@ const eventsActions = {
             console.log(respuesta)
         }catch(error){
           Swal.fire(error)
-        }
-          }
-          
-    },
-    // getArticles: () => {
-    //   try{
-    //     return async(dispatch, getState) => {
-    //         const response = await axios.get(`${API}/blog`)
-    //         dispatch({type: 'GET_ARTICLES', payload: response.data.response})
-    //     }
-    //   }catch(error){
-    //     Swal.fire(error)
-    //   }    
-    // },
-    // editArticle:(article)=>{
-        
-    //     return async(dispatch, getState) => {
-    //         try{
-    //             const response = await axios.put(`${API}/blog`, {article})
-    //             dispatch({type: 'UPDATE_ARTICLE', payload: response.data.response})
-    //         }
-    //         catch(error){
-    //           Swal.fire(error)
-    //           }
-    //     }   
-    // },
-    // deleteArticle:(id) => {
-    //     return async (dispatch, getState) => {
-    //       const response = await axios.put(`${API}/blog/delete`,{id})
-    //       dispatch({ type: 'DELETE_ARTICLE', payload: response.data.response })
-    //     }
-    //   },
-    // commentArticle: newComment => {
-    //     const {comment, token, artId} = newComment      
-    //     return async(dispatch, getState) => {
-    //       try{
-    //         const response = await axios.post(`${API}/article/comment`, {comment, artId}, 
-    //         {
-    //             headers:{
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         })
-    //         dispatch({type: 'COMMENT_ARTICLE', payload: response.data.response})
-    //       }catch(error){
-    //         Swal.fire(error)
-    //       }
-          
-    //     }
-    // },
-    // deleteComment: remove => {
-    //     const { artId, token, commentId } = remove
-    //     return async (dispatch, getState) => {
-    //       try{
-    //         const response = await axios.delete(`${API}/article/comment/${artId}/${commentId}`,
-    //         {
-    //           headers: {
-    //             Authorization: `Bearer ${token}`,
-    //           },
-    //         }
-    //       )
-    //       dispatch({ type: 'DELETE_COMMENT', payload: response.data.response })
-    //       }catch(error){
-    //         Swal.fire(error)
-    //       }
-          
-    //     }
-    //   },
-    //   editComment: (reComment) => {
-    //     const {commentId, artId, editComment, token } = reComment
-    //     return async (dispatch, getState) => {
-    //       try{
-    //         const response = await axios.put(`${API}/article/comment`, { artId, commentId, editComment },
-    //         {
-    //           headers: {
-    //             Authorization: `Bearer ${token}`,
-    //           },
-    //         })     
-    //       dispatch({ type: 'EDIT_COMMENT', payload: response.data.response })
-    //       }catch(error){
-    //         Swal.fire(error)
-    //       }
-         
-    //     }
-    //   },
-    //   addVisit: (artId) => {
-    //     return async (dispatch, getState) => {
-    //       try{
-    //         const response = await axios.post(`${API}/articles/visits`, { artId })
-    //         dispatch({ type: 'ADD_BLOG', payload: response.data.response })
-    //       }catch(error){
-    //         Swal.fire(error)
-    //       }
-         
-    //     }
-    //   },
+        }       
+    }
+},
 }
 
 export default eventsActions
