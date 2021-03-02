@@ -3,8 +3,8 @@ require("dotenv").config();
 
 // conexion a la BASE DE DATOS
 mongoose.connect(process.env.MONGODB, {
-     useNewUrlParser:true,
-    useCreateIndex:true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
