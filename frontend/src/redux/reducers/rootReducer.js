@@ -5,6 +5,5 @@ import authReducer from './authReducer'
 const reducer = combineReducers({
     authReducer
 })
-
-const store = createStore(reducer, applyMiddleware(thunk))
-export default store
+    const store= createStore(reducer, applyMiddleware(thunk))
+export default store 

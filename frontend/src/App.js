@@ -18,28 +18,34 @@ function App(props) {
   const [reload, setReload] = useState(false)
   if (props.loggedUser) {
     if (props.loggedUser.role === "admin") {
+      console.log(1)
       var routes = 
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path ="/management" component={Management} />
-        <Route exact path ="/calendar" component={Calendar} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/menu" component={Menu} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/profile" component={Profile}/>
-        <Redirect to="/" />
-      </Switch>
-    } else {
-      var routes = 
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path ="/calendar" component={Calendar} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/menu" component={Menu} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/profile" component={Profile}/>
-        <Redirect to="/" />
-      </Switch>
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path ="/management" component={Management} />
+          <Route exact path ="/calendar" component={Calendar} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/profile" component={Profile}/>
+          <Redirect to="/" />
+        </Switch>
+      </ScrollToTop>
+    } else{
+      console.log(2)
+      var routes =
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path ="/calendar" component={Calendar} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/profile" component={Profile}/>
+          <Redirect to="/" />
+        </Switch>
+      </ScrollToTop>
     }
   } else if (localStorage.getItem('token')) {
     props.logFromLS(localStorage.getItem('token'))
@@ -48,25 +54,25 @@ function App(props) {
       })
   } else {
     var routes = (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/calendar" component={Calendar} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/menu" component={Menu} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Redirect to="/" />
-      </Switch>
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/calendar" component={Calendar} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Redirect to="/" />
+        </Switch>
+      </ScrollToTop>
     );
   }
 
   return (
     <Router>
-        <ScrollToTop>
-          {routes}
-        </ScrollToTop>  
-      </Router>
+        {routes}
+    </Router>
   );
 }
 const mapStateToProps = state => {
