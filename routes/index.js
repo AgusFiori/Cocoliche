@@ -12,7 +12,7 @@ require('../config/passport')
 router.route('/user/signup')
 .post( validator.accountToValidate,userController.signUp)
 router.route('/user/signin')
-.get(userController.signIn)
+.post(userController.signin)
 router.route('/user/ls')
 .post(passport.authenticate('jwt', {session: false}), userController.logFromLS)
 

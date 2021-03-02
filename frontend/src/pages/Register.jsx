@@ -9,7 +9,6 @@ const Register =(props)=>{
     lastname:'',
     urlPic:'',
  })
-
  const validateUser=e=>{
      const inputValue= e.target.value
      const field=e.target.name
