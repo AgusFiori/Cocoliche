@@ -3,7 +3,7 @@ import CreateEvent from './components/CreateEvent.jsx';
 
 
 import Home from './pages/Home'
-import Calendar from './pages/Calendar'
+import Calendary from './pages/Calendar'
 import Cart from './pages/Cart'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
@@ -25,7 +25,7 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path ="/management" component={Management} />
-        <Route exact path ="/calendar" component={Calendar} />
+        <Route exact path ="/calendar" component={Calendary} />
         <Route path="/cart" component={Cart} />
         <Route path="/menu" component={Menu} />
         <Route path="/contact" component={Contact} />
@@ -37,7 +37,7 @@ function App(props) {
       var routes = 
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path ="/calendar" component={Calendar} />
+        <Route path ="/calendar" component={Calendary} />
         <Route path="/cart" component={Cart} />
         <Route path="/menu" component={Menu} />
         <Route path="/contact" component={Contact} />
@@ -54,7 +54,7 @@ function App(props) {
     var routes = (
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/calendar" component={Calendar} />
+        <Route path="/calendar" component={Calendary} />
         <Route path="/cart" component={Cart} />
         <Route path="/menu" component={Menu} />
         <Route path="/contact" component={Contact} />

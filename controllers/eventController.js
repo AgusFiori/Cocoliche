@@ -6,8 +6,8 @@ const eventController = {
 
     const { title, descripcion, category, dateEvent } = req.body
     const file = req.files.file
-    const articlePictureUbicacion = `/assets/eventsPics/${file.md5}.jpg`
-    const articleSave = new Event({
+    const articlePictureUbicacion = `/assets/articlePics/${file.md5}.jpg`
+    const eventSave = new Event({
       title,
       descripcion,
       picture: articlePictureUbicacion,
@@ -15,35 +15,28 @@ const eventController = {
       dateEvent
     })
 
-    file.mv(path.join(__dirname, `../frontend/public/assets/eventsPics/${file.md5}.jpg`), error => {
-      if (error) {
-        return res.json({ response: error })
-      }
-    })
-    articleSave.save()
-      .then(articleSaved => {
-        return res.json({ success: true, response: articleSaved })
+    // file.mv(path.join(__dirname, `../client/build/assets/articlePics/${file.md5}.jpg`), error => {
+    //   if (error) {
+    //     return res.json({ response: error })
+    //   }
+    // })
+    Event.save()
+      .then(eventSaved => {
+        return res.json({ success: true, response: eventSaved })
       })
       .catch(error => {
         return res.json({ success: false, error })
       })
 
   },
-  getEvents: async (req, res) => {
-    try {
-      const data = await Event.find()
-
-      res.json({
-        success: true,
-        response: data
-      })
-
-    } catch (error) {
-      res.json({
-        success: false,
-        response: error
-      })
-    }
+  getEvents: (req, res) => {
+    Event.find()
+    .then(event => {
+      return res.json({ success: true, response: event })
+    })
+    .catch(error => {
+      return res.json({ success: false, error })
+    })
   },
   editEvent: async (req, res) => {
     const { _id, date, artist, picture, description, categoty } = req.body.article

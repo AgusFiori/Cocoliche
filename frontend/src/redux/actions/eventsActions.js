@@ -29,7 +29,18 @@ const eventsActions = {
           Swal.fire(error)
         }       
     }
-},
+
+  },
+  
+  getEvents: () => {
+    return async (dispatch, getState) => {
+      try {
+				const response = await axios.get(`${API}/events`)
+				dispatch({type: 'GET_EVENTS', payload: response.data.response})
+			}catch(error){
+        Swal.fire(error)}
+      }
+  },
 }
 
 export default eventsActions
