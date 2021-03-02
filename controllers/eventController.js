@@ -6,11 +6,10 @@ const eventController = {
     const { title, descripcion, articleCategory } = req.body
     const { name, profilePicture, _id } = req.user
     const file = req.files.file
-    const articlePictureUbicacion = `/assets/articlePics/${file.md5}.jpg`
+    const articlePictureUbicacion = `/assets/eventsPics/${file.md5}.jpg`
     const articleSave = new Event({
       title,
       descripcion,
-      articleCategory,
       picture: articlePictureUbicacion,
       author: {
         name,
@@ -19,7 +18,7 @@ const eventController = {
       },
     })
 
-    file.mv(path.join(__dirname, `../client/build/assets/articlePics/${file.md5}.jpg`), error => {
+    file.mv(path.join(__dirname, `../frontend/public/assets/eventsPics/${file.md5}.jpg`), error => {
       if (error) {
         return res.json({ response: error })
       }
