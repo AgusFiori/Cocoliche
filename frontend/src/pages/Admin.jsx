@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import productActions from "../redux/actions/productActions";
 import Compressor from "compressorjs";
 import Swal from "sweetalert2";
 import { connect } from "react-redux";
+import Table from "react-bootstrap/Table";
+import Product from "../components/Product.jsx";
 
 const Admin = (props) => {
   const [product, setProduct] = useState({});
   const [pathImage, setPathImage] = useState("/assets/losago.png");
   const [file, setFile] = useState();
+  const [products, setProducts] = useState([]);
+
+  const { allProducts } = props;
+
+  useEffect(() => {
+    props.getProducts();
+  }, []);
+
+  useEffect(() => {
+    setProducts(allProducts);
+  }, [allProducts]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +61,13 @@ const Admin = (props) => {
     }
   };
 
-  const addProduct = () => {
+  const remove = (e, id) => {
+    e.preventDefault();
+    props.deleteProduct(id);
+  };
+
+  const addProduct = (e) => {
+    e.preventDefault();
     // if (
     //   !product.name ||
     //   !product.price ||
@@ -91,6 +110,7 @@ const Admin = (props) => {
           name="file"
           onChange={onFileChange}
         />
+        <img className="" src={pathImage} alt="Producto" />
         <input
           type="text"
           name="category"
@@ -113,18 +133,44 @@ const Admin = (props) => {
       <div>
         <button onClick={addProduct}>Enviar</button>
       </div>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Delay</th>
+            <th>Stock</th>
+            <th>Picture</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Delete</th>
+            <th>Delete</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products &&
+            products.map((product) => {
+              return <Product product={product} remove={remove} />;
+            })}
+        </tbody>
+      </Table>
     </div>
   );
 };
 
-// const mapStateToProps = state => {
-//   return {
-//     loggedUser: state.authR.loggedUser
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    allProducts: state.productR.allProducts,
+  };
+};
 
 const mapDispatchToProps = {
   addProduct: productActions.addProduct,
+  getProducts: productActions.getProducts,
+  deleteProduct: productActions.deleteProduct,
 };
 
-export default connect(null, mapDispatchToProps)(Admin);
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

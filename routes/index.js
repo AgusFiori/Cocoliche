@@ -5,8 +5,9 @@ const router = express.Router()
 
 const productController = require('../controllers/productController')
 
-router.route('/products/addProduct').post(productController.addProduct)
+// EL METODO PUT LO TENEMOS QUE MOVER A LA RUTA QUE TIENE EL PRODUCT ID
+router.route('/products').post(productController.addProduct).get(productController.getProducts).put(productController.editProduct)
 
-
+router.route('/product/:productId').delete(productController.deleteProduct)
 
 module.exports = router
