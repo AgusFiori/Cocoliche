@@ -1,9 +1,9 @@
 const express = require('express')
-const cors = require('cors')
-require('dotenv').config()
 const path = require('path')
+require('dotenv').config()
+const cors = require('cors')
+const router = require('./routes/index.js')
 require('./config/database')
-const router = require('./routes')
 const fileUpload = require('express-fileupload')
 
 const app = express()
@@ -25,4 +25,4 @@ if(process.env.NODE_ENV === 'production'){
 const port = process.env.PORT
 const host = process.env.HOST || '0.0.0.0'
 
-app.listen(port, host, () => console.log(`App listening on port ${process.env.PORT}`))
+app.listen(port, host, () => console.log(`App listening on port ${port}`))

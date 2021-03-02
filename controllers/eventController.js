@@ -7,7 +7,7 @@ const eventController = {
     const { name, profilePicture, _id } = req.user
     const file = req.files.file
     const articlePictureUbicacion = `/assets/articlePics/${file.md5}.jpg`
-    const articleSave = new Event({
+    const eventSave = new Event({
       title,
       descripcion,
       articleCategory,
@@ -19,14 +19,14 @@ const eventController = {
       },
     })
 
-    file.mv(path.join(__dirname, `../client/build/assets/articlePics/${file.md5}.jpg`), error => {
-      if (error) {
-        return res.json({ response: error })
-      }
-    })
-    articleSave.save()
-      .then(articleSaved => {
-        return res.json({ success: true, response: articleSaved })
+    // file.mv(path.join(__dirname, `../client/build/assets/articlePics/${file.md5}.jpg`), error => {
+    //   if (error) {
+    //     return res.json({ response: error })
+    //   }
+    // })
+    Event.save()
+      .then(evenSaved => {
+        return res.json({ success: true, response: eventSaved })
       })
       .catch(error => {
         return res.json({ success: false, error })

@@ -1,11 +1,20 @@
-import React from "react";
+import React from 'react'
+import '../App.scss'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
 
-const Calendar = () => {
+const Calendary = () => {
   return (
-    <div>
-      <h2>Calendar</h2>
-    </div>
-  );
-};
+    <div className="container">
+      <div className="calendario">
+        <FullCalendar
+        plugins={[ dayGridPlugin ]}
+        initialView="dayGridMonth"
+        />
+      </div>
 
-export default Calendar;
+    </div>
+  )
+}
+
+export default Calendary;

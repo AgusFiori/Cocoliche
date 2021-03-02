@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Calendary from './pages/Calendar';
 
 function App() {
   return (
-    <h1>Cocoliche</h1>
+    <Calendary></Calendary>
   );
 }
 
