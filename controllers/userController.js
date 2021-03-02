@@ -30,19 +30,24 @@ const userController ={
                 role: userValidation.role}})
         },
           
-    signIn:(req, res) =>{
-        const {username, password} = req.body
-        const emailValidation =findOne({'username':username})
-        if(!emailValidation){
-            return res.json({success:false, respuesta:'wrong username or password'})
-        }
-        const validacionPassword = bcrypt.compareSync(password,usuarioExistente.password)
-        if(!validacionPassword){
-            return res.json({success:false, respuesta: 'wrong username or password'})
-        }
-        var token =jwt.sign({...emailValidation},process.env.secret_word,{})
-        return res.json({success: true, response:{ token,urlPic: emailValidation.urlPic, username:emailValidation.username }})
-    },
+    
+        signin: async (req, res)=>{
+            console.log(req.body)
+            const {username, password} = req.body
+        
+            const usuarioExistente = await user.findOne({username:username})
+            if(!usuarioExistente){
+                return res.json({success:false, respuesta:'wrong username or password'})
+            }
+            
+            const passExistente=bcrypt.compareSync(password,usuarioExistente.password)
+            if(!passExistente){
+                return res.json({success:false, respuesta: 'wrong username or password'})
+            }
+            var token =jwt.sign({...usuarioExistente},process.env.SECRET_KEY,{})
+            return res.json({success: true, response:{ token,urlPic: usuarioExistente.urlPic, username:usuarioExistente.username }})
+    
+        },
     logFromLS: (req, res) => {
         res.json({success: true, response: {
             token: req.body.token, 

@@ -41,6 +41,7 @@ const authActions = {
         return async (dispatch, getState) => {
             console.log(user)
             const respuesta = await axios.post(`${API}/user/signin`, user)
+            console.log(respuesta)
             if (!respuesta.data.success) {
                 return respuesta.data
             }

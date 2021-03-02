@@ -18,7 +18,6 @@ function App(props) {
   const [reload, setReload] = useState(false)
   if (props.loggedUser) {
     if (props.loggedUser.role === "admin") {
-      console.log(1)
       var routes = 
       <ScrollToTop>
         <Switch>
@@ -33,7 +32,6 @@ function App(props) {
         </Switch>
       </ScrollToTop>
     } else{
-      console.log(2)
       var routes =
       <ScrollToTop>
         <Switch>
@@ -53,7 +51,7 @@ function App(props) {
         if (respuesta === '/') setReload(!reload)
       })
   } else {
-    var routes = (
+    var routes = 
       <ScrollToTop>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -66,7 +64,7 @@ function App(props) {
           <Redirect to="/" />
         </Switch>
       </ScrollToTop>
-    );
+
   }
 
   return (
