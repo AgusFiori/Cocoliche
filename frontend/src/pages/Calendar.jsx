@@ -7,12 +7,12 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { Calendar } from '@fullcalendar/core'
 import interactionPlugin from '@fullcalendar/interaction'; // for selectable
 import eventsActions from '../redux/actions/eventsActions'
+import bootstrapPlugin from '@fullcalendar/bootstrap';
 
 const Calendary = (props) => {
   useEffect(()=>{
     props.getEvents()
   },[])
-  console.log(props.events)
 
   
   return (
@@ -26,16 +26,16 @@ const Calendary = (props) => {
           </select>
         </div>
       <FullCalendar
-      plugins={[ interactionPlugin, dayGridPlugin ]}
+      plugins={[ interactionPlugin, dayGridPlugin, bootstrapPlugin ]}
       locale="es-ES"
       selectable={true}
       dateClick={ function(info) {
+    
         alert('Clicked on: ' + info.dateStr);
-        alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-        alert('Current view: ' + info.view.type);
         // change the day's background color just for fun
         info.dayEl.style.backgroundColor = 'red';
       }}
+      themeSystem='bootstrap'
       />
 
       </div>

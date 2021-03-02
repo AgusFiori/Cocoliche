@@ -5,6 +5,7 @@ import App from './App';
 // Importing Sass with Bootstrap CSS
 import './App.scss';
 import store from './redux/reducers/rootReducer'
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
