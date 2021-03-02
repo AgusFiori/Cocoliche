@@ -15,6 +15,7 @@ app.use(cors())
 app.use(fileUpload())
 
 app.use('/api', router)
+<<<<<<< HEAD
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))
@@ -26,3 +27,6 @@ const port = process.env.PORT
 const host = process.env.HOST || '0.0.0.0'
 
 app.listen(port, host, () => console.log(`App listening on port ${port}`))
+=======
+app.listen(4000,()=>console.log("App listening on port 4000"));
+>>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d

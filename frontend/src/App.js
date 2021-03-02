@@ -20,8 +20,9 @@ import React, { useState } from 'react'
 function App(props) {
   const [reload, setReload] = useState(false)
   if (props.loggedUser) {
-    if (props.loggedUser.rol === "admin") {
+    if (props.loggedUser.role === "admin") {
       var routes = 
+<<<<<<< HEAD
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path ="/management" component={Management} />
@@ -30,6 +31,7 @@ function App(props) {
         <Route path="/menu" component={Menu} />
         <Route path="/contact" component={Contact} />
         <Route path="/profile" component={Profile}/>
+        <Route path="/createEvent" component={CreateEvent} />
         <Redirect to="/" />
       </Switch>
     } else {
@@ -43,6 +45,33 @@ function App(props) {
         <Route path="/profile" component={Profile}/>
         <Redirect to="/" />
       </Switch>
+=======
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path ="/management" component={Management} />
+          <Route exact path ="/calendar" component={Calendar} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/profile" component={Profile}/>
+          <Redirect to="/" />
+        </Switch>
+      </ScrollToTop>
+    } else{
+      var routes =
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path ="/calendar" component={Calendar} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/profile" component={Profile}/>
+          <Redirect to="/" />
+        </Switch>
+      </ScrollToTop>
+>>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d
     }
   } else if (localStorage.getItem('token')) {
     props.logFromLS(localStorage.getItem('token'))
@@ -50,6 +79,7 @@ function App(props) {
         if (respuesta === '/') setReload(!reload)
       })
   } else {
+<<<<<<< HEAD
     var routes = (
       <Switch>
         <Route exact path="/" component={Home} />
@@ -62,18 +92,38 @@ function App(props) {
         <Redirect to="/" />
       </Switch>
     );
+=======
+    var routes = 
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/calendar" component={Calendar} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Redirect to="/" />
+        </Switch>
+      </ScrollToTop>
+
+>>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d
   }
 
   return (
     <>
     <h1>Cocoliche</h1>
-    <CreateEvent />
     <Router>
+<<<<<<< HEAD
         <ScrollToTop>
           {routes}
         </ScrollToTop>  
       </Router>
     </>
+=======
+        {routes}
+    </Router>
+>>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d
   );
 }
 const mapStateToProps = state => {
