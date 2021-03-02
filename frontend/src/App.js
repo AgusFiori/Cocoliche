@@ -30,6 +30,7 @@ function App(props) {
         <Route path="/menu" component={Menu} />
         <Route path="/contact" component={Contact} />
         <Route path="/profile" component={Profile}/>
+        <Route path="/createEvent" component={CreateEvent} />
         <Redirect to="/" />
       </Switch>
     } else {
@@ -67,7 +68,6 @@ function App(props) {
   return (
     <>
     <h1>Cocoliche</h1>
-    <CreateEvent />
     <Router>
         <ScrollToTop>
           {routes}
