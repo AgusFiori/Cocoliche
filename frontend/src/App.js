@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Signup from '../src/components/Signup'
 
 function App() {
   return (
-    <h1>Cocoliche</h1>
+    <Signup/>
   );
 }
 

@@ -7,7 +7,7 @@ const validator ={
             password:Joi.string().trim().required().min(6), 
             firstname:Joi.string().trim().required(),
             lastname:Joi.string().trim().required(),
-            urlPi:Joi.string().uri(),
+            urlPic:Joi.string().uri(),
         })
         const validation  = schema.validate(req.body,{abortEarly: false})
         if(!validation.error){ 

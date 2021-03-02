@@ -1,9 +1,9 @@
 const user = require ('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { findOne } = require('../models/User')
 const userController ={
     signUp: async (req, res)=>{
-        console.log(req.body)
         const errores=[]
         const {username, password, firstname,lastname,urlPic, role, purchases, date }= req.body
 
@@ -23,6 +23,19 @@ const userController ={
             respuesta: errores,
             //validamos que no tenga errores para mandarle los datos 
             response:errores.length === 0 && {token, urlPic: userValidation.urlPic, username: userValidation.username}})
+    },
+    signIn:(req, res) =>{
+        const {username, password} = req.body
+        const emailValidation =findOne({'username':username})
+        if(!emailValidation){
+            return res.json({success:false, respuesta:'wrong username or password'})
+        }
+        const validacionPassword = bcrypt.compareSync(password,usuarioExistente.password)
+        if(!validacionPassword){
+            return res.json({success:false, respuesta: 'wrong username or password'})
+        }
+        var token =jwt.sign({...emailValidation},process.env.secret_word,{})
+        return res.json({success: true, response:{ token,urlPic: emailValidation.urlPic, username:emailValidation.username }})
     }
 }
 
