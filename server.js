@@ -16,18 +16,6 @@ app.use(fileUpload())
 
 app.use('/api', router)
 
-<<<<<<< HEAD
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('client/build'))
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname + '/client/build/index.html'))
-//   })
-// }
-// const port = process.env.PORT
-// const host = process.env.HOST || '0.0.0.0'
-
-app.listen(4000, () => console.log(`App listening on port ${process.env.PORT}`))
-=======
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
   app.get('*', (req, res) => {
@@ -38,4 +26,3 @@ const port = process.env.PORT
 const host = process.env.HOST || '0.0.0.0'
 
 app.listen(port, host, () => console.log(`App listening on port ${process.env.PORT}`))
->>>>>>> 33809c93c845b00a20d034f89ca89af81e9fdc72
