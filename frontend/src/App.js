@@ -17,7 +17,7 @@ import React, { useState } from 'react'
 function App(props) {
   const [reload, setReload] = useState(false)
   if (props.loggedUser) {
-    if (props.loggedUser.rol === "admin") {
+    if (props.loggedUser.role === "admin") {
       var routes = 
       <Switch>
         <Route exact path="/" component={Home} />

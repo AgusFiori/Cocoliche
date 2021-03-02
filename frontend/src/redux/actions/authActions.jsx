@@ -10,7 +10,6 @@ const authActions = {
             form.append('lastName',newUser.lastName)
             form.append('username',newUser.username)
             form.append('password',newUser.password)
-            form.append('country',newUser.country)
             form.append('profilePicture', file.name)
             form.append('file', file)
             const respuesta = await axios.post('http://localhost:4000/user/signup', form, {headers:{'Content-Type':'multipart/formdata'}})
