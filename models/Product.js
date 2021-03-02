@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
   picture: String,
   category: String,
   delay: Number,
-  amountSold: Number
+  amountSold: { tpye: Number, default: 0 }
 });
 
 const Product = mongoose.model("product", productSchema);
