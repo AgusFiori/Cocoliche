@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now() },
+  title: String,
   artist: String,
   picture: String,
   description: String,
-  categoty: String
+  categoty: String,
+  dateEvent: String
 });
 
 

@@ -3,20 +3,23 @@ const path = require('path')
 
 const eventController = {
   addEvent: async (req, res) => {
-    const { title, descripcion, articleCategory } = req.body
-    const { name, profilePicture, _id } = req.user
+    console.log(req.body.title)
+    console.log(req.files)
+    const { title, descripcion, category, dateEvent } = req.body
+    //const { name, profilePicture, _id } = req.user
     const file = req.files.file
     const articlePictureUbicacion = `/assets/articlePics/${file.md5}.jpg`
     const eventSave = new Event({
       title,
       descripcion,
-      articleCategory,
       picture: articlePictureUbicacion,
-      author: {
-        name,
-        profilePicture,
-        idUser: _id
-      },
+      category,
+      dateEvent
+      // author: {
+      //   name,
+      //   profilePicture,
+      //   idUser: _id
+      // },
     })
 
     // file.mv(path.join(__dirname, `../client/build/assets/articlePics/${file.md5}.jpg`), error => {
@@ -25,7 +28,7 @@ const eventController = {
     //   }
     // })
     Event.save()
-      .then(evenSaved => {
+      .then(eventSaved => {
         return res.json({ success: true, response: eventSaved })
       })
       .catch(error => {
@@ -33,21 +36,14 @@ const eventController = {
       })
 
   },
-  getEvents: async (req, res) => {
-    try {
-      const data = await Event.find()
-
-      res.json({
-        success: true,
-        response: data
-      })
-
-    } catch (error) {
-      res.json({
-        success: false,
-        response: error
-      })
-    }
+  getEvents: (req, res) => {
+    Event.find()
+    .then(event => {
+      return res.json({ success: true, response: event })
+    })
+    .catch(error => {
+      return res.json({ success: false, error })
+    })
   },
   editEvent: async (req, res) => {
     const { _id, date, artist, picture, description, categoty } = req.body.article
