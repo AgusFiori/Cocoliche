@@ -5,7 +5,7 @@ const initialState = {
     filter: [],
   }
   
-  const bookReducers = (state = initialState, action) => {
+function eventReducer(state = initialState, action) {
     switch (action.type) {
       case 'ADD_ARTICLE':
         return {
@@ -30,4 +30,4 @@ const initialState = {
       }
   }
   
-  export default bookReducers
+  export default eventReducer

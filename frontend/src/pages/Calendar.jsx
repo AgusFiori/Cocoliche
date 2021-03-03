@@ -1,20 +1,83 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import "../App.scss";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-// import timeGridPlugin from "@fullcalendar/timegrid";   // para q es esto
-// import { Calendar } from "@fullcalendar/core";
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import eventsActions from "../redux/actions/eventsActions";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
+import Swal from "sweetalert2";
 
 const Calendary = (props) => {
-  const { getEvents } = props;
+  const [event, setEvent] = useState([])
 
-  useEffect(() => {
+  const { getEvents } = props;
+  useEffect( () => {
     getEvents();
-  }, [getEvents]);
+    setEvent(props.events)
+  }, [getEvents, event]);
+
+
+  const eventos = event.map(event => {
+    return (
+      event = {
+        id: event._id,
+        title: event.title,
+        start: event.dateEvent,
+        
+      }
+    )
+  })
+
+  const handleDateClick = (arg) => {
+    console.log(arg)
+    event.map(event => {
+      if (event.dateEvent === arg.dateStr) {
+        Swal.fire({
+          title: event.title,
+          text: 'Modal with a custom image.',
+          imageUrl: event.picture,
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+          showCancelButton: true,
+          confirmButtonText: 'Pedir turno',
+          cancelButtonText: 'Cerrar',
+          reverseButtons: true
+
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+            'Go to turns',
+            'Turns',
+            'success'
+          )
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            Swal.fire(
+            'Cancel',
+            'Canceled',
+            'error'
+          )
+          }
+        })
+
+      } 
+    })
+  }
+  const handleEventClick = (arg) => {
+    console.log(arg)
+        Swal.fire({
+          title: 'Sweet!',
+          text: 'Modal with a custom image.',
+          imageUrl: event.picture,
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+        })
+  }
 
   return (
     <div className="container">
@@ -26,15 +89,28 @@ const Calendary = (props) => {
             <option></option>
           </select>
         </div>
+        
         <FullCalendar
           plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
           locale="es-ES"
-          selectable={true}
-          dateClick={function (info) {
-            alert("Clicked on: " + info.dateStr);
-            // change the day's background color just for fun
-            info.dayEl.style.backgroundColor = "red";
+          customButtons= {{
+            myCustomButton: {
+              text: 'custom!',
+              click: function() {
+                alert('clicked the custom button!');
+              }
+            }
           }}
+          headerToolbar= {{
+            left: 'myCustomButton',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          }}
+          selectable={true}
+          events= {eventos}
+          dayMaxEvents={true}
+          dateClick={handleDateClick}
+          eventClick={handleEventClick}
           themeSystem="bootstrap"
         />
       </div>
