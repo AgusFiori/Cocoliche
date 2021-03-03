@@ -1,12 +1,12 @@
-import axios from "axios"
-import swal from 'sweetalert2'
-import { API } from "../../components/Api"
-//comentario para poder hacer un push
+import axios from "axios";
+import swal from "sweetalert2";
+import { API } from "../../components/Api";
 
 const authActions = {
     newUser: (newUser) => {
         return async (dispatch, getState) => {
             const respuesta = await axios.post(`${API}/user/signup`,newUser)
+            console.log(respuesta.data.response.details)
             if (!respuesta.data.success) {
                 return respuesta.data
             }
@@ -15,7 +15,7 @@ const authActions = {
     },
     loginWithGoogle:(response)=>{
         return async (dispatch, getState) => {
-            const respuesta = await axios.post(`${API}/user/sign_google`, response)
+            const respuesta = await axios.post('http://localhost:4000/user/sign_google', response)
             if (!respuesta.data.success) {
                 swal.fire({
                     position: 'top-end',
@@ -51,29 +51,32 @@ const authActions = {
     logoutUser: () => {
         return (dispatch, getState) => {
             dispatch({type: 'LOG_OUT_USER'})
+      
         }
-    },
-    //logueo desde local storage
-    logFromLS: (token) => {
-        return async (dispatch, getState) => {
-            try {
-                const respuesta = await axios.post(`${API}/user/ls`, {token}, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-                dispatch({type: 'LOG_USER', payload:respuesta.data })
-            } catch(err) {
-                if (err.response.status === 401) {
-                    alert("Access denied")
-                    localStorage.clear()
-                    return '/'
-                }
-            }
+      },
+       //logueo desde local storage
+  logFromLS: (token) => {
+    return async (dispatch, getState) => {
+      try {
+        const respuesta = await axios.post(
+          `${API}/user/ls`,
+          { token },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        dispatch({ type: "LOG_USER", payload: respuesta.data });
+      } catch (err) {
+        if (err.response.status === 401) {
+          alert("Access denied");
+          localStorage.clear();
+          return "/" 
+          };
         }
-    },
-
-
+    }
+  }
 }
 
 export default authActions
