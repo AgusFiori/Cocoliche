@@ -19,9 +19,5 @@ app.use('/api', router)
 const port = process.env.PORT
 const host = process.env.HOST || '0.0.0.0'
 
-<<<<<<< HEAD
-app.listen(4000, () => console.log(`App listening on port 4000`))
-=======
 
 app.listen(4000, () => console.log("App listening on port 4000"));
->>>>>>> 7569c3afcb33a530a7e6786810d371d1c0013b99

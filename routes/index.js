@@ -5,11 +5,6 @@ const router = express.Router()
 
 const productController = require('../controllers/productController')
 
-<<<<<<< HEAD
-router.route('/products').post(productController.addProduct).put(productController.editProduct)
-
-router.route('/product/:productId').get(productController.deleteProduct)
-=======
 // EL METODO PUT LO TENEMOS QUE MOVER A LA RUTA QUE TIENE EL PRODUCT ID
 router.route('/products').post(productController.addProduct).get(productController.getProducts).put(productController.editProduct)
 
@@ -40,6 +35,5 @@ router.route('/user/signin')
   .post(userController.signin)
 router.route('/user/ls')
   .post(passport.authenticate('jwt', { session: false }), userController.logFromLS)
->>>>>>> 7569c3afcb33a530a7e6786810d371d1c0013b99
 
 module.exports = router
