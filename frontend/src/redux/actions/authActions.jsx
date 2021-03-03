@@ -1,7 +1,7 @@
 import axios from "axios"
 import swal from 'sweetalert2'
 import { API } from "../../components/Api"
-
+//comentario para poder hacer un push
 
 const authActions = {
     newUser: (newUser) => {
