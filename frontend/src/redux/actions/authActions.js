@@ -1,20 +1,13 @@
 import axios from "axios";
-import { API } from "./../../Components/Api";
+import { API } from "./../../components/Api";
 import Swal from "sweetalert2";
 
 const authActions = {
-    newUser: (newUser, file) => {
+    newUser: (newUser) => {
         return async (dispatch, getState) => {
             try {
-                const form = new FormData();
-                form.append("name", newUser.name);
-                form.append("lastName", newUser.lastName);
-                form.append("username", newUser.username);
-                form.append("password", newUser.password);
-                form.append("file", file.result);
-                const respuesta = await axios.post(`${API}/user/signup`, form, {
-                    headers: { "Content-Type": "multipart/formdata" },
-                });
+
+                const respuesta = await axios.post(`${API}/user/signup`, newUser);
                 if (!respuesta.data.success) {
                     return respuesta.data;
                 }

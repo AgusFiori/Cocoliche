@@ -148,6 +148,9 @@ const Admin = (props) => {
             <th>Delete</th>
             <th>Delete</th>
             <th>Delete</th>
+            <th>Delete</th>
+            <th>Delete</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
