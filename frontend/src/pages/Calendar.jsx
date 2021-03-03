@@ -82,29 +82,26 @@ const Calendary = (props) => {
   return (
     <div className="container">
       <div className="calendario mt-5">
-        <div>
-          <input placeholder="Evento" />
-          <select className="w-50 h-100">
-            <option></option>
-            <option></option>
-          </select>
-        </div>
-        
         <FullCalendar
           plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
           locale="es-ES"
           customButtons= {{
             myCustomButton: {
-              text: 'custom!',
+              text:"Pedir turno",
               click: function() {
-                alert('clicked the custom button!');
+                Swal.fire({
+                  title: 'Sweet!',
+                  text: 'Modal with a custom image.',
+                  imageUrl: 'https://unsplash.it/400/200',
+                  imageWidth: 400,
+                  imageHeight: 200,
+                  imageAlt: 'Custom image',
+                })
               }
-            }
+            },
           }}
           headerToolbar= {{
-            left: 'myCustomButton',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            end: 'myCustomButton'
           }}
           selectable={true}
           events= {eventos}
@@ -112,6 +109,8 @@ const Calendary = (props) => {
           dateClick={handleDateClick}
           eventClick={handleEventClick}
           themeSystem="bootstrap"
+          
+          contentHeight={500}
         />
       </div>
     </div>
