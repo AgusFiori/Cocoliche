@@ -13,10 +13,11 @@ const Admin = (props) => {
   const [products, setProducts] = useState([]);
 
   const { allProducts } = props;
+  const { getProducts } = props;
 
   useEffect(() => {
-    props.getProducts();
-  }, []);
+    getProducts();
+  }, [getProducts]);
 
   useEffect(() => {
     setProducts(allProducts);
@@ -144,12 +145,6 @@ const Admin = (props) => {
             <th>Stock</th>
             <th>Picture</th>
             <th>Edit</th>
-            <th>Delete</th>
-            <th>Delete</th>
-            <th>Delete</th>
-            <th>Delete</th>
-            <th>Delete</th>
-            <th>Delete</th>
             <th>Delete</th>
           </tr>
         </thead>

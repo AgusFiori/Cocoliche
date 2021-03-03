@@ -1,17 +1,9 @@
 const express = require('express')
-<<<<<<< HEAD
-const cors = require('cors')
-require('dotenv').config()
-const path = require('path')
-require('./config/database')
-const router = require('./routes')
-=======
 const path = require('path')
 require('dotenv').config()
 const cors = require('cors')
 const router = require('./routes/index.js')
 require('./config/database')
->>>>>>> 4bd31ba6ad8858e0e64c61c682c771f3b766001e
 const fileUpload = require('express-fileupload')
 
 const app = express()
@@ -23,31 +15,9 @@ app.use(cors())
 app.use(fileUpload())
 
 app.use('/api', router)
-<<<<<<< HEAD
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'))
-  })
-=======
-<<<<<<< HEAD
-
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('client/build'))
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname+'/client/build/index.html'))
-    })
->>>>>>> 4bd31ba6ad8858e0e64c61c682c771f3b766001e
-}
 const port = process.env.PORT
 const host = process.env.HOST || '0.0.0.0'
 
-<<<<<<< HEAD
-app.listen(port, host, () => console.log(`App listening on port ${process.env.PORT}`))
-=======
-app.listen(port, host, () => console.log(`App listening on port ${port}`))
-=======
-app.listen(4000,()=>console.log("App listening on port 4000"));
->>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d
->>>>>>> 4bd31ba6ad8858e0e64c61c682c771f3b766001e
+
+app.listen(4000, () => console.log("App listening on port 4000"));

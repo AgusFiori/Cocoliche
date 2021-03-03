@@ -3,16 +3,18 @@ import { connect } from "react-redux";
 import "../App.scss";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import { Calendar } from "@fullcalendar/core";
+// import timeGridPlugin from "@fullcalendar/timegrid";   // para q es esto
+// import { Calendar } from "@fullcalendar/core";
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import eventsActions from "../redux/actions/eventsActions";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 
 const Calendary = (props) => {
+  const { getEvents } = props;
+
   useEffect(() => {
-    props.getEvents();
-  }, []);
+    getEvents();
+  }, [getEvents]);
 
   return (
     <div className="container">
