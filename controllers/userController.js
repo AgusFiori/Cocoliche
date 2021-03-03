@@ -1,7 +1,6 @@
 const user = require ('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { findOne } = require('../models/User')
 const userController ={
     signUp: async (req, res)=>{
         console.log(req.body)
@@ -46,8 +45,8 @@ const userController ={
             return res.json({success: true, response:{ token,urlPic: usuarioExistente.urlPic, username:usuarioExistente.username }})
     
         },
-    logFromLS: (req, res) => {
-        res.json({success: true, response: {
+         logFromLS: (req, res) => {
+            res.json({success: true, response: {
             token: req.body.token, 
             firstname: req.user.firstname, 
             urlPic: req.user.urlPic,
