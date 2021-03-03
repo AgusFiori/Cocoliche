@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import App from './App';
+import { Provider } from 'react-redux'
 // Importing Sass with Bootstrap CSS
 import './App.scss';
 import store from './redux/reducers/rootReducer'

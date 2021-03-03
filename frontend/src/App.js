@@ -1,6 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import CreateEvent from './components/CreateEvent.jsx';
-
 
 import Home from './pages/Home'
 import Calendary from './pages/Calendar'
@@ -10,68 +7,46 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Menu from './pages/Menu'
 import Profile from './pages/Profile'
-import Management from './pages/Management'
 import ScrollToTop from './components/ScrollTop'
-import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
-import {connect} from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { connect } from 'react-redux'
 import authActions from './redux/actions/authActions'
 import React, { useState } from 'react'
+import Admin from './pages/Admin.jsx';
+
 
 function App(props) {
   const [reload, setReload] = useState(false)
+  var routes
   if (props.loggedUser) {
     if (props.loggedUser.role === "admin") {
-      var routes = 
-<<<<<<< HEAD
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path ="/management" component={Management} />
-        <Route exact path ="/calendar" component={Calendary} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/menu" component={Menu} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/profile" component={Profile}/>
-        <Route path="/createEvent" component={CreateEvent} />
-        <Redirect to="/" />
-      </Switch>
+      routes =
+        <ScrollToTop>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/calendar" component={Calendary} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/menu" component={Menu} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/profile" component={Profile} />
+            <Redirect to="/" />
+          </Switch>
+        </ScrollToTop>
     } else {
-      var routes = 
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path ="/calendar" component={Calendary} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/menu" component={Menu} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/profile" component={Profile}/>
-        <Redirect to="/" />
-      </Switch>
-=======
-      <ScrollToTop>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path ="/management" component={Management} />
-          <Route exact path ="/calendar" component={Calendar} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/menu" component={Menu} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/profile" component={Profile}/>
-          <Redirect to="/" />
-        </Switch>
-      </ScrollToTop>
-    } else{
-      var routes =
-      <ScrollToTop>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path ="/calendar" component={Calendar} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/menu" component={Menu} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/profile" component={Profile}/>
-          <Redirect to="/" />
-        </Switch>
-      </ScrollToTop>
->>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d
+      routes =
+        <ScrollToTop>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/calendar" component={Calendary} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/menu" component={Menu} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/admin" component={Admin} />
+
+            <Redirect to="/" />
+          </Switch>
+        </ScrollToTop>
     }
   } else if (localStorage.getItem('token')) {
     props.logFromLS(localStorage.getItem('token'))
@@ -79,25 +54,11 @@ function App(props) {
         if (respuesta === '/') setReload(!reload)
       })
   } else {
-<<<<<<< HEAD
-    var routes = (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/calendar" component={Calendary} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/menu" component={Menu} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Redirect to="/" />
-      </Switch>
-    );
-=======
-    var routes = 
+    routes =
       <ScrollToTop>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/calendar" component={Calendar} />
+          <Route path="/calendar" component={Calendary} />
           <Route path="/cart" component={Cart} />
           <Route path="/menu" component={Menu} />
           <Route path="/contact" component={Contact} />
@@ -107,23 +68,14 @@ function App(props) {
         </Switch>
       </ScrollToTop>
 
->>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d
   }
 
   return (
     <>
-    <h1>Cocoliche</h1>
-    <Router>
-<<<<<<< HEAD
-        <ScrollToTop>
-          {routes}
-        </ScrollToTop>  
+      <Router>
+        {routes}
       </Router>
     </>
-=======
-        {routes}
-    </Router>
->>>>>>> a8b59e66b6a97d9c832192a79fa6c49725c3120d
   );
 }
 const mapStateToProps = state => {
