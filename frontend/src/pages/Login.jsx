@@ -51,24 +51,46 @@ const responseGoogle = async (response) => {
   }
 
     return(
-         <div>
-             <h1>Log in</h1>
-             <input placeholder="write your email"  name="username" onChange={validateUser}></input>
-             <input placeholder="write your password" type="password" name="password" onChange={validateUser}></input>
-             <button onClick={createUser}>Create Account</button>
-             <label>{errores}</label>
-             <GoogleLogin
-               clientId="581401226209-scr1fncegbbivf7eds0g088i1ks51ihh.apps.googleusercontent.com"
-               buttonText="Crear Account with Google"
-               onSuccess={responseGoogle}
-               onFailure={responseGoogle}
-               cookiePolicy={'single_host_origin'}
-            />
-         </div>
+      <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
+          <Navbar />
+        </div>
+        <div className="col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
+            <span className="h1">Ingresar</span>
+            <input
+              className='text-center h3'
+              placeholder="Ingresa tu email"
+              name="username"
+              onChange={validateUser}
+            ></input>
+            <input
+              className='text-center my-4 h3'
+              placeholder="Ingresa tu contraseña"
+              type="password"
+              name="password"
+              onChange={validateUser}
+            ></input>
+            <button onClick={login} className='h3'>Ingresar</button>
+            <label>{errores}</label>
+            <GoogleLogin
+         clientId="581401226209-scr1fncegbbivf7eds0g088i1ks51ihh.apps.googleusercontent.com"
+         buttonText="Crear Account with Google"
+         onSuccess={responseGoogle}
+         onFailure={responseGoogle}
+         cookiePolicy={'single_host_origin'}
+      />
+        </div>
+      </div>
+    </div>
+    
     )
 }
 
 const mapDispatchToProps={
   loginUser:authActions.loginUser
 }
-export default connect (null, mapDispatchToProps) (Login)
+const mapDispatchToProps = {
+  loginUser: authActions.loginUser,
+  newUser: authActions.newUser,
+};
