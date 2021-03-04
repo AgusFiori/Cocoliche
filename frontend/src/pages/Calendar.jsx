@@ -41,17 +41,38 @@ const Calendary = (props) => {
           imageHeight: 200,
           imageAlt: 'Custom image',
           showCancelButton: true,
-          confirmButtonText: 'Pedir turno',
+          confirmButtonText: 'Pedir reserva',
           cancelButtonText: 'Cerrar',
           reverseButtons: true
 
         }).then((result) => {
           if (result.isConfirmed) {
-            Swal.fire(
-            'Go to turns',
-            'Turns',
-            'success'
-          )
+            Swal.mixin({
+              input: 'text',
+              confirmButtonText: 'Next &rarr;',
+              showCancelButton: true,
+              progressSteps: ['1', '2', '3']
+            }).queue([
+              {
+                title: 'Cantidad de personas',
+                text: 'Chaining swal2 modals is easy'
+              },
+              'Question 2',
+              'Question 3'
+            ]).then((result) => {
+              if (result.value) {
+                console.log(result.value)
+                const answers = JSON.stringify(result.value)
+                Swal.fire({
+                  title: 'All done!',
+                  html: `
+                    Your answers:
+                    <pre><code>${answers}</code></pre>
+                  `,
+                  confirmButtonText: 'Lovely!'
+                })
+              }
+            })
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -88,7 +109,7 @@ const Calendary = (props) => {
           locale="es-ES"
           customButtons= {{
             myCustomButton: {
-              text:"Pedir turno",
+              text:"Pedir reserva",
               click: function() {
                 Swal.fire({
                   title: 'Sweet!',
