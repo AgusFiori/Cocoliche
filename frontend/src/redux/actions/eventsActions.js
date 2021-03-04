@@ -37,6 +37,7 @@ const eventsActions = {
       try {
 				const response = await axios.get(`${API}/events`)
 				dispatch({type: 'GET_EVENTS', payload: response.data.response})
+        console.log(response.data.response)
 			}catch(error){
         Swal.fire(error)}
       }
