@@ -73,9 +73,9 @@ const Product = (props) => {
           <td>{props.product.name}</td>
           <td>{props.product.price}</td>
           <td>{props.product.category}</td>
+          <td>{props.product.description}</td>
           <td>{props.product.delay}</td>
           <td>{props.product.stock}</td>
-          <td>{props.product.description}</td>
           <td>
             <img
               src={`${props.product.picture}`}
@@ -123,6 +123,14 @@ const Product = (props) => {
           <td>
             <input
               type="text"
+              name="description"
+              onChange={handleChange}
+              defaultValue={props.product.description}
+            />
+          </td>
+          <td>
+            <input
+              type="text"
               name="delay"
               onChange={handleChange}
               defaultValue={props.product.delay}
@@ -135,15 +143,7 @@ const Product = (props) => {
               onChange={handleChange}
               defaultValue={props.product.stock}
             />
-          </td>
-          <td>
-            <input
-              type="text"
-              name="description"
-              onChange={handleChange}
-              defaultValue={props.product.description}
-            />
-          </td>
+          </td> 
           <td>
             <img
               src={`${editProduct.file}`}

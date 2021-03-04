@@ -17,7 +17,11 @@ const productController = {
     }
   },
   addProduct: async (req, res) => {
-    const { name, price, description, stock, category, delay } = req.body
+    console.log(req.body, req.body.subcategories)
+
+    const parsedSubcategories = JSON.parse(req.body.subcategories)
+
+    const { name, description, stock, delay, category } = req.body
     const file = req.files.file
 
     await file.mv(path.join(__dirname, '../frontend/public/assets/productPictures/' + file.md5 + ".jpeg"), error => {
@@ -26,12 +30,11 @@ const productController = {
       }
     })
 
-    // const productPicturesLocation = `/assets/productPictures/${file.md5}.jpeg`
+    const productPicturesLocation = `/assets/productPictures/${file.md5}.jpeg`
 
     const newProduct = new Product({
-      name, price, description, stock, picture: productPicturesLocation, category, delay
+      name, description, stock, picture: productPicturesLocation, subcategories: parsedSubcategories, delay, category
     })
-    // GUARDA, PERO DA UN ERROR DE MENSAJE EN LOS HEADERS QUE SE ENVIAN
     newProduct.save()
       .then(newProduct => { return res.json({ success: true, response: newProduct }) })
       .catch(error => { return res.json({ success: false, response: error }) })
@@ -54,7 +57,6 @@ const productController = {
 
 
       if (!req.files) {
-        console.log('no foto')
         var modifiedProduct = await Product.findOneAndUpdate(
           { "_id": id },
           {
@@ -69,11 +71,7 @@ const productController = {
           },
           { new: true }
         )
-        console.log(modifiedProduct)
-
       } else {
-
-
         var modifiedProduct = await Product.findOneAndUpdate(
           { "_id": id },
           {
@@ -89,14 +87,11 @@ const productController = {
           },
           { new: true }
         )
-        console.log(modifiedProduct)
       }
       res.json({
         success: true,
         response: modifiedProduct
       })
-      // .then(modifiedProduct => { return res.json({ success: true, response: modifiedProduct }) })
-      //     .catch(error => { return res.json({ success: false, error }) })
     }
     catch (error) {
       console.log(error)
