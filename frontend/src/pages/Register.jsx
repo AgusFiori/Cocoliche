@@ -15,6 +15,7 @@ const Register =(props)=>{
     urlPic:'',
  })
  const [errores,setErrores]=useState([])
+ 
  const validateUser=e=>{
      const inputValue= e.target.value
      const field=e.target.name

@@ -50,14 +50,13 @@ const responseGoogle = async (response) => {
     }
   }
 
-
-console.log(errores)
     return(
          <div>
              <h1>Log in</h1>
              <input placeholder="write your email"  name="username" onChange={validateUser}></input>
              <input placeholder="write your password" type="password" name="password" onChange={validateUser}></input>
              <button onClick={createUser}>Create Account</button>
+             <label>{errores}</label>
              <GoogleLogin
                clientId="581401226209-scr1fncegbbivf7eds0g088i1ks51ihh.apps.googleusercontent.com"
                buttonText="Crear Account with Google"
