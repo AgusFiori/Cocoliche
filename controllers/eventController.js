@@ -3,7 +3,7 @@ const path = require('path')
 
 const eventController = {
   addEvent: async (req, res) => {
-
+    console.log(req.body)
     const { title, description, category, dateEvent } = req.body
     const file = req.files.file
     const articlePictureUbicacion = `/assets/eventsPics/${file.md5}.jpg`
@@ -12,7 +12,7 @@ const eventController = {
       description,
       picture: articlePictureUbicacion,
       category,
-      date: dateEvent
+      dateEvent,
     })
 
     file.mv(path.join(__dirname, `../frontend/public/assets/eventsPics/${file.md5}.jpg`), error => {

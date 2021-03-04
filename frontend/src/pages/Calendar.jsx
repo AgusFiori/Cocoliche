@@ -29,6 +29,8 @@ const Calendary = (props) => {
     )
   })
 
+
+  
   const handleDateClick = (arg) => {
     console.log(arg)
     event.map(event => {
@@ -44,7 +46,6 @@ const Calendary = (props) => {
           confirmButtonText: 'Pedir turno',
           cancelButtonText: 'Cerrar',
           reverseButtons: true
-
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire(
@@ -86,21 +87,6 @@ const Calendary = (props) => {
         <FullCalendar
           plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
           locale="es-ES"
-          customButtons= {{
-            myCustomButton: {
-              text:"Pedir turno",
-              click: function() {
-                Swal.fire({
-                  title: 'Sweet!',
-                  text: 'Modal with a custom image.',
-                  imageUrl: 'https://unsplash.it/400/200',
-                  imageWidth: 400,
-                  imageHeight: 200,
-                  imageAlt: 'Custom image',
-                })
-              }
-            },
-          }}
           headerToolbar= {{
             end: 'myCustomButton'
           }}
@@ -108,9 +94,7 @@ const Calendary = (props) => {
           events= {eventos}
           dayMaxEvents={true}
           dateClick={handleDateClick}
-          eventClick={handleEventClick}
-          themeSystem="bootstrap"
-          
+          eventClick={handleEventClick}          
           contentHeight={500}
         />
       </div>
