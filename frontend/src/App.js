@@ -13,7 +13,6 @@ import { connect } from 'react-redux'
 import authActions from './redux/actions/authActions'
 import React, { useState } from 'react'
 import Admin from './pages/Admin.jsx';
-import CreateEvent from './components/CreateEvent';
 
 
 function App(props) {

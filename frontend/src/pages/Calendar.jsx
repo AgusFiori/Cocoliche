@@ -30,6 +30,8 @@ const Calendary = (props) => {
     )
   })
 
+
+  
   const handleDateClick = (arg) => {
     console.log(arg)
     event.map(event => {
@@ -45,7 +47,6 @@ const Calendary = (props) => {
           confirmButtonText: 'Pedir reserva',
           cancelButtonText: 'Cerrar',
           reverseButtons: true
-
         }).then((result) => {
           console.log(result)
           if (result.isConfirmed) {
@@ -96,32 +97,30 @@ const Calendary = (props) => {
         <FullCalendar
           plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
           locale="es-ES"
-          customButtons= {{
-            myCustomButton: {
-              icon:'fa-chevron-left',
-              text:"Ver eventos",
-              click: function() {
-                Swal.fire({
-                  title: event.title,
-                  text: event.descripcion,
-                  imageUrl: event.picture,
-                  imageWidth: 400,
-                  imageHeight: 200,
-                  imageAlt: 'Custom image',
-                })
-              }
-            },
-          }}
-          headerToolbar= {{
-            end: 'myCustomButton'
-          }}
+          // customButtons= {{
+          //   myCustomButton: {
+          //     icon:'fa-chevron-left',
+          //     text:"Ver eventos",
+          //     click: function() {
+          //       Swal.fire({
+          //         title: event.title,
+          //         text: event.descripcion,
+          //         imageUrl: event.picture,
+          //         imageWidth: 400,
+          //         imageHeight: 200,
+          //         imageAlt: 'Custom image',
+          //       })
+          //     }
+          //   },
+          // }}
+          // headerToolbar= {{
+          //   end: 'myCustomButton'
+          // }}
           selectable={true}
           events= {eventos}
           dayMaxEvents={true}
           dateClick={handleDateClick}
-          // eventClick={handleEventClick}
-          themeSystem="bootstrap"
-          
+          // eventClick={handleEventClick}          
           contentHeight={500}
         />
       </div>

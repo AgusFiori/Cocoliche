@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink} from "react-router-dom";
 import authActions from '../redux/actions/authActions'
 import {IoFastFoodOutline} from 'react-icons/io5'
 import { GoSignOut } from "react-icons/go";
 import { connect } from 'react-redux'
 import logo from '../assets/cocoliche-logo.png'
+import Swal from 'sweetalert2';
 
 const Navbar = (props) => {
+
+  const [diaReserva, setDiaReserva] = useState("")
+
+  const [nroReserva, setNumeroReserva] = useState("")
+
+  const reservar = e => {
+    Swal.fire({
+      confirmButtonText: "RESERVAR",
+      showCancelButton: true,
+      cancelButtonText: "CERRAR",
+      title: 'Multiple inputs',
+
+      html:
+        '<span>Ingrese la fecha de su reserva</span>'+
+        '<input type="date" id="swal-input1" class="swal2-input">' +
+        '<span>Cantidada de sillas a reservar</span>'+
+        '<input type="number" id="swal-input2" class="swal2-input">',
+      focusConfirm: true,  
+      preConfirm: () => {
+        return [
+          setDiaReserva(document.getElementById('swal-input1').value),
+          setNumeroReserva(document.getElementById('swal-input2').value)
+        ]
+      }
+    })
+    .then((result) => {
+      console.log(nroReserva, diaReserva)
+      result.dismiss &&      
+      (nroReserva !== "" && diaReserva !== "") ? 
+        Swal.fire('Reserva enviada, recibirá un mail con la confirmación!', '', 'success') : 
+        Swal.fire('Complete todos los campos', '', 'error')
+  })
+  }
+  
   if (props.loggedUser === null) {
     var links = <>
           <NavLink to="/login" className="text-decoration-none m-2">
@@ -44,6 +79,7 @@ const Navbar = (props) => {
             <NavLink to="/">
                 <GoSignOut className="logOut" onClick={() => props.logoutUser()} />
             </NavLink>
+           
             </> }
     }
   return (
@@ -51,8 +87,7 @@ const Navbar = (props) => {
           <div className="logo mt-4 mb-2" style={{backgroundImage: `url(${logo})`}}>
           </div>
           <div className="menu mx-auto d-flex flex-column">
-            {links}
-            
+            {links}           
             <NavLink to="/menu" className="text-decoration-none m-2">
               <span className="h4">Menú</span>
             </NavLink>
@@ -65,6 +100,10 @@ const Navbar = (props) => {
             <NavLink to="/contact" className="text-decoration-none m-2">
               <span className="h4">Contacto</span>
             </NavLink>
+            {props.loggedUser && 
+            <NavLink  className="text-decoration-none m-2" to="/">
+              <span className="h4" onClick={reservar}>HACER UNA RESERVA</span>
+            </NavLink>}
           </div>
       </div>
   );
