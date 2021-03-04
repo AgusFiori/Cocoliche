@@ -38,9 +38,7 @@ const authActions = {
   },
   loginUser: (user) => {
     return async (dispatch, getState) => {
-      console.log(user);
       const respuesta = await axios.post(`${API}/user/signin`, user);
-      console.log(respuesta);
       if (!respuesta.data.success) {
         return respuesta.data;
       }
@@ -67,6 +65,7 @@ const authActions = {
         );
         dispatch({ type: "LOG_USER", payload: respuesta.data });
       } catch (err) {
+        console.log(err)
         if (err.response.status === 401) {
           alert("Access denied");
           localStorage.clear();

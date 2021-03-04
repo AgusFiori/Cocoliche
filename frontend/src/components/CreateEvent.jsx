@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react'
 import eventsActions from './../redux/actions/eventsActions';
 import { connect } from 'react-redux';
 import Swal from "sweetalert2";
 import Compressor from "compressorjs";
+import Event from './Event';
 
 const CreateEvent = (props) => {
 
@@ -18,6 +18,11 @@ const CreateEvent = (props) => {
         });
       };
 
+      const resetFile = () => {
+        setPathImage("");
+        setFile("");
+      };
+
     const [newEvent, setNewEvent] = useState({})
 
     const captureNewEvent = e => {
@@ -30,7 +35,8 @@ const CreateEvent = (props) => {
     }
 
     const enviarEvento = (e) => {
-        e.preventDefault();
+        e.preventDefault()
+        e.stopPropagation();
         if(newEvent.length === undefined && file === undefined){
           errorAlert("error","All fields are required" )
           return false
@@ -39,8 +45,8 @@ const CreateEvent = (props) => {
           errorAlert("error","All fields are required" )
           return false
         }
-
         props.newEvent(newEvent, file);
+        resetFile()
 
      }
 
@@ -78,7 +84,7 @@ const CreateEvent = (props) => {
             <input type="date" name="date" onChange={captureNewEvent}  placeholder="Fecha del evento"/>
             <input type="text" name="description" onChange={captureNewEvent}  placeholder="Descripción"/>
             <label htmlFor="inputUpload">
-                <img style={{margin:"0"}} className="img-fluid profile-pic-profile-submit" src={pathImage} alt="petition-pic" />
+                <img style={{margin:"0"}} className="img-fluid profile-pic-profile-submit" src={pathImage} alt="event-pic" />
             </label>    
             <input id="inputUpload" name="picture" type="file" onChange={onFileChange} />
             <span onChange={captureNewEvent}>
@@ -89,10 +95,24 @@ const CreateEvent = (props) => {
                 <option value="Bebida">Bebida</option>
             </select>
             </span>
-            
             <button onClick={enviarEvento}>Enviar</button>
+            <h3>Lista de próximos eventos</h3>
+            <div>{
+                props.allEvents.map(({title, _id, picture, description, date}) => 
+              
+               { return <span key={_id}><Event title={title} picture={picture} id={_id} description={description} date={date} /></span>}
+                )
+
+                }
+            </div>
         </div>
     )
+}
+
+const mapStateToProps = state => {
+  return {
+    allEvents: state.eventR.events
+  }
 }
 
 const mapDispatchToProps = {
@@ -100,4 +120,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(null, mapDispatchToProps)(CreateEvent)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent)

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { connect } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Product from "../components/Product.jsx";
+import CreateEvent from '../components/CreateEvent'
 
 const Admin = (props) => {
   const [product, setProduct] = useState({});
@@ -46,6 +47,7 @@ const Admin = (props) => {
 
   const submitCategory = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     props.createCategory(newCategory);
   };
 
@@ -90,6 +92,7 @@ const Admin = (props) => {
 
   const remove = (e, id) => {
     e.preventDefault();
+    e.stopPropagation();
     props.deleteProduct(id);
   };
 
@@ -112,6 +115,7 @@ const Admin = (props) => {
   console.log(props);
 
   return (
+    <>
     <div>
       <div>
         <input
@@ -144,7 +148,6 @@ const Admin = (props) => {
         <img className="" src={pathImage} alt="Producto" />
         {props.allCategories.length && (
           <select
-            type="select"
             defaultValue="default"
             onChange={handleChange}
             name="category"
@@ -169,6 +172,7 @@ const Admin = (props) => {
           placeholder="Subcategorias"
           onChange={handleSubcategory}
         />
+        <button onClick={addSubcategory}>Agregar</button>
         <input
           type="text"
           name="subcategoryPrice"
@@ -216,6 +220,10 @@ const Admin = (props) => {
         </tbody>
       </Table>
     </div>
+    <div className="mt-5">
+    <CreateEvent/>
+    </div>
+    </>
   );
 };
 

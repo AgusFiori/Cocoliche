@@ -12,7 +12,6 @@ const productActions = {
           type: 'GET_PRODUCTS',
           payload: response.data.response
         })
-        console.log(response)
       } catch (error) {
         console.log(error)
       }
@@ -20,12 +19,12 @@ const productActions = {
   },
   addProduct: (product, file) => {
     try {
-      const { name, price, description, category, delay, stock } = product
+      const { name, description, category, subcategories, delay, stock } = product
       const form = new FormData()
       form.append('name', name)
-      form.append('price', price)
       form.append('description', description)
       form.append('category', category)
+      form.append('subcategories', JSON.stringify(subcategories))
       form.append('delay', delay)
       form.append('stock', stock)
       form.append('file', file.result)
@@ -59,13 +58,12 @@ const productActions = {
     }
   },
   editProduct: (product, file) => {
-    const { name, price, description, category, delay, stock, id } = product
-    console.log(file)
+    const { name, price, description, idCategory, delay, stock, id } = product
     const editedProduct = new FormData()
     editedProduct.append('name', name)
     editedProduct.append('price', price)
     editedProduct.append('description', description)
-    editedProduct.append('category', category)
+    editedProduct.append('idCategory', idCategory)
     editedProduct.append('delay', delay)
     editedProduct.append('stock', stock)
     file && editedProduct.append('file', file.result)
@@ -75,6 +73,32 @@ const productActions = {
         const response = await axios.put(`${API}/products`, editedProduct)
         dispatch({ type: 'RERENDER', payload: response.data.response })
 
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
+  createCategory: (category) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = axios.post(`${API}/category`, { category })
+        dispatch({
+          type: 'RERENDER',
+          payload: response.data.response
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
+  getCategories: () => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await axios.get(`${API}/category`)
+        dispatch({
+          type: 'ALL_CATEGORIES',
+          payload: response.data.response
+        })
       } catch (error) {
         console.log(error)
       }
