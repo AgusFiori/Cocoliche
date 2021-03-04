@@ -28,13 +28,36 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.banner{
+.banner-sm-home{
+    height: 25vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner-sm-home:hover{
+    transition: transform 2s ease-in-out;
+    background-size: 105%;
+    animation: movement 10s infinite linear alternate;
+}
+.banner-md-home{
+    height: 50vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner-md-home:hover{
+    transition: transform 2s ease-in-out;
+    background-size: 105%;
+    animation: movement 10s infinite linear alternate;
+}
+.banner-lg-home{
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.banner:hover{
+.banner-lg-home:hover{
     transition: transform 2s ease-in-out;
     background-size: 105%;
     animation: movement 10s infinite linear alternate;
@@ -62,4 +85,8 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 15vw;
+}
+.img-prev{
+    width: 200px;
+    height: 200px;
 }

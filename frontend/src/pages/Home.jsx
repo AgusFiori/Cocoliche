@@ -1,25 +1,43 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import blackboard from '../assets/blackboard.jpg'
 import banner_1 from '../assets/Img/banner_1.jpg'
+import banner_2 from '../assets/Img/banner_2.jpg'
+import banner_3 from '../assets/Img/banner_3.jpg'
+import banner_4 from '../assets/Img/banner_4.jpg'
+
 
 const Home = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
+        <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0">
           <Navbar />
         </div>
-        <div className="col-sm-12 col-md-9 col-lg-10 col-xl-10 bg-primary">
+        <div className="col-sm-12 col-md-12 col-lg-10 col-xl-10 bg-primary">
             <div className="row">
-              <div className="col-sm-12 col-lg-5 banner" style={{backgroundImage: `url(${banner_1})`}}>
+              <div className="col-sm-12 col-md-5 col-lg-5 banner-lg-home" style={{backgroundImage: `url(${banner_1})`}}>
 
               </div>
-              <div className="col-7">
-                <div className="container-fluid">
-                  <div className="row"></div>
-                  <div className="row"></div>
-                  <div className="row"></div>
+              <div className="col-sm-12 col-md-7 col-lg-7">
+                <div className="container-fluid p-0">
+                  
+                  <div className="row">
+                    <div className="col-12 banner-md-home" style={{backgroundImage: `url(${banner_2})`}}>
+                      
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12  banner-sm-home" style={{backgroundImage: `url(${banner_3})`}}>
+                        
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12 banner-sm-home" style={{backgroundImage: `url(${banner_4})`}}>
+                        
+                    </div>
+                  </div>
+                
+               
                 </div>
               </div>
             </div>
