@@ -5,13 +5,10 @@ import {IoFastFoodOutline} from 'react-icons/io5'
 import { GoSignOut } from "react-icons/go";
 import { connect } from 'react-redux'
 import logo from '../assets/cocoliche-logo.png'
-<<<<<<< HEAD
 import blackboard from '../assets/blackboard.jpg'
 
 
-=======
 import Swal from 'sweetalert2';
->>>>>>> 530273b89a7453f8b82fd5ec17bf68503f74fb75
 
 const Navbar = (props) => {
 
@@ -89,7 +86,6 @@ const Navbar = (props) => {
             </> }
     }
   return (
-<<<<<<< HEAD
       <div className="d-flex flex-column nav-coco " style={{backgroundImage: `url(${blackboard})`}}>
           <NavLink to="/" className="text-decoration-none">
             <div className="logo mt-4 mb-2" style={{backgroundImage: `url(${logo})`}}>
@@ -98,14 +94,6 @@ const Navbar = (props) => {
           <div className="menu d-flex flex-column mx-auto">
             {links}
             <NavLink to="/menu" className="text-decoration-none mt-2">
-=======
-      <div className="d-flex flex-column">
-          <div className="logo mt-4 mb-2" style={{backgroundImage: `url(${logo})`}}>
-          </div>
-          <div className="menu mx-auto d-flex flex-column">
-            {links}           
-            <NavLink to="/menu" className="text-decoration-none m-2">
->>>>>>> 530273b89a7453f8b82fd5ec17bf68503f74fb75
               <span className="h4">Menú</span>
             </NavLink>
             <NavLink to="/cart" className="text-decoration-none mt-2">
