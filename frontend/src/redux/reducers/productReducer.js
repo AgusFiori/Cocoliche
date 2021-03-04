@@ -1,5 +1,6 @@
 const initialState = {
-  allProducts: []
+  allProducts: [],
+  allCategories: []
 }
 
 export function productReducer(state = initialState, action) {
@@ -14,6 +15,11 @@ export function productReducer(state = initialState, action) {
       return {
         ...state,
         allProducts: state.allProducts.map(product => product._id === action.payload._id ? action.payload : product)
+      }
+    case 'ALL_CATEGORIES':
+      return {
+        ...state,
+        allCategories: action.payload
       }
     default:
       return state

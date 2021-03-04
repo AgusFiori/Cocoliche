@@ -32,7 +32,6 @@ const Register = (props) => {
     }
     const respuesta = await props.newUser(users);
     if (respuesta && respuesta.success) {
-      console.log(respuesta);
     }
   };
 

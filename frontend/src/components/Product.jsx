@@ -64,18 +64,22 @@ const Product = (props) => {
     }
   };
 
-  console.log(editProduct);
-
   return (
     <>
       {!visible ? (
         <tr>
           <td>{props.product.name}</td>
-          <td>{props.product.price}</td>
           <td>{props.product.category}</td>
+          <td>
+            {props.product.subcategories.map((subcategory) => (
+              <p>
+                {subcategory.subcategory}---{subcategory.subcategoryPrice}
+              </p>
+            ))}
+          </td>
+          <td>{props.product.description}</td>
           <td>{props.product.delay}</td>
           <td>{props.product.stock}</td>
-          <td>{props.product.description}</td>
           <td>
             <img
               src={`${props.product.picture}`}
@@ -107,17 +111,25 @@ const Product = (props) => {
           <td>
             <input
               type="text"
-              name="price"
+              name="category"
               onChange={handleChange}
-              defaultValue={props.product.price}
+              defaultValue={props.product.category}
             />
           </td>
           <td>
             <input
               type="text"
-              name="category"
+              name="description"
               onChange={handleChange}
-              defaultValue={props.product.category}
+              disabled={true}
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="description"
+              onChange={handleChange}
+              defaultValue={props.product.description}
             />
           </td>
           <td>
@@ -134,14 +146,6 @@ const Product = (props) => {
               name="stock"
               onChange={handleChange}
               defaultValue={props.product.stock}
-            />
-          </td>
-          <td>
-            <input
-              type="text"
-              name="description"
-              onChange={handleChange}
-              defaultValue={props.product.description}
             />
           </td>
           <td>
