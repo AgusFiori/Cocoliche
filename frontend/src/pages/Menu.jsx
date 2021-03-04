@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import MenuItem from "../components/MenuItem";
 import productActions from "../redux/actions/productActions";
 
 const Menu = (props) => {
@@ -21,25 +22,9 @@ const Menu = (props) => {
       </div>
       <div>
         <h2>Menu</h2>
+
         {props.allProducts.map((product) => (
-          <div>
-            <h3>{product.name}</h3>
-            <img
-              src={`${product.picture}`}
-              alt="Comida"
-              style={{ width: "200px" }}
-            ></img>
-            <select defaultValue="default">
-              <option value="default">Elegi una opcion</option>
-              {product.subcategories.map((category) => (
-                <option key={category.category} value={category.category}>
-                  {category.subcategory} --- {category.subcategoryPrice}
-                </option>
-              ))}
-            </select>
-            <p>{product.description}</p>
-            <h4>{product.rating.length}⭐</h4>
-          </div>
+          <MenuItem key={product._id} product={product} />
         ))}
       </div>
     </div>
