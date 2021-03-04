@@ -4,23 +4,24 @@ const path = require('path')
 const eventController = {
   addEvent: async (req, res) => {
 
-    const { title, descripcion, category, dateEvent } = req.body
+    const { title, description, category, dateEvent } = req.body
     const file = req.files.file
-    const articlePictureUbicacion = `/assets/articlePics/${file.md5}.jpg`
+    const articlePictureUbicacion = `/assets/eventsPics/${file.md5}.jpg`
     const eventSave = new Event({
       title,
-      descripcion,
+      description,
       picture: articlePictureUbicacion,
       category,
-      dateEvent
+      date: dateEvent
     })
 
-    // file.mv(path.join(__dirname, `../client/build/assets/articlePics/${file.md5}.jpg`), error => {
-    //   if (error) {
-    //     return res.json({ response: error })
-    //   }
-    // })
-    Event.save()
+    file.mv(path.join(__dirname, `../frontend/public/assets/eventsPics/${file.md5}.jpg`), error => {
+      if (error) {
+        return res.json({ response: error })
+      }
+    })
+
+    eventSave.save()
       .then(eventSaved => {
         return res.json({ success: true, response: eventSaved })
       })
@@ -59,11 +60,11 @@ const eventController = {
     catch (error) { res.json({ success: false, error }) }
   },
   deleteEvent: async (req, res) => {
+    //BORRA EL POSTEO QUE COINCIDA CON EL ID QUE LE LLEGA POR PARAMS
     try {
-      const { id } = req.body
-      const response = await Event.findOneAndDelete(
-        { _id: id }
-      )
+      const { id } = req.params
+      await Event.findOneAndDelete({ _id: id })
+      const response = await Event.find()
       res.json({
         success: true,
         response
@@ -101,18 +102,27 @@ const eventController = {
       })
     }
   },
-  deleteEvent: async (req, res) => {
+  modifyEvent: async (req, res) => 
     try {
-      const { artId, commentId } = req.params
+      if(req.files && req.files.file){
+        var { file } = req.files
+        var articlePictureUbicacion = `/assets/eventsPics/${file.md5}.jpg`
+
+        file.mv(path.join(__dirname, `../frontend/public/assets/eventsPics/${file.md5}.jpg`), error => {
+        if (error) {
+          return res.json({ response: error })
+        }
+      })
+      }
+  
+      const { title, description, date, id } = req.body
       const response = await Event.findOneAndUpdate(
-        { _id: artId },
-        {
-          $pull: {
-            comments: {
-              _id: commentId
-            }
+        { _id: id },
+        {$set: 
+          {
+            title, description, date, picture: articlePictureUbicacion
           }
-        },
+          },
         { new: true })
       res.json({
         success: true,

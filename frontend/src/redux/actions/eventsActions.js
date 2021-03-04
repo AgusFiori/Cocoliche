@@ -9,29 +9,27 @@ const eventsActions = {
           try{
             const form = new FormData()
             form.append('title',newEvent.title)
-            form.append('descripcion',newEvent.description)
+            form.append('description',newEvent.description)
             form.append('category',newEvent.category)
             form.append('dateEvent',newEvent.date)
             form.append('file', file.result)
             const respuesta = await axios.post(`${API}/events`, form, 
-            // {
-            //      headers:{
-            //          'Authorization': `Bearer ${token}`,
-            //          'Content-Type':'multipart/formdata'
-            //  }}
+            {
+                 headers:{
+                     'Authorization': `Bearer ${token}`,
+                     'Content-Type':'multipart/formdata'
+             }}
              )
              if (!respuesta.data.success) {
                  return respuesta.data
              }
-            dispatch({type: 'ADD_ARTICLE', payload: respuesta.data.response})
+            dispatch({type: 'ADD_EVENT', payload: respuesta.data.response})
             console.log(respuesta)
         }catch(error){
           Swal.fire(error)
         }       
     }
-
-  },
-  
+  }, 
   getEvents: () => {
     return async (dispatch, getState) => {
       try {
@@ -40,6 +38,39 @@ const eventsActions = {
 			}catch(error){
         Swal.fire(error)}
       }
+  },
+  editEvent:(newEvent)=>{      
+    console.log(newEvent)
+    try {
+      const {
+        title, // ID del posteo
+        description, // Texto modificado
+        date,
+        id,
+        compressedFile // Foto
+      } = newEvent
+      const form = new FormData()
+      form.append('title', title)
+      form.append('description', description)
+      form.append('id', id)
+      form.append('date', date)
+      compressedFile && form.append('file', compressedFile.result)
+      return async (dispatch, getState) => {
+        const response = await axios.put(`${API}/events`, form )
+        dispatch({
+          type: 'UPDATE_POST',
+          payload: response.data.response
+        })
+      }
+    } catch (error) {
+      Swal.fire(error)
+    } 
+},
+deleteEvent:(id) => {
+    return async (dispatch, getState) => {
+      const response = await axios.delete(`${API}/events/delete/${id}` )
+      dispatch({ type: 'DELETE_EVENT', payload: response.data.response })
+     }
   },
 }
 

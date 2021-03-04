@@ -23,6 +23,11 @@ const eventController = require('../controllers/eventController')
 router.route('/events')
   .get(eventController.getEvents)
   .post(eventController.addEvent)
+  .put(eventController.modifyEvent)
+
+
+  router.route('/events/delete/:id')
+  .delete(eventController.deleteEvent)
 
 
 
