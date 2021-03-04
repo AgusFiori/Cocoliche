@@ -1,57 +1,57 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import Navbar from "../components/Navbar";
-import blackboard from '../assets/blackboard.jpg'
-import authActions from "../redux/actions/authActions";
+import { connect } from 'react-redux'
+import {useState} from 'react'
+import authActions from '../redux/actions/authActions'
 import GoogleLogin from 'react-google-login'
 
-const Login = (props) => {
-  const [users, setUsers] = useState({
-    username: "",
-    password: "",
-  });
 
-  const [errores, setErrores] = useState();
 
-  const validateUser = (e) => {
-    const inputValue = e.target.value;
-    const field = e.target.name;
-    setUsers({
-      ...users,
-      [field]: inputValue,
-    });
-  };
-  const responseGoogle = async (response) => {
+const Login =(props)=>{
+ const [users, setUsers]=useState({
+    username: '', 
+    password:''
+ })
+ const [errores,setErrores]=useState([])
+ 
+ const validateUser=e=>{
+     const inputValue= e.target.value
+     const field=e.target.name
+     setUsers({
+         ...users,
+         [field]:inputValue
+     })
+ }
+
+
+
+const createUser=async e=>{
+    e.preventDefault()
+    if(users.username === '' || users.password ===''){
+        alert('fill in all fields')
+        return false
+    }
+    const respuesta = await props.newUser(users)
+    if(respuesta && !respuesta.success){
+        setErrores(respuesta.respuesta)
+    }
+}
+
+const responseGoogle = async (response) => {
     if(response.error){
       alert ('invalid account')
     }else{
       //podemos crear el nuevo usuario con google con la action 
-      const respuesta = await props.newUser({
+      const respuesta = await props.loginUser({
         username: response.profileObj.email,
-        urlPic: response.profileObj.imageUrl,
-        password: response.profileObj.googleId,
-        firstname: response.profileObj.givenName,
-        lastname: response.profileObj.familyName
+        password: response.profileObj.googleId
       })
       if(respuesta && !respuesta.success){
         setErrores(respuesta.respuesta)
        }
     }
   }
-  const login = async (e) => {
-    e.preventDefault();
-    if (users.username === "" || users.password === "") {
-      alert("fill in all fields");
-      return false;
-    }
-    const respuesta = await props.loginUser(users);
-    if (respuesta && !respuesta.success) {
-      setErrores(respuesta.respuesta);
-    }
-  };
 
-  return (
-    <div className="container-fluid">
+    return(
+      <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
           <Navbar />
@@ -84,15 +84,13 @@ const Login = (props) => {
       </div>
     </div>
     
-  );
-};
-const mapStateToProps = state => {
-  return {
-      loggedUser: state.authReducer.loggedUser
-  }
+    )
+}
+
+const mapDispatchToProps={
+  loginUser:authActions.loginUser
 }
 const mapDispatchToProps = {
   loginUser: authActions.loginUser,
   newUser: authActions.newUser,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
