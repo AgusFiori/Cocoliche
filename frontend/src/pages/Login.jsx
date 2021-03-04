@@ -18,7 +18,6 @@ const Login = (props) => {
       [field]: inputValue,
     });
   };
-  console.log(users);
 
   const login = async (e) => {
     e.preventDefault();
