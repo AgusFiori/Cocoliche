@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 
 const Calendary = (props) => {
   const [event, setEvent] = useState([])
+  const [numero, setNumeroReserva] = useState("")
 
   const { getEvents } = props;
   useEffect( () => {
@@ -29,6 +30,8 @@ const Calendary = (props) => {
     )
   })
 
+
+  
   const handleDateClick = (arg) => {
     console.log(arg)
     event.map(event => {
@@ -41,43 +44,51 @@ const Calendary = (props) => {
           imageHeight: 200,
           imageAlt: 'Custom image',
           showCancelButton: true,
-          confirmButtonText: 'Pedir turno',
+          confirmButtonText: 'Pedir reserva',
           cancelButtonText: 'Cerrar',
           reverseButtons: true
-
         }).then((result) => {
+          console.log(result)
           if (result.isConfirmed) {
-            Swal.fire(
-            'Go to turns',
-            'Turns',
-            'success'
-          )
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            Swal.fire(
-            'Cancel',
-            'Canceled',
-            'error'
-          )
+            Swal.fire({
+              html: 
+              '<span>Cantidada de sillas a reservar</span>'+
+              '<input type="number" id="swal-input2" class="swal2-input">',
+              preConfirm: () => {
+                return document.getElementById('swal-input2').value
+                
+              }
+            }).then((result)=>{
+
+              console.log(result)
+              if (result.value !== "") {
+                Swal.fire({
+                  icon:'success',
+                  title:'Recibira un mail con la confirmacion',
+                })
+              } else {
+                Swal.fire({
+                  icon:'error',
+                  title:'No puso cantidad de personas',
+                })
+              }
+            })
           }
         })
 
       } 
     })
   }
-  const handleEventClick = (arg) => {
-    console.log(arg)
-        Swal.fire({
-          title: 'Sweet!',
-          text: 'Modal with a custom image.',
-          imageUrl: event.picture,
-          imageWidth: 400,
-          imageHeight: 200,
-          imageAlt: 'Custom image',
-        })
-  }
+  // const handleEventClick = (arg) => {
+  //   console.log(arg)
+  //   Swal.fire({
+  //     title: eventos.title,
+  //     text: eventos.descripcion,
+  //     imageUrl: eventos.picture,
+  //     imageWidth: 400,
+  //     imageHeight: 200,
+  //     imageAlt: 'Custom image',
+  //   })}
 
   
   return (
@@ -86,31 +97,30 @@ const Calendary = (props) => {
         <FullCalendar
           plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
           locale="es-ES"
-          customButtons= {{
-            myCustomButton: {
-              text:"Pedir turno",
-              click: function() {
-                Swal.fire({
-                  title: 'Sweet!',
-                  text: 'Modal with a custom image.',
-                  imageUrl: 'https://unsplash.it/400/200',
-                  imageWidth: 400,
-                  imageHeight: 200,
-                  imageAlt: 'Custom image',
-                })
-              }
-            },
-          }}
-          headerToolbar= {{
-            end: 'myCustomButton'
-          }}
+          // customButtons= {{
+          //   myCustomButton: {
+          //     icon:'fa-chevron-left',
+          //     text:"Ver eventos",
+          //     click: function() {
+          //       Swal.fire({
+          //         title: event.title,
+          //         text: event.descripcion,
+          //         imageUrl: event.picture,
+          //         imageWidth: 400,
+          //         imageHeight: 200,
+          //         imageAlt: 'Custom image',
+          //       })
+          //     }
+          //   },
+          // }}
+          // headerToolbar= {{
+          //   end: 'myCustomButton'
+          // }}
           selectable={true}
           events= {eventos}
           dayMaxEvents={true}
           dateClick={handleDateClick}
-          eventClick={handleEventClick}
-          themeSystem="bootstrap"
-          
+          // eventClick={handleEventClick}          
           contentHeight={500}
         />
       </div>
