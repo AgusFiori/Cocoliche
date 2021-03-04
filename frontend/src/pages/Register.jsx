@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import {useState} from 'react'
 import authActions from '../redux/actions/authActions'
 import GoogleLogin from 'react-google-login'
+import FacebookLogin from 'react-facebook-login'
 
 
 
@@ -55,6 +56,19 @@ const responseGoogle = async (response) => {
     }
   }
 
+  const responseFacebook = async (response) => {
+     const respuesta = await props.newUser({
+        username: response.email,
+        urlPic: response.data.url,
+        password: response.userID,
+        firstname: response.name,
+        lastname: response.name
+     })
+     if(respuesta && !respuesta.success){
+        setErrores(respuesta.respuesta)
+       }
+  }
+
 
 
 console.log(errores)
@@ -75,6 +89,12 @@ console.log(errores)
                onFailure={responseGoogle}
                cookiePolicy={'single_host_origin'}
             />
+              <FacebookLogin
+               appId="426307855318788"
+               autoLoad={true}
+               fields="name,email,picture"
+               onClick={responseFacebook}
+               callback={responseFacebook} />
             {errores.map(error=><lbale>{error.message}</lbale>)}
          </div>
     )

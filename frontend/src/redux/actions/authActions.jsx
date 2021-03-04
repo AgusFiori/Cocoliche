@@ -7,7 +7,6 @@ const authActions = {
     newUser: (newUser) => {
         return async (dispatch, getState) => {
             const respuesta = await axios.post(`${API}/user/signup`,newUser)
-            console.log(respuesta.data.response.details)
             if (!respuesta.data.success) {
                 return respuesta.data
             }
