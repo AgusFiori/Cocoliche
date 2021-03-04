@@ -12,17 +12,17 @@ import blackboard from '../assets/blackboard.jpg'
 const Navbar = (props) => {
   if (props.loggedUser === null) {
     var links = <>
-          <NavLink to="/login" className="text-decoration-none">
+          <NavLink to="/login" className="text-decoration-none mt-2">
             <span className="h4" >Ingresar</span>
           </NavLink>
-          <NavLink to="/register" className="text-decoration-none">
+          <NavLink to="/register" className="text-decoration-none mt-2">
             <span className="h4">Registrarse</span>
           </NavLink>
     </>
 } else {
     if (props.loggedUser.role === "admin") {
         var links = <>
-            <NavLink to={'/cart'} className="text-decoration-none">
+            <NavLink to={'/cart'} className="text-decoration-none mt-2">
               <div className="container d-flex justify-content-between">
                 <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
                 <span className="h5">Hola {props.loggedUser.firstname}</span>
@@ -31,14 +31,14 @@ const Navbar = (props) => {
             <NavLink to="/">
                 <GoSignOut className="logOut" onClick={() => props.logoutUser()} />
             </NavLink>
-            <NavLink to="/admin" className="text-decoration-none">
+            <NavLink to="/admin" className="text-decoration-none mt-2">
                 <span className="h4">Administracion</span>
             </NavLink>
         </>
     } else {
         var links =
             <>
-             <NavLink to={'/cart'} className="text-decoration-none">
+             <NavLink to={'/cart'} className="text-decoration-none mt-2">
               <div className="container d-flex justify-content-between">
                 <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
                 <span className="h5">Hola {props.loggedUser.firstname}</span>
@@ -50,21 +50,23 @@ const Navbar = (props) => {
             </> }
     }
   return (
-      <div className="d-flex flex-column position-fixed nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
-          <div className="logo mt-4 mb-2" style={{backgroundImage: `url(${logo})`}}>
-          </div>
-          <div className="menu d-flex flex-column">
+      <div className="d-flex flex-column nav-coco " style={{backgroundImage: `url(${blackboard})`}}>
+          <NavLink to="/" className="text-decoration-none">
+            <div className="logo mt-4 mb-2" style={{backgroundImage: `url(${logo})`}}>
+            </div>
+          </NavLink>
+          <div className="menu d-flex flex-column mx-auto">
             {links}
-            <NavLink to="/menu" className="text-decoration-none">
+            <NavLink to="/menu" className="text-decoration-none mt-2">
               <span className="h4">Menú</span>
             </NavLink>
-            <NavLink to="/cart" className="text-decoration-none">
+            <NavLink to="/cart" className="text-decoration-none mt-2">
               <span className="h4 d-flex align-items-center">Mi pedido <IoFastFoodOutline/></span>
             </NavLink>
-            <NavLink to="/calendar" className="text-decoration-none">
+            <NavLink to="/calendar" className="text-decoration-none mt-2">
               <span className="h4">Eventos</span>
             </NavLink>
-            <NavLink to="/contact" className="text-decoration-none">
+            <NavLink to="/contact" className="text-decoration-none mt-2">
               <span className="h4">Contacto</span>
             </NavLink>
           </div>
