@@ -24,7 +24,7 @@ const Navbar = (props) => {
         '<span>Ingrese la fecha de su reserva</span>'+
         '<input type="date" id="swal-input1" class="swal2-input">' +
         '<span>Cantidada de sillas a reservar</span>'+
-        '<input type="number" id="swal-input2" class="swal2-input">',
+        '<input   type="number" id="swal-input2" class="swal2-input">',
       focusConfirm: true,  
       preConfirm: () => {
         return [
@@ -35,7 +35,7 @@ const Navbar = (props) => {
     })
     .then((result) => {
       console.log(nroReserva, diaReserva)
-      result.dismiss &&      
+      !result.dismiss &&      
       (nroReserva !== "" && diaReserva !== "") ? 
         Swal.fire('Reserva enviada, recibirá un mail con la confirmación!', '', 'success') : 
         Swal.fire('Complete todos los campos', '', 'error')
