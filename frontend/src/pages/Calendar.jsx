@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 
 const Calendary = (props) => {
   const [event, setEvent] = useState([])
+  const [numero, setNumeroReserva] = useState("")
 
   const { getEvents } = props;
   useEffect( () => {
@@ -46,59 +47,47 @@ const Calendary = (props) => {
           reverseButtons: true
 
         }).then((result) => {
+          console.log(result)
           if (result.isConfirmed) {
-            Swal.mixin({
-              input: 'text',
-              confirmButtonText: 'Next &rarr;',
-              showCancelButton: true,
-              progressSteps: ['1', '2', '3']
-            }).queue([
-              {
-                title: 'Cantidad de personas',
-                text: 'Chaining swal2 modals is easy'
-              },
-              'Question 2',
-              'Question 3'
-            ]).then((result) => {
-              if (result.value) {
-                console.log(result.value)
-                const answers = JSON.stringify(result.value)
+            Swal.fire({
+              html: 
+              '<span>Cantidada de sillas a reservar</span>'+
+              '<input type="number" id="swal-input2" class="swal2-input">',
+              preConfirm: () => {
+                return document.getElementById('swal-input2').value
+                
+              }
+            }).then((result)=>{
+
+              console.log(result)
+              if (result.value !== "") {
                 Swal.fire({
-                  title: 'All done!',
-                  html: `
-                    Your answers:
-                    <pre><code>${answers}</code></pre>
-                  `,
-                  confirmButtonText: 'Lovely!'
+                  icon:'success',
+                  title:'Recibira un mail con la confirmacion',
+                })
+              } else {
+                Swal.fire({
+                  icon:'error',
+                  title:'No puso cantidad de personas',
                 })
               }
             })
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            Swal.fire(
-            'Cancel',
-            'Canceled',
-            'error'
-          )
           }
         })
 
       } 
     })
   }
-  const handleEventClick = (arg) => {
-    console.log(arg)
-        Swal.fire({
-          title: 'Sweet!',
-          text: 'Modal with a custom image.',
-          imageUrl: event.picture,
-          imageWidth: 400,
-          imageHeight: 200,
-          imageAlt: 'Custom image',
-        })
-  }
+  // const handleEventClick = (arg) => {
+  //   console.log(arg)
+  //   Swal.fire({
+  //     title: eventos.title,
+  //     text: eventos.descripcion,
+  //     imageUrl: eventos.picture,
+  //     imageWidth: 400,
+  //     imageHeight: 200,
+  //     imageAlt: 'Custom image',
+  //   })}
 
   
   return (
@@ -109,12 +98,13 @@ const Calendary = (props) => {
           locale="es-ES"
           customButtons= {{
             myCustomButton: {
-              text:"Pedir reserva",
+              icon:'fa-chevron-left',
+              text:"Ver eventos",
               click: function() {
                 Swal.fire({
-                  title: 'Sweet!',
-                  text: 'Modal with a custom image.',
-                  imageUrl: 'https://unsplash.it/400/200',
+                  title: event.title,
+                  text: event.descripcion,
+                  imageUrl: event.picture,
                   imageWidth: 400,
                   imageHeight: 200,
                   imageAlt: 'Custom image',
@@ -129,7 +119,7 @@ const Calendary = (props) => {
           events= {eventos}
           dayMaxEvents={true}
           dateClick={handleDateClick}
-          eventClick={handleEventClick}
+          // eventClick={handleEventClick}
           themeSystem="bootstrap"
           
           contentHeight={500}
