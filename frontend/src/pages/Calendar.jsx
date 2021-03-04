@@ -79,6 +79,7 @@ const Calendary = (props) => {
         })
   }
 
+  
   return (
     <div className="container">
       <div className="calendario mt-5">
@@ -114,16 +115,17 @@ const Calendary = (props) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-const mapStateToProps = (state) => {
+
+const mapStateToProps = state => {
   return {
-    events: state.eventReducer.events,
-  };
-};
+    events: state.eventR.events
+  }
+}   
 
 const mapDispatchToProps = {
-  getEvents: eventsActions.getEvents,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Calendary);
+  getEvents: eventsActions.getEvents
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Calendary);

@@ -8,7 +8,8 @@ import eventReducer from './eventReducer'
 const reducer = combineReducers({
   eventReducer,
   authReducer,
-  productR: productReducer
+  productR: productReducer,
+  eventR: eventReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

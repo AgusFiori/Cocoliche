@@ -1,16 +1,15 @@
 
 const initialState = {
     events: [],
-    newEvent: [],
     filter: [],
   }
   
 function eventReducer(state = initialState, action) {
     switch (action.type) {
-      case 'ADD_ARTICLE':
+      case 'ADD_EVENT':
         return {
           ...state,
-          newEvent: action.payload
+          events: state.events.concat(action.payload)
         }
       case 'GET_EVENTS':
         return {
@@ -24,6 +23,12 @@ function eventReducer(state = initialState, action) {
               filter: state.events.filter(event => event.title.toUpperCase().includes(action.payload.toUpperCase().trim())
             || event.artist.toUpperCase().includes(action.payload.toUpperCase().trim())  
               || event.user.categoty.toUpperCase().includes(action.payload.toUpperCase().trim()))
+        }
+
+      case 'DELETE_EVENT': 
+        return {
+          ...state,
+          events: action.payload
         }
         default:
         return state
