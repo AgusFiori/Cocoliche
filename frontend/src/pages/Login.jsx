@@ -2,10 +2,12 @@ import { connect } from 'react-redux'
 import {useState} from 'react'
 import authActions from '../redux/actions/authActions'
 import GoogleLogin from 'react-google-login'
+import Navbar from './../components/Navbar';
+import blackboard from '../assets/blackboard.jpg'
 
 
 
-const Login =(props)=>{
+const Login = (props) =>{
  const [users, setUsers]=useState({
     username: '', 
     password:''
@@ -23,7 +25,7 @@ const Login =(props)=>{
 
 
 
-const createUser=async e=>{
+const login =async e=>{
     e.preventDefault()
     if(users.username === '' || users.password ===''){
         alert('fill in all fields')
@@ -87,10 +89,10 @@ const responseGoogle = async (response) => {
     )
 }
 
-const mapDispatchToProps={
-  loginUser:authActions.loginUser
-}
+
 const mapDispatchToProps = {
   loginUser: authActions.loginUser,
   newUser: authActions.newUser,
 };
+
+export default connect(null, mapDispatchToProps)(Login)
