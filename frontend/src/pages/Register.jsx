@@ -22,7 +22,6 @@ const Register = (props) => {
     });
   };
 
-
   const createUser = async (e) => {
     e.preventDefault();
     if (
