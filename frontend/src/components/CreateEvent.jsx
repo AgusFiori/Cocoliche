@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import eventsActions from './../redux/actions/eventsActions';
 import { connect } from 'react-redux';

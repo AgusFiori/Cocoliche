@@ -30,6 +30,7 @@ function App(props) {
             <Route path="/menu" component={Menu} />
             <Route path="/contact" component={Contact} />
             <Route path="/profile" component={Profile} />
+            <Route path="/admin" component={Admin} />
             <Redirect to="/" />
           </Switch>
         </ScrollToTop>
@@ -43,8 +44,6 @@ function App(props) {
             <Route path="/menu" component={Menu} />
             <Route path="/contact" component={Contact} />
             <Route path="/profile" component={Profile} />
-            <Route path="/admin" component={Admin} />
-
             <Redirect to="/" />
           </Switch>
         </ScrollToTop>

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { connect } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Product from "../components/Product.jsx";
+import CreateEvent from '../components/CreateEvent'
 
 const Admin = (props) => {
   const [product, setProduct] = useState({});
@@ -114,6 +115,7 @@ const Admin = (props) => {
   console.log(props);
 
   return (
+    <>
     <div>
       <div>
         <input
@@ -217,6 +219,10 @@ const Admin = (props) => {
         </tbody>
       </Table>
     </div>
+    <div className="mt-5">
+    <CreateEvent/>
+    </div>
+    </>
   );
 };
 
