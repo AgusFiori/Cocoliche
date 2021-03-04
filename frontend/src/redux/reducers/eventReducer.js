@@ -4,7 +4,7 @@ const initialState = {
     filter: [],
   }
   
-  const eventReducer = (state = initialState, action) => {
+function eventReducer(state = initialState, action) {
     switch (action.type) {
       case 'ADD_EVENT':
         return {

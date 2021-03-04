@@ -103,7 +103,8 @@ const eventController = {
     }
   },
   modifyEvent: async (req, res) => 
-    try {
+    {
+      try {
       if(req.files && req.files.file){
         var { file } = req.files
         var articlePictureUbicacion = `/assets/eventsPics/${file.md5}.jpg`
