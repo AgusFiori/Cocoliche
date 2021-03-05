@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import authActions from './redux/actions/authActions'
 import React, { useState } from 'react'
 import Admin from './pages/Admin.jsx';
+import { Reservation } from './components/Reservation'
 
 
 function App(props) {
@@ -63,7 +64,7 @@ function App(props) {
           <Route path="/contact" component={Contact} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/admin" component={Admin} />
+          <Route path="/reservation" component={Reservation} />
           <Redirect to="/" />
         </Switch>
       </ScrollToTop>

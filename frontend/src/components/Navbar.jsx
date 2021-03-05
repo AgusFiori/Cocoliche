@@ -12,38 +12,6 @@ import Swal from 'sweetalert2';
 
 const Navbar = (props) => {
 
-  const [diaReserva, setDiaReserva] = useState("")
-
-  const [nroReserva, setNumeroReserva] = useState("")
-
-  const reservar = e => {
-    Swal.fire({
-      confirmButtonText: "RESERVAR",
-      showCancelButton: true,
-      cancelButtonText: "CERRAR",
-      title: 'Multiple inputs',
-
-      html:
-        '<span>Ingrese la fecha de su reserva</span>'+
-        '<input type="date" id="swal-input1" class="swal2-input">' +
-        '<span>Cantidada de sillas a reservar</span>'+
-        '<input   type="number" id="swal-input2" class="swal2-input">',
-      focusConfirm: true,  
-      preConfirm: () => {
-        return [
-          setDiaReserva(document.getElementById('swal-input1').value),
-          setNumeroReserva(document.getElementById('swal-input2').value)
-        ]
-      }
-    })
-    .then((result) => {
-      console.log(nroReserva, diaReserva)
-      !result.dismiss &&      
-      (nroReserva !== "" && diaReserva !== "") ? 
-        Swal.fire('Reserva enviada, recibirá un mail con la confirmación!', '', 'success') : 
-        Swal.fire('Complete todos los campos', '', 'error')
-  })
-  }
   
   if (props.loggedUser === null) {
     var links = <>
@@ -105,10 +73,9 @@ const Navbar = (props) => {
             <NavLink to="/contact" className="text-decoration-none mt-2">
               <span className="h4">Contacto</span>
             </NavLink>
-            {props.loggedUser && 
-            <NavLink  className="text-decoration-none m-2" to="/">
-              <span className="h4" onClick={reservar}>HACER UNA RESERVA</span>
-            </NavLink>}
+            <NavLink  className="text-decoration-none mt-2" to="/reservation">
+              <span className="h4">HACER UNA RESERVA</span>
+            </NavLink>
           </div>
       </div>
   );
