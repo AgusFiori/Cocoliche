@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import authActions from './redux/actions/authActions'
 import React, { useState } from 'react'
 import Admin from './pages/Admin.jsx';
-import { Reservation } from './components/Reservation'
+import Reservation from './components/Reservation'
 
 
 function App(props) {
@@ -25,6 +25,7 @@ function App(props) {
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/reservation" component={Reservation} />
             <Route exact path="/calendar" component={Calendary} />
             <Route path="/cart" component={Cart} />
             <Route path="/menu" component={Menu} />
@@ -39,6 +40,7 @@ function App(props) {
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/reservation" component={Reservation} />
             <Route path="/calendar" component={Calendary} />
             <Route path="/cart" component={Cart} />
             <Route path="/menu" component={Menu} />
