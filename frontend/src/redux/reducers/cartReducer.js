@@ -5,18 +5,19 @@ const initialState = {
 function cartReducer(state = initialState, action) {
   switch (action.type) {
     case 'ADD_TO_CART':
+      const cartLocal = JSON.stringify(action.payload)
       // let prodCart = []
       // prodCart.push(action.payload)
       // const cartLocal = JSON.stringify(prodCart)
       // localStorage.setItem('cart', cartLocal)
       // console.log(localStorage.getItem('cart'))
-      // var cartLocal = [JSON.stringify(...state.cart)]
+      // var cartLocal = [JSON.stringify(action.payload)]
       // var stringifiedCartItem = JSON.stringify(action.payload)
       // cartLocal.push(stringifiedCartItem)
-      // localStorage.setItem('cart', cartLocal)
+      localStorage.setItem('cart', cartLocal)
       return {
         ...state,
-        cart: [...state.cart, action.payload]
+        cart: action.payload
       }
     case 'REMOVE_FROM_CART':
       const stringifiedNewCart = JSON.stringify(action.payload);
@@ -30,6 +31,13 @@ function cartReducer(state = initialState, action) {
         ...state,
       }
     case 'ADD_FROM_LS':
+      return {
+        ...state,
+        cart: action.payload
+      }
+    case 'MODIFY_QTY':
+      const stringifiedModCart = JSON.stringify(action.payload);
+      localStorage.setItem('cart', stringifiedModCart)
       return {
         ...state,
         cart: action.payload

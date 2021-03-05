@@ -5,10 +5,9 @@ const productSchema = new mongoose.Schema({
   description: String,
   rating: [{ userId: String, value: Number }],
   reviews: [{ userId: String, title: String, text: String, date: Date, rating: Number }],
-  stock: Number,
   picture: String,
   category: String,
-  subcategories: [{ subcategory: String, subcategoryPrice: Number }],
+  subcategories: [{ subcategory: String, subcategoryPrice: Number, subcategoryStock: Number }],
   delay: Number,
   amountSold: { type: Number, default: 0 }
 });
