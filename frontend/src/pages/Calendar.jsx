@@ -20,8 +20,6 @@ const Calendary = (props) => {
     setEvent(props.events)
   }, [getEvents, event]);
 
-  console.log(props.loggedUser)
-
 
   const eventos = event.map(event => {
     return (
