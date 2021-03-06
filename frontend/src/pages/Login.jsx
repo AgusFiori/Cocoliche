@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import { useState } from "react";
 import authActions from "../redux/actions/authActions";
-import GoogleLogin from "react-google-login";
 import Navbar from "../components/Navbar.jsx";
 import blackboard from "../assets/blackboard.jpg";
+import firebase from 'firebase'
 
 const Login = (props) => {
   const [users, setUsers] = useState({
@@ -27,26 +27,19 @@ const Login = (props) => {
       alert("fill in all fields");
       return false;
     }
-    const respuesta = await props.newUser(users);
+    const respuesta = await props.loginUser(users);
     if (respuesta && !respuesta.success) {
       setErrores(respuesta.respuesta);
     }
   };
 
-  const responseGoogle = async (response) => {
-    if (response.error) {
-      alert("invalid account");
-    } else {
-      //podemos crear el nuevo usuario con google con la action
-      const respuesta = await props.loginUser({
-        username: response.profileObj.email,
-        password: response.profileObj.googleId,
-      });
-      if (respuesta && !respuesta.success) {
-        setErrores(respuesta.respuesta);
-      }
-    }
-  };
+
+  const loginWithRS = async e => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    const dates = await firebase.auth().signInWithPopup(provider)
+    props.loginWithGoogle(dates.user)
+  }
+
 
   return (
     <div className="container-fluid">
@@ -76,13 +69,7 @@ const Login = (props) => {
             Ingresar
           </button>
           <label>{errores}</label>
-          <GoogleLogin
-            clientId="581401226209-scr1fncegbbivf7eds0g088i1ks51ihh.apps.googleusercontent.com"
-            buttonText="Crear Account with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-          />
+          <button onClick={loginWithRS}>Ingresar con otros métodos</button>
         </div>
       </div>
     </div>
@@ -91,7 +78,7 @@ const Login = (props) => {
 
 const mapDispatchToProps = {
   loginUser: authActions.loginUser,
-  newUser: authActions.newUser,
+  loginWithGoogle: authActions.loginWithGoogle,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
