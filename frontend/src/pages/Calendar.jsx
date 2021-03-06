@@ -16,11 +16,11 @@ const Calendary = (props) => {
 
   const { getEvents } = props;
   useEffect( () => {
+    console.log(props.events)
     getEvents();
     setEvent(props.events)
   }, [getEvents, event]);
 
-  console.log(props.loggedUser)
 
 
   const eventos = event.map(event => {
