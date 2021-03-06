@@ -72,7 +72,7 @@ const Product = (props) => {
           <td>{props.product.category}</td>
           <td>
             {props.product.subcategories.map((subcategory) => (
-              <p>
+              <p key={subcategory._id}>
                 {subcategory.subcategory}---{subcategory.subcategoryPrice}
               </p>
             ))}
