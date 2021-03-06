@@ -1,14 +1,34 @@
-// import axios from "axios";
-// import { API } from './../../components/Api';
+import axios from "axios";
+import { API } from './../../components/Api';
 
 const productActions = {
   addToCart: (product) => {
     try {
-      const { subcategoryId, productId, quantity } = product
       return async (dispatch, getState) => {
+
+        var copyCart = getState().cartReducer.cart.slice()
+        var otherCart = getState().cartReducer.cart.slice()
+
+        let comparator = copyCart.findIndex((item) => {
+          return item.subcategory.subcategoryId === product.subcategory.subcategoryId
+        })
+
+        if (comparator !== -1) {
+          otherCart = copyCart.map(item => {
+            if (item.subcategory.subcategoryId === product.subcategory.subcategoryId) {
+              return item = product
+            } else {
+              return item
+            }
+          })
+        } else {
+          otherCart.push(product)
+        }
+
+
         dispatch({
           type: 'ADD_TO_CART',
-          payload: product
+          payload: otherCart
         })
       }
     } catch (error) {
@@ -30,17 +50,48 @@ const productActions = {
   removeProduct: (id) => {
     return async (dispatch, getState) => {
       try {
-        const removeItem = getState().cartReducer.cart.filter(cartItem => cartItem.productId !== id)
+        const removeItem = getState().cartReducer.cart.filter(cartItem => cartItem.subcategory.subcategoryId !== id)
         dispatch({ type: 'REMOVE_FROM_CART', payload: removeItem })
       } catch (error) {
         console.log(error)
       }
     }
   },
-  modifyQuantity: (cant) => {
+  modifyQuantity: (cant, idSubItem) => {
     return (dispatch, getState) => {
-      const modifyItem = getState().cartReducer.cart
-      console.log(modifyItem)
+      const copyCart = getState().cartReducer.cart.slice()
+      let modifyItem = copyCart.find(cartItem => cartItem.subcategory.subcategoryId === idSubItem);
+      modifyItem.subcategory.qty = cant
+      let indiMod = copyCart.findIndex((item) => {
+        return item.subcategory.subcategoryId === idSubItem
+      })
+      copyCart.splice(indiMod, 1, modifyItem)
+      dispatch({ type: 'MODIFY_QTY', payload: copyCart })
+    }
+  },
+  confirmPurchase: (newCart) => {
+    const { token, cart } = newCart
+    return async (dispatch, getState) => {
+      const response = await axios.post(`${API}/purchases`, cart,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
+      )
+      console.log(response)
+      dispatch({
+        type: "CONFIRM_PURCHASE",
+        payload: response.data
+      })
+    }
+  },
+  getCart: () => {
+    return async (dispatch, getState) => {
+      dispatch({
+        type: "GET_CART",
+        payload: ""
+      })
     }
   }
 }

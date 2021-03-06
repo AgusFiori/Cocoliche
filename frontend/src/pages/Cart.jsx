@@ -9,11 +9,17 @@ const Cart = (props) => {
     props.localStorageCart(localCart);
   }, []);
 
+  const sendCart = () => {
+    props.confirmPurchase({ cart: props.cart, token: props.loggedUser.token });
+  };
+
+  console.log(props);
+
   return (
     <div>
       <h2>Cart</h2>
       {props.cart && props.cart.map((item) => <CartItem props={item} />)}
-      <button>Comprar</button>
+      <button onClick={sendCart}>Confirmar Compra</button>
     </div>
   );
 };
@@ -21,11 +27,13 @@ const Cart = (props) => {
 const mapStateToProps = (state) => {
   return {
     cart: state.cartReducer.cart,
+    loggedUser: state.authReducer.loggedUser,
   };
 };
 
 const mapDispatchToProps = {
   localStorageCart: cartActions.localStorageCart,
+  confirmPurchase: cartActions.confirmPurchase,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
