@@ -17,6 +17,7 @@ const SubCategory = (props) => {
     setProductToAdd({
       ...productToAdd,
       [name]: newValue,
+      name: props.name,
     });
   };
 
@@ -38,6 +39,7 @@ const SubCategory = (props) => {
                 price: props.sub.subcategoryPrice,
                 subcategoryId: props.sub._id,
                 qty,
+                stock: props.sub.subcategoryStock,
               })}
             >
               {qty++}

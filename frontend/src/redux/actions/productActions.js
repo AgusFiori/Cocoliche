@@ -102,6 +102,21 @@ const productActions = {
         console.log(error)
       }
     }
+  },
+  addSubcategories: (subcategories, productId) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = axios.post(`${API}/product/subproduct`, { subcategories, productId },
+
+        )
+        dispatch({
+          type: 'ADD_SUBCATEGORY',
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 

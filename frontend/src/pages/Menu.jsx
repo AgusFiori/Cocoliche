@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import MenuItem from "../components/MenuItem";
 import productActions from "../redux/actions/productActions";
+import cartActions from "../redux/actions/cartActions";
 
 const Menu = (props) => {
   const { getProducts } = props;
 
   useEffect(() => {
     getProducts();
+    props.getCart();
   }, [getProducts]);
 
   return (
@@ -38,6 +40,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  getCart: cartActions.getCart,
   getProducts: productActions.getProducts,
 };
 

@@ -13,8 +13,7 @@ const Cart = (props) => {
     props.confirmPurchase({ cart: props.cart, token: props.loggedUser.token });
   };
 
-  // let total = 0;
-  // console.log(props.cart.map((item) => item.quantity));
+  console.log(props);
 
   return (
     <div>

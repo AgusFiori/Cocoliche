@@ -113,6 +113,24 @@ const productController = {
       })
     }
 
+  },
+  addSubProducts: async (req, res) => {
+    console.log(req.body)
+    const { subcategories, productId } = req.body
+    try {
+      var addSubProd = await Product.findOneAndUpdate(
+        { _id: productId },
+        {
+          "$set": {
+            subcategories: subcategories
+          }
+        },
+        { new: true }
+      )
+      return res.json({ success: true, response: addSubProd })
+    } catch (error) {
+      return res.json({ success: false, response: error })
+    }
   }
 }
 
