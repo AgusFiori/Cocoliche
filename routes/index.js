@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
-// require('../config/passport')
-// const passport = require('passport')
+require('../config/passport')
+const passport = require('passport')
 
+//CONTROLADORES
+const eventController = require('../controllers/eventController')
 const productController = require('../controllers/productController')
 const categoryController = require('../controllers/categoryController')
 
@@ -14,11 +16,9 @@ router.route('/category').post(categoryController.addCategory).get(categoryContr
 router.route('/product/:productId').delete(productController.deleteProduct)
 const validator = require('../controllers/validator')
 const userController = require('../controllers/userController')
-const passport = require('passport')
-require('../config/passport')
+const reservationController = require('../controllers/reservationController')
+const orderController = require('../controllers/orderController')
 
-//CONTROLADORES
-const eventController = require('../controllers/eventController')
 
 
 
@@ -27,13 +27,13 @@ router.route('/events')
   .get(eventController.getEvents)
   .post(eventController.addEvent)
   .put(eventController.modifyEvent)
-
-
-  router.route('/events/delete/:id')
+router.route('/events/delete/:id')
   .delete(eventController.deleteEvent)
 
 
-
+//RUTAS RESERVAS
+router.route('/reservation')
+  .post(passport.authenticate('jwt', { session: false }), reservationController.reservation)
 
 
 //rutas de signIn y signUp
@@ -43,5 +43,9 @@ router.route('/user/signin')
   .post(userController.signin)
 router.route('/user/ls')
   .post(passport.authenticate('jwt', { session: false }), userController.logFromLS)
+
+//Rutas de pedidos
+router.route('/purchases')
+  .post(passport.authenticate('jwt', { session: false }), orderController.newOrder)
 
 module.exports = router

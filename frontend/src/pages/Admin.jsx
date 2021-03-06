@@ -5,11 +5,13 @@ import Swal from "sweetalert2";
 import { connect } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Product from "../components/Product.jsx";
-import CreateEvent from '../components/CreateEvent'
+import CreateEvent from "../components/CreateEvent";
+import agregarProducto from "../assets/agregar-producto.jpg";
+import Navbar from "../components/Navbar";
 
 const Admin = (props) => {
   const [product, setProduct] = useState({});
-  const [pathImage, setPathImage] = useState("/assets/losago.png");
+  const [pathImage, setPathImage] = useState(agregarProducto);
   const [file, setFile] = useState();
   const [products, setProducts] = useState([]);
   const [subCategory, setSubCategory] = useState({});
@@ -50,6 +52,8 @@ const Admin = (props) => {
     e.stopPropagation();
     props.createCategory(newCategory);
   };
+
+  console.log(product);
 
   const addSubcategory = () => {
     subCategories.push(subCategory);
@@ -112,116 +116,168 @@ const Admin = (props) => {
     // }
   };
 
-  console.log(props);
-
   return (
     <>
-    <div>
-      <div>
-        <input
-          type="text"
-          name="category"
-          placeholder="Crear categoria"
-          onChange={handleChangeCategory}
-        />
-        <button onClick={submitCategory}>Enviar</button>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 p-0">
+            <Navbar />
+          </div>
+          <div className="col-sm-12 col-md-9 col-lg-10 col-xl-10 mt-5">
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 d-flex flex-column mx-auto">
+                <span className="h3">
+                  Crear una nueva Categoría de Productos
+                </span>
+                <input
+                  className="my-3 h5 pl-3"
+                  type="text"
+                  name="category"
+                  placeholder="Crear categoria"
+                  onChange={handleChangeCategory}
+                />
+                <button onClick={submitCategory} className="h4">
+                  Enviar
+                </button>
+              </div>
+            </div>
+            <hr></hr>
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 d-flex flex-column mx-auto">
+                <span className="h3">Cargar un nuevo Producto</span>
+                <input
+                  className="h5 pl-3"
+                  type="text"
+                  name="name"
+                  placeholder="Nombre del producto"
+                  onChange={handleChange}
+                />
+
+                <input
+                  className="d-none"
+                  type="file"
+                  id="productPicture"
+                  name="file"
+                  onChange={onFileChange}
+                />
+                <label
+                  htmlFor="productPicture"
+                  className="text-center d-flex flex-column align-items-center"
+                >
+                  <span className="h4">Cargar imagen del Producto</span>
+                  <span className="h6">Tamaño recomendado 200px * 200px</span>
+                  <img className="img-prev" src={pathImage} alt="Producto" />
+                </label>
+                {props.allCategories.length && (
+                  <select
+                    className="my-2 h5 p-1"
+                    defaultValue="default"
+                    onChange={handleChange}
+                    name="category"
+                  >
+                    <option value="default" disabled>
+                      Seleccione la Categoria del Producto
+                    </option>
+                    {props.allCategories.map((category) => (
+                      <option
+                        key={category.category}
+                        value={category.category}
+                        name="category"
+                      >
+                        {category.category}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                <input
+                  className="h5 pl-3"
+                  type="number"
+                  name="delay"
+                  placeholder="Demora estimada"
+                  onChange={handleChange}
+                />
+                <textarea
+                  className="my-2 h5 p-3"
+                  minLength="25"
+                  maxlength="140"
+                  type="text"
+                  name="description"
+                  placeholder="Descripcion del producto"
+                  onChange={handleChange}
+                />
+
+                <span className="h5">Agregar SubCategoria del producto</span>
+                <input
+                  className="h5 pl-3"
+                  type="text"
+                  name="subcategory"
+                  placeholder="Subcategorias"
+                  onChange={handleSubcategory}
+                />
+                <input
+                  className="h5 pl-3"
+                  type="number"
+                  name="subcategoryPrice"
+                  placeholder="Precio"
+                  onChange={handleSubcategory}
+                />
+                <input
+                  className="my-2 h5 pl-3"
+                  type="number"
+                  name="subcategoryStock"
+                  placeholder="Stock"
+                  onChange={handleSubcategory}
+                />
+                <button onClick={addSubcategory} className="h4">
+                  Agregar
+                </button>
+                <button onClick={addProduct} className="h4">
+                  Enviar
+                </button>
+              </div>
+            </div>
+
+            <div className="row mt-3">
+              <div className="col-sm-12 col-md-8 col-lg-10 d-flex flex-column mx-auto">
+                <span className="h1">Listado de Productos</span>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Subcategory</th>
+                      <th>Description</th>
+                      <th>Delay</th>
+                      <th>Stock</th>
+                      <th>Picture</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products &&
+                      products.map((product) => {
+                        return (
+                          <Product
+                            key={product._id}
+                            product={product}
+                            remove={remove}
+                          />
+                        );
+                      })}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 mx-auto">
+                <CreateEvent />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre del producto"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="stock"
-          placeholder="Stock"
-          onChange={handleChange}
-        />
-        <input
-          type="file"
-          id="productPicture"
-          name="file"
-          onChange={onFileChange}
-        />
-        <img className="" src={pathImage} alt="Producto" />
-        {props.allCategories.length && (
-          <select
-            defaultValue="default"
-            onChange={handleChange}
-            name="category"
-          >
-            <option value="default" disabled>
-              Create category
-            </option>
-            {props.allCategories.map((category) => (
-              <option
-                key={category.category}
-                value={category.category}
-                name="category"
-              >
-                {category.category}
-              </option>
-            ))}
-          </select>
-        )}
-        <input
-          type="text"
-          name="subcategory"
-          placeholder="Subcategorias"
-          onChange={handleSubcategory}
-        />
-        <input
-          type="text"
-          name="subcategoryPrice"
-          placeholder="Precio"
-          onChange={handleSubcategory}
-        />
-        <button onClick={addSubcategory}>Agregar</button>
-        <input
-          type="text"
-          name="delay"
-          placeholder="Demora estimada"
-          onChange={handleChange}
-        />
-        <textarea
-          type="text"
-          name="description"
-          placeholder="Descripcion"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <button onClick={addProduct}>Enviar</button>
-      </div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Subcategory</th>
-            <th>Description</th>
-            <th>Delay</th>
-            <th>Stock</th>
-            <th>Picture</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products &&
-            products.map((product) => {
-              return (
-                <Product key={product._id} product={product} remove={remove} />
-              );
-            })}
-        </tbody>
-      </Table>
-    </div>
-    <div className="mt-5">
-    <CreateEvent/>
-    </div>
     </>
   );
 };

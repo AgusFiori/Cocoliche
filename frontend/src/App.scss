@@ -18,36 +18,85 @@ body {
     background-size: contain;
     height: 25vh;
 }
-.calendario{
-    margin: auto;
+.container-fluid{
+    background-image: url('https://img.freepik.com/foto-gratis/pared-blanca-sucia-cemento-natural-o-pared-textura-antigua-piedra-banner-pared-conceptual-grunge-material-o-construccion_1258-17209.jpg?size=626&ext=jpg');
+   
 }
-
+.trasparent{
+    background-color: rgb(255,255,255); opacity: 0.8;
+    box-shadow: 5px 5px 10px -1px #000000;
+}
 .nav-coco{
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.banner{
+.banner-sm-home{
+    height: 25vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner-sm-home:hover{
+    transition: transform 2s ease-in-out;
+    background-size: 105%;
+    animation: movement 10s infinite linear alternate;
+}
+.banner-md-home{
+    height: 50vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner-md-home:hover{
+    transition: transform 2s ease-in-out;
+    background-size: 105%;
+    animation: movement 10s infinite linear alternate;
+}
+.banner-lg-home{
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.banner:hover{
+.banner-lg-home:hover{
     transition: transform 2s ease-in-out;
     background-size: 105%;
     animation: movement 10s infinite linear alternate;
 }
 .menu span {
+  text-decoration: none;
+  background-image: linear-gradient(#222b40, #222b40),
+    linear-gradient(white, white),
+    linear-gradient(white, white);
+  background-size: 20px 2px, 100% 2px, 0 2px;
+  background-position: calc(20px * -1) 100%, 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s linear, background-position 0.5s linear;
     font-size: 30px;
-    text-shadow: 2px 3px 0 #000;
     color: white;
 }
 
 .menu span:hover{
-    text-shadow: 3px 5px 0 #000;
+    background-size: 20px 2px, 0 2px, 100% 2px;
+    background-position: calc(100% + 20px) 100%, 100% 100%, 0 100%;
     color: white;
+}
+.rd{
+    font-size: 35px;
+    color:white
+}
+.rd:hover{
+    color: rgb(255,255,255); opacity: 0.8;
+    
+    font-size: 40px;
+}
+.cartIcono{
+    
+    font-size: 35px;
+    color:white
 }
 @keyframes movement {
     from {
@@ -62,4 +111,8 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 15vw;
+}
+.img-prev{
+    width: 200px;
+    height: 200px;
 }

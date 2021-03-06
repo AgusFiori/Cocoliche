@@ -78,8 +78,8 @@ const CreateEvent = (props) => {
 
 
     return (
-        <div>
-            <h1>Crear Evento</h1>
+        <div className="d-flex flex-column mx-auto">
+            <span className="h1">Crear Evento</span>
             <input type="text" name="title" onChange={captureNewEvent} placeholder="Titulo del evento"/>
             <input type="date" name="date" onChange={captureNewEvent}  placeholder="Fecha del evento"/>
             <input type="text" name="description" onChange={captureNewEvent}  placeholder="Descripción"/>

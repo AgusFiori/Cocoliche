@@ -64,7 +64,7 @@ const Register = (props) => {
         <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
           <Navbar />
         </div>
-        <div className="col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
+        <div className="trasparent col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
           <h1>Registrate</h1>
           <input
             className='text-center my-4 h3'
