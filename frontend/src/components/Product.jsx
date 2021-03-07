@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import productActions from "../redux/actions/productActions";
 import Compressor from "compressorjs";
@@ -22,6 +22,11 @@ const Product = (props) => {
   const [file, setFile] = useState();
   const [subCategory, setSubCategory] = useState({});
   const [subCategories, setSubCategories] = useState([]);
+
+  useEffect(() => {
+    props.getProducts();
+  }, []);
+  console.log(props);
 
   // VARIABLE CONTADOR
 
@@ -99,9 +104,6 @@ const Product = (props) => {
   };
 
   const aceptarModif = (subCat, id) => {
-    console.log(subCat);
-    console.log(id);
-    console.log(subCategories);
     subCategories.map((subcategory) => {
       if (subcategory.id === id) {
         return (subcategory = subCat);
@@ -113,7 +115,7 @@ const Product = (props) => {
   const confirmChanges = () => {
     props.addSubcategories(subCategories, props.product._id);
   };
-
+  // console.log(props);
   return (
     <>
       {!visible ? (
@@ -206,7 +208,6 @@ const Product = (props) => {
                 <NewSubcategories
                   newSubCategory={newSubCategory}
                   productId={props.product._id}
-                  id={contador++}
                   aceptarModif={aceptarModif}
                 />
               );
@@ -252,6 +253,7 @@ const Product = (props) => {
 };
 
 const mapDispatchToProps = {
+  getProducts: productActions.getProducts,
   deleteProduct: productActions.deleteProduct,
   editProduct: productActions.editProduct,
   addSubcategories: productActions.addSubcategories,

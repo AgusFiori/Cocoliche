@@ -121,9 +121,7 @@ const productController = {
       var addSubProd = await Product.findOneAndUpdate(
         { _id: productId },
         {
-          "$set": {
-            subcategories: subcategories
-          }
+          "$push": { subcategories: { "$each": subcategories } }
         },
         { new: true }
       )

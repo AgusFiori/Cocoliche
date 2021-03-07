@@ -20,8 +20,6 @@ const NewSubcategories = (props) => {
     setVisible(!visible);
   };
 
-  console.log(props);
-
   return (
     <>
       {!visible ? (
@@ -34,7 +32,7 @@ const NewSubcategories = (props) => {
           <button onClick={modificarSub}>Modificar</button>
         </>
       ) : (
-        <button>
+        <>
           <td>
             <input
               type="text"
@@ -63,7 +61,7 @@ const NewSubcategories = (props) => {
             Aceptar
           </button>
           <button onClick={() => setVisible(!visible)}>Cancelar</button>
-        </button>
+        </>
       )}
     </>
   );
