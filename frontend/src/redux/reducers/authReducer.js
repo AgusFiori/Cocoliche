@@ -6,10 +6,10 @@ const initialState = {
 function authReducer(state = initialState, action) {
     switch (action.type) {
         case 'LOG_USER':
-            localStorage.setItem('firstname', action.payload.response.firstname)
-            localStorage.setItem('urlPic', action.payload.response.urlPic)
-            localStorage.setItem('token', action.payload.response.token)
-            localStorage.setItem('role', action.payload.response.role)
+            localStorage.setItem('firstname', action.payload.firstname)
+            localStorage.setItem('urlPic', action.payload.urlPic)
+            localStorage.setItem('token', action.payload.token)
+            localStorage.setItem('role', action.payload.role)
             return {
                 ...state,
                 loggedUser: action.payload.response

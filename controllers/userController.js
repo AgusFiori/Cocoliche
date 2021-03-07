@@ -1,4 +1,4 @@
-const user = require('../models/User')
+const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { findOne } = require('../models/User')
@@ -13,7 +13,7 @@ const userController = {
         }
         if (errores.length === 0) {
             const passHasheado = bcrypt.hashSync(password, 10)
-            const validatedUser = new user({
+            const validatedUser = new User({
                 username, password: passHasheado, firstname, lastname, urlPic, role, purchases, date
             })
             var userValidation = await validatedUser.save()
@@ -33,6 +33,36 @@ const userController = {
         })
     },
 
+    signGoogle: async(req, res)=>{
+        const {displayName, email,  refreshToken, photoURL} = req.body
+        const userExists = await User.findOne({username: email})
+        const nombre = displayName.split(" ")
+
+        if (userExists) {
+            var token = jwt.sign({...userExists}, process.env.SECRET_KEY, {})
+            return res.json({success: true, response: {
+                success: true,
+                token,
+                firstname: userExists.firstname,
+                urlPic: userExists.urlPic,
+                role: userExists.role
+            }})
+        }else{
+            var newUser = new User({
+                firstname: nombre[0], lastname:nombre[nombre.length - 1], username:email, urlPic:photoURL, logginGoogle: refreshToken
+            })
+            var newUserSaved = await newUser.save()
+            var token = jwt.sign({...newUserSaved}, process.env.SECRET_KEY, {})
+            return res.json({success: true, response: {
+                success: true,
+                token, 
+                firstname: newUserSaved.firsname,
+                urlPic: newUserSaved.urlPic,
+                role: newUserSaved.role
+            }})
+        
+        }
+    },
 
     signin: async (req, res) => {
         const { username, password } = req.body
@@ -58,6 +88,7 @@ const userController = {
 
     },
     logFromLS: (req, res) => {
+        console.log(req.body)
         res.json({
             success: true, response: {
                 token: req.body.token,
@@ -70,3 +101,6 @@ const userController = {
 }
 
 module.exports = userController
+
+
+
