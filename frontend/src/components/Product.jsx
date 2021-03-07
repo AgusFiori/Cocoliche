@@ -64,6 +64,8 @@ const Product = (props) => {
     }
   };
 
+  console.log(props);
+
   return (
     <>
       {!visible ? (
@@ -79,7 +81,11 @@ const Product = (props) => {
           </td>
           <td>{props.product.description}</td>
           <td>{props.product.delay}</td>
-          <td>{props.product.stock}</td>
+          <td>
+            {props.product.subcategories.map((subcategory) => (
+              <p>{subcategory.subcategoryStock}</p>
+            ))}
+          </td>
           <td>
             <img
               src={`${props.product.picture}`}

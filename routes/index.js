@@ -17,6 +17,8 @@ router.route('/product/:productId').delete(productController.deleteProduct)
 const validator = require('../controllers/validator')
 const userController = require('../controllers/userController')
 const reservationController = require('../controllers/reservationController')
+const orderController = require('../controllers/orderController')
+
 
 
 
@@ -25,13 +27,13 @@ router.route('/events')
   .get(eventController.getEvents)
   .post(eventController.addEvent)
   .put(eventController.modifyEvent)
-  router.route('/events/delete/:id')
+router.route('/events/delete/:id')
   .delete(eventController.deleteEvent)
 
 
 //RUTAS RESERVAS
 router.route('/reservation')
-.post(passport.authenticate('jwt', { session: false }), reservationController.reservation)
+  .post(passport.authenticate('jwt', { session: false }), reservationController.reservation)
 
 
 //rutas de signIn y signUp
@@ -45,5 +47,8 @@ router.route('/user/ls')
 
   router.route('/user/sign_google')
   .post(userController.signGoogle)
+//Rutas de pedidos
+router.route('/purchases')
+  .post(passport.authenticate('jwt', { session: false }), orderController.newOrder)
 
 module.exports = router

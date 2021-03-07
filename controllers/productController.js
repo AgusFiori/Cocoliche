@@ -21,7 +21,7 @@ const productController = {
 
     const parsedSubcategories = JSON.parse(req.body.subcategories)
 
-    const { name, description, stock, delay, category } = req.body
+    const { name, description, delay, category } = req.body
     const file = req.files.file
 
     await file.mv(path.join(__dirname, '../frontend/public/assets/productPictures/' + file.md5 + ".jpeg"), error => {
@@ -33,7 +33,7 @@ const productController = {
     const productPicturesLocation = `/assets/productPictures/${file.md5}.jpeg`
 
     const newProduct = new Product({
-      name, description, stock, picture: productPicturesLocation, subcategories: parsedSubcategories, delay, category
+      name, description, picture: productPicturesLocation, subcategories: parsedSubcategories, delay, category
     })
     newProduct.save()
       .then(newProduct => { return res.json({ success: true, response: newProduct }) })
@@ -43,7 +43,7 @@ const productController = {
   editProduct: async (req, res) => {
     // productId tendría que llegar de la barra de navegacion
     try {
-      const { name, price, description, stock, category, delay, id } = req.body
+      const { name, price, description, category, delay, id } = req.body
 
       if (req.files) {
         var file = req.files.file

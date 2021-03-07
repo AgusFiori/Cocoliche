@@ -19,14 +19,13 @@ const productActions = {
   },
   addProduct: (product, file) => {
     try {
-      const { name, description, category, subcategories, delay, stock } = product
+      const { name, description, category, subcategories, delay } = product
       const form = new FormData()
       form.append('name', name)
       form.append('description', description)
       form.append('category', category)
       form.append('subcategories', JSON.stringify(subcategories))
       form.append('delay', delay)
-      form.append('stock', stock)
       form.append('file', file.result)
       return async (dispatch, getState) => {
         const response = await axios.post(`${API}/products`, form
