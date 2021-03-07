@@ -57,7 +57,7 @@ const Login = (props) => {
         >
           <Navbar />
         </div>
-        <div className="col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
+        <div className="trasparent col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
           <span className="h1">Ingresar</span>
           <input
             className="text-center h3"

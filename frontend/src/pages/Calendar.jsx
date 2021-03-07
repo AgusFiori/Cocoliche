@@ -16,6 +16,7 @@ const Calendary = (props) => {
 
   const { getEvents } = props;
   useEffect( () => {
+    console.log(props.events)
     getEvents();
     setEvent(props.events)
   }, [getEvents, event]);
@@ -36,7 +37,7 @@ const Calendary = (props) => {
       if (event.dateEvent === arg.dateStr) {
         Swal.fire({
           title: event.title,
-          text: 'Modal with a custom image.',
+          text: '',
           imageUrl: event.picture,
           imageWidth: 400,
           imageHeight: 200,
@@ -85,13 +86,13 @@ const Calendary = (props) => {
   
   return (
       
-      <div className="container-fluid">
+      <div className="container-fluid background">
             <div className="row">
                 <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
                     <Navbar />
                 </div>
                 
-              <div className="calendario col-sm-12 col-md-7 col-lg-10 col-xl-10">
+              <div className="trasparent p-4 m-auto col-sm-12 col-md-7 col-lg-10 col-xl-10">
                 <FullCalendar
                   plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
                   locale="es-ES"
