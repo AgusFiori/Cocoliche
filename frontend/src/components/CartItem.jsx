@@ -16,8 +16,9 @@ const CartItem = (props) => {
   console.log(props);
 
   let qty = 1;
+
   return (
-    <>
+    <div>
       <h2>
         {props.props.name} {props.props.subcategory.subcategory}
       </h2>
@@ -26,8 +27,10 @@ const CartItem = (props) => {
         style={{ width: "100px", height: "100px" }}
         alt="producto"
       ></img>
-      <h3>Subtotal: {props.props.subcategory.price * props.props.quantity}</h3>
-      <h3>Cantidad: </h3>
+      <h3>
+        Subtotal: {props.props.subcategory.price * props.props.subcategory.qty}
+      </h3>
+      <h3>Cantidad </h3>
       {visible ? (
         <>
           <select
@@ -36,14 +39,14 @@ const CartItem = (props) => {
             defaultValue="default"
           >
             <option value="default">-</option>
-            {[...Array(props.props.stock)].map(() => {
+            {[...Array(props.props.subcategory.stock)].map(() => {
               return <option>{qty++}</option>;
             })}
           </select>
           <button onClick={confirmChanges}>Confirmar</button>
         </>
       ) : (
-        <h3>{props.props.quantity}</h3>
+        <h3>{props.props.subcategory.qty}</h3>
       )}
 
       <button
@@ -54,7 +57,7 @@ const CartItem = (props) => {
         X
       </button>
       <button onClick={() => setVisible(!visible)}>Modificar</button>
-    </>
+    </div>
   );
 };
 

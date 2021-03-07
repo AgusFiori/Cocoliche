@@ -3,13 +3,32 @@ import { API } from './../../components/Api';
 
 const productActions = {
   addToCart: (product) => {
-    console.log(product)
     try {
       return async (dispatch, getState) => {
-        const cart = getState().cartReducer.cart.concat(product)
+
+        var copyCart = getState().cartReducer.cart.slice()
+        var otherCart = getState().cartReducer.cart.slice()
+
+        let comparator = copyCart.findIndex((item) => {
+          return item.subcategory.subcategoryId === product.subcategory.subcategoryId
+        })
+
+        if (comparator !== -1) {
+          otherCart = copyCart.map(item => {
+            if (item.subcategory.subcategoryId === product.subcategory.subcategoryId) {
+              return item = product
+            } else {
+              return item
+            }
+          })
+        } else {
+          otherCart.push(product)
+        }
+
+
         dispatch({
           type: 'ADD_TO_CART',
-          payload: cart
+          payload: otherCart
         })
       }
     } catch (error) {
@@ -42,7 +61,7 @@ const productActions = {
     return (dispatch, getState) => {
       const copyCart = getState().cartReducer.cart.slice()
       let modifyItem = copyCart.find(cartItem => cartItem.subcategory.subcategoryId === idSubItem);
-      modifyItem.quantity = cant
+      modifyItem.subcategory.qty = cant
       let indiMod = copyCart.findIndex((item) => {
         return item.subcategory.subcategoryId === idSubItem
       })
@@ -63,6 +82,14 @@ const productActions = {
       console.log(response)
       dispatch({
         type: "CONFIRM_PURCHASE",
+        payload: response.data
+      })
+    }
+  },
+  getCart: () => {
+    return async (dispatch, getState) => {
+      dispatch({
+        type: "GET_CART",
         payload: ""
       })
     }

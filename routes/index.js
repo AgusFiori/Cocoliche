@@ -14,6 +14,11 @@ router.route('/products').post(productController.addProduct).get(productControll
 router.route('/category').post(categoryController.addCategory).get(categoryController.getCategories)
 
 router.route('/product/:productId').delete(productController.deleteProduct)
+
+router.route('/product/subcategory').post(productController.addSubProducts).put(productController.editSubcategory)
+router.route('/product/subcategory/delete/:productId/:subcategoryId').delete(productController.deleteSubcategory)
+
+
 const validator = require('../controllers/validator')
 const userController = require('../controllers/userController')
 const reservationController = require('../controllers/reservationController')

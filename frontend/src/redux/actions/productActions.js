@@ -102,6 +102,47 @@ const productActions = {
         console.log(error)
       }
     }
+  },
+  addSubcategories: (subcategories, productId) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await axios.post(`${API}/product/subcategory`, { subcategories, productId },
+
+        )
+        dispatch({
+          type: 'ADD_SUBCATEGORY',
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
+  deleteSubcategory: (productId, subcategoryId) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await axios.delete(`${API}/product/subcategory/delete/${productId}/${subcategoryId}`)
+        dispatch({
+          type: "DELETE_SUB",
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
+  editSubcategory: (editedSubcategory) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await axios.put(`${API}/product/subcategory/`, editedSubcategory)
+        dispatch({
+          type: "EDIT_SUBCATEGORY",
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 

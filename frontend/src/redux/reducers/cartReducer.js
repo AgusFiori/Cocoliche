@@ -5,6 +5,7 @@ const initialState = {
 function cartReducer(state = initialState, action) {
   switch (action.type) {
     case 'ADD_TO_CART':
+      console.log(action.payload)
       const cartLocal = JSON.stringify(action.payload)
       // let prodCart = []
       // prodCart.push(action.payload)
@@ -41,6 +42,17 @@ function cartReducer(state = initialState, action) {
       return {
         ...state,
         cart: action.payload
+      }
+    case 'CONFIRM_PURCHASE':
+      localStorage.removeItem('cart')
+      return {
+        ...state,
+        cart: []
+      }
+    case 'GET_CART':
+      return {
+        ...state,
+        cart: [...state.cart]
       }
     default:
       return state

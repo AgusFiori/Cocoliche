@@ -15,7 +15,11 @@ function authReducer(state = initialState, action) {
                 loggedUser: action.payload.response
             }
         case 'LOG_OUT_USER':
-            localStorage.clear()
+            localStorage.removeItem('firstname')
+            localStorage.removeItem('urlPic')
+            localStorage.removeItem('token')
+            localStorage.removeItem('role')
+
             return {
                 ...state,
                 loggedUser: null

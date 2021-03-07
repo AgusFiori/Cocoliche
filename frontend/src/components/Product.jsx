@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import productActions from "../redux/actions/productActions";
 import Compressor from "compressorjs";
 import Swal from "sweetalert2";
+import ProductSubcategory from "./ProductSubcategory";
 
 const Product = (props) => {
   const [visible, setVisible] = useState(false);
+  const [visibleSub, setVisibleSub] = useState(false);
   const [editProduct, setEditProduct] = useState({
     name: props.product.name,
     price: props.product.price,
@@ -18,12 +20,23 @@ const Product = (props) => {
   });
   const [pathImage, setPathImage] = useState("/assets/losago.png");
   const [file, setFile] = useState();
+  const [subCategory, setSubCategory] = useState({});
+  const [subCategories, setSubCategories] = useState([]);
+  const [newSubcategory, setNewSubcategory] = useState({});
 
+  useEffect(() => {
+    props.getProducts();
+  }, []);
+
+  // *****************************************
+  // EDICION DE PRODUCTOS
+  // CAPTURA INPUTS DE EDICION DE PRODUCTO
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditProduct({ ...editProduct, [name]: value });
   };
 
+  // SHORTCUT PARA ALERTAS DE ERROR
   const errorAlert = (type, title, text) => {
     Swal.fire({
       icon: type,
@@ -33,12 +46,14 @@ const Product = (props) => {
     });
   };
 
+  // ENVIA CAMBIOS A BASE DE DATOS
   const sendEdit = () => {
     let newFile = file ? file : props.product.picture;
     props.editProduct(editProduct, newFile);
     setVisible(!visible);
   };
 
+  // FUNCION PARA CAPTURAR FILES (FOTOS)
   const onFileChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -63,71 +78,89 @@ const Product = (props) => {
       }
     }
   };
+  // *****************************************
+  // FIN EDICION DE PRODUCTOS
 
-  console.log(props);
+  // *****************************************
+  // EDICION DE SUBCATEGORIAS
+
+  const addSubcategory = () => {
+    setVisibleSub(!visibleSub);
+    subCategories.push(subCategory);
+  };
+
+  // const handleSubcategory = (e) => {
+  //   // subcategory
+  //   const { name, value } = e.target;
+  //   setSubCategory({ ...subCategory, [name]: value });
+  // };
+
+  // const aceptarModif = (subCat, id) => {
+  //   subCategories.map((subcategory) => {
+  //     if (subcategory.id === id) {
+  //       return (subcategory = subCat);
+  //     }
+  //     return subcategory;
+  //   });
+  // };
+
+  // const confirmChanges = () => {
+  //   props.addSubcategories(subCategories, props.product._id);
+  // };
+
+  const handleNewSubcategory = (e) => {
+    // subcategory
+    const { name, value } = e.target;
+    setNewSubcategory({ ...newSubcategory, [name]: value });
+  };
+
+  const addNewSubcategory = () => {
+    props.addSubcategories(newSubcategory, props.product._id);
+  };
 
   return (
     <>
       {!visible ? (
-        <tr>
-          <td>{props.product.name}</td>
-          <td>{props.product.category}</td>
-          <td>
-            {props.product.subcategories.map((subcategory) => (
-              <p key={subcategory._id}>
-                {subcategory.subcategory}---{subcategory.subcategoryPrice}
-              </p>
-            ))}
-          </td>
-          <td>{props.product.description}</td>
-          <td>{props.product.delay}</td>
-          <td>
-            {props.product.subcategories.map((subcategory) => (
-              <p>{subcategory.subcategoryStock}</p>
-            ))}
-          </td>
-          <td>
-            <img
-              src={`${props.product.picture}`}
-              style={{ width: "100px", height: "100px" }}
-              alt="a"
-            ></img>
-          </td>
-
-          <td>
-            <button onClick={() => setVisible(!visible)}>Editar</button>
-          </td>
-          <td>
-            <button onClick={(e) => props.remove(e, props.product._id)}>
-              Borrar
-            </button>
-          </td>
-        </tr>
+        <>
+          <tr>
+            <td>{props.product.name}</td>
+            <td>{props.product.category}</td>
+            <td>{props.product.description}</td>
+            <td>{props.product.delay}</td>
+            <td>
+              <img
+                src={`${props.product.picture}`}
+                style={{ width: "100px", height: "100px" }}
+                alt="Product"
+              ></img>
+            </td>
+            <td>
+              <button onClick={() => setVisible(!visible)}>Editar</button>
+            </td>
+            <td>
+              <button onClick={(e) => props.remove(e, props.product._id)}>
+                Borrar
+              </button>
+            </td>
+          </tr>
+        </>
       ) : (
         <>
           {" "}
           <td>
             <input
               type="text"
-              name="name"
+              name="subcategory"
               onChange={handleChange}
               defaultValue={props.product.name}
             />
           </td>
           <td>
             <input
-              type="text"
+              type="subcategoryPrice"
               name="category"
               onChange={handleChange}
               defaultValue={props.product.category}
-            />
-          </td>
-          <td>
-            <input
-              type="text"
-              name="description"
-              onChange={handleChange}
-              disabled={true}
             />
           </td>
           <td>
@@ -147,14 +180,6 @@ const Product = (props) => {
             />
           </td>
           <td>
-            <input
-              type="text"
-              name="stock"
-              onChange={handleChange}
-              defaultValue={props.product.stock}
-            />
-          </td>
-          <td>
             <img
               src={`${editProduct.file}`}
               style={{ width: "100px", height: "100px" }}
@@ -171,13 +196,94 @@ const Product = (props) => {
           <button onClick={() => setVisible(!visible)}>CANCELAR</button>
         </>
       )}
+      {visibleSub ? (
+        <>
+          <tr>
+            {props.product.subcategories.map((subcategory) => (
+              <ProductSubcategory
+                subcategory={subcategory}
+                productId={props.product._id}
+              />
+            ))}
+          </tr>
+          <td>
+            <input
+              type="text"
+              name="subcategory"
+              onChange={handleNewSubcategory}
+              placeholder="Nombre de la subcategoria"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="subcategoryPrice"
+              onChange={handleNewSubcategory}
+              placeholder="Precio"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="subcategoryStock"
+              onChange={handleNewSubcategory}
+              placeholder="Stock disponible"
+            />
+          </td>
+          <button onClick={addNewSubcategory}>Agregar Subcategoria</button>
+          {/* <button onClick={confirmChanges}>Confirmar cambios</button> */}
+        </>
+      ) : (
+        <>
+          <td>
+            <input
+              type="text"
+              name="subcategory"
+              // onChange={handleSubcategory}
+              placeholder="Nombre de subcategoria"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="subcategoryPrice"
+              // onChange={handleSubcategory}
+              placeholder="Precio"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="subcategoryStock"
+              // onChange={handleSubcategory}
+              placeholder="Stock"
+            />
+          </td>
+          <td>
+            <button onClick={addSubcategory}>Añadir subcategoría</button>
+          </td>
+        </>
+      )}
+      <tr>
+        <th>
+          <button
+            onClick={() => {
+              setVisibleSub(!visibleSub);
+            }}
+          >
+            Ver subcategorias
+          </button>
+        </th>
+      </tr>
     </>
   );
 };
 
 const mapDispatchToProps = {
+  getProducts: productActions.getProducts,
   deleteProduct: productActions.deleteProduct,
   editProduct: productActions.editProduct,
+  addSubcategories: productActions.addSubcategories,
 };
 
 export default connect(null, mapDispatchToProps)(Product);
