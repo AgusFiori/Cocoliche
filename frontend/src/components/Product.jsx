@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import productActions from "../redux/actions/productActions";
 import Compressor from "compressorjs";
 import Swal from "sweetalert2";
-import NewSubcategories from "./NewSubcategories";
+import ProductSubcategory from "./ProductSubcategory";
 
 const Product = (props) => {
   const [visible, setVisible] = useState(false);
@@ -22,15 +22,11 @@ const Product = (props) => {
   const [file, setFile] = useState();
   const [subCategory, setSubCategory] = useState({});
   const [subCategories, setSubCategories] = useState([]);
+  const [newSubcategory, setNewSubcategory] = useState({});
 
   useEffect(() => {
     props.getProducts();
   }, []);
-  console.log(props);
-
-  // VARIABLE CONTADOR
-
-  let contador = 0;
 
   // *****************************************
   // EDICION DE PRODUCTOS
@@ -93,29 +89,35 @@ const Product = (props) => {
     subCategories.push(subCategory);
   };
 
-  const handleSubcategory = (e) => {
+  // const handleSubcategory = (e) => {
+  //   // subcategory
+  //   const { name, value } = e.target;
+  //   setSubCategory({ ...subCategory, [name]: value });
+  // };
+
+  // const aceptarModif = (subCat, id) => {
+  //   subCategories.map((subcategory) => {
+  //     if (subcategory.id === id) {
+  //       return (subcategory = subCat);
+  //     }
+  //     return subcategory;
+  //   });
+  // };
+
+  // const confirmChanges = () => {
+  //   props.addSubcategories(subCategories, props.product._id);
+  // };
+
+  const handleNewSubcategory = (e) => {
     // subcategory
     const { name, value } = e.target;
-    setSubCategory({ ...subCategory, [name]: value, id: contador });
+    setNewSubcategory({ ...newSubcategory, [name]: value });
   };
 
-  const agregarSubcategoria = () => {
-    setVisibleSub(!visibleSub);
+  const addNewSubcategory = () => {
+    props.addSubcategories(newSubcategory, props.product._id);
   };
 
-  const aceptarModif = (subCat, id) => {
-    subCategories.map((subcategory) => {
-      if (subcategory.id === id) {
-        return (subcategory = subCat);
-      }
-      return subcategory;
-    });
-  };
-
-  const confirmChanges = () => {
-    props.addSubcategories(subCategories, props.product._id);
-  };
-  // console.log(props);
   return (
     <>
       {!visible ? (
@@ -129,7 +131,7 @@ const Product = (props) => {
               <img
                 src={`${props.product.picture}`}
                 style={{ width: "100px", height: "100px" }}
-                alt="a"
+                alt="Product"
               ></img>
             </td>
             <td>
@@ -194,43 +196,29 @@ const Product = (props) => {
           <button onClick={() => setVisible(!visible)}>CANCELAR</button>
         </>
       )}
-      {!visibleSub ? (
+      {visibleSub ? (
         <>
           <tr>
             {props.product.subcategories.map((subcategory) => (
-              <td>{subcategory.subcategory}</td>
+              <ProductSubcategory
+                subcategory={subcategory}
+                productId={props.product._id}
+              />
             ))}
           </tr>
-          <tr>
-            <td>subcategorias del producto</td>
-            {subCategories.map((newSubCategory) => {
-              return (
-                <NewSubcategories
-                  newSubCategory={newSubCategory}
-                  productId={props.product._id}
-                  aceptarModif={aceptarModif}
-                />
-              );
-            })}
-          </tr>
-          <button onClick={agregarSubcategoria}>Agregar Subcategoria</button>
-          <button onClick={confirmChanges}>Confirmar cambios</button>
-        </>
-      ) : (
-        <>
           <td>
             <input
               type="text"
               name="subcategory"
-              onChange={handleSubcategory}
-              placeholder="Nombre de subcategoria"
+              onChange={handleNewSubcategory}
+              placeholder="Nombre de la subcategoria"
             />
           </td>
           <td>
             <input
               type="number"
               name="subcategoryPrice"
-              onChange={handleSubcategory}
+              onChange={handleNewSubcategory}
               placeholder="Precio"
             />
           </td>
@@ -238,16 +226,55 @@ const Product = (props) => {
             <input
               type="number"
               name="subcategoryStock"
-              onChange={handleSubcategory}
+              onChange={handleNewSubcategory}
+              placeholder="Stock disponible"
+            />
+          </td>
+          <button onClick={addNewSubcategory}>Agregar Subcategoria</button>
+          {/* <button onClick={confirmChanges}>Confirmar cambios</button> */}
+        </>
+      ) : (
+        <>
+          <td>
+            <input
+              type="text"
+              name="subcategory"
+              // onChange={handleSubcategory}
+              placeholder="Nombre de subcategoria"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="subcategoryPrice"
+              // onChange={handleSubcategory}
+              placeholder="Precio"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="subcategoryStock"
+              // onChange={handleSubcategory}
               placeholder="Stock"
             />
           </td>
           <td>
             <button onClick={addSubcategory}>Añadir subcategoría</button>
-            <button onClick={() => setVisibleSub(!visibleSub)}>Cancelar</button>
           </td>
         </>
       )}
+      <tr>
+        <th>
+          <button
+            onClick={() => {
+              setVisibleSub(!visibleSub);
+            }}
+          >
+            Ver subcategorias
+          </button>
+        </th>
+      </tr>
     </>
   );
 };
