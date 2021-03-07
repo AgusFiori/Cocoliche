@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { NavLink} from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import authActions from '../redux/actions/authActions'
 import {IoFastFoodOutline} from 'react-icons/io5'
 import { GoSignOut } from "react-icons/go";
 import { connect } from 'react-redux'
 import logo from '../assets/cocoliche-logo.png'
 import blackboard from '../assets/blackboard.jpg'
+import { AiFillFacebook, AiFillInstagram } from "react-icons/ai";
 
 
 import Swal from 'sweetalert2';
@@ -64,8 +65,8 @@ const Navbar = (props) => {
             <NavLink to="/menu" className="text-decoration-none mt-2">
               <span className="h4">Menú</span>
             </NavLink>
-            <NavLink to="/cart" className="text-decoration-none mt-2">
-              <span className="h4 d-flex align-items-center">Mi pedido <IoFastFoodOutline/></span>
+            <NavLink to="/cart" className="text-decoration-none mt-2 d-flex">
+              <span className="h4 d-flex align-items-center">Mi pedido</span> <IoFastFoodOutline className="cartIcono"/>
             </NavLink>
             <NavLink to="/calendar" className="text-decoration-none mt-2">
               <span className="h4">Eventos</span>
@@ -76,6 +77,19 @@ const Navbar = (props) => {
             <NavLink  className="text-decoration-none mt-2" to="/reservation">
               <span className="h4">HACER UNA RESERVA</span>
             </NavLink>
+            <div className="mt-3 d-flex justify-content-around">
+            <Link>
+              <p>
+                <AiFillFacebook className="rd"></AiFillFacebook>
+              </p>
+            </Link>
+            <Link>
+              <p>
+                <AiFillInstagram className="rd"></AiFillInstagram>
+              </p>
+            </Link>
+
+            </div>
           </div>
       </div>
   );
