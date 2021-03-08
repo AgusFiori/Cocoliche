@@ -15,7 +15,7 @@ const authActions = {
   },
  
   loginWithGoogle:(response)=>{
-
+console.log(response)
     return async (dispatch, getState) => {
         const respuesta = await axios.post(`${API}/user/sign_google`, response)
         if (!respuesta.data.success) {

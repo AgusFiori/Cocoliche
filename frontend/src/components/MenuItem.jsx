@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import cartActions from "../redux/actions/cartActions";
 import SubCategory from "./SubCategory.jsx";
 
 const MenuItems = (props) => {
