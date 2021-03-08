@@ -11,9 +11,8 @@ const CartItem = (props) => {
 
   const confirmChanges = () => {
     props.modifyQuantity(newQuantity, props.props.subcategory.subcategoryId);
+    setVisible(!visible);
   };
-
-  console.log(props);
 
   let qty = 1;
 
@@ -25,6 +24,7 @@ const CartItem = (props) => {
       <img
         src={`${props.props.picture}`}
         style={{ width: "100px", height: "100px" }}
+        className="rounded-circle"
         alt="producto"
       ></img>
       <h3>
@@ -38,7 +38,7 @@ const CartItem = (props) => {
             onChange={changeQuantity}
             defaultValue="default"
           >
-            <option value="default">-</option>
+            <option value="default">{props.props.subcategory.qty}</option>
             {[...Array(props.props.subcategory.stock)].map(() => {
               return <option>{qty++}</option>;
             })}
