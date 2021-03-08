@@ -20,6 +20,7 @@ function authReducer(state = initialState, action) {
             localStorage.removeItem('urlPic')
             localStorage.removeItem('token')
             localStorage.removeItem('role')
+            localStorage.setItem('cart', [])
 
             return {
                 ...state,

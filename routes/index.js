@@ -38,7 +38,8 @@ router.route('/events/delete/:id')
 
 //RUTAS RESERVAS
 router.route('/reservation')
-  .post(passport.authenticate('jwt', { session: false }), reservationController.reservation)
+  .post(passport.authenticate('jwt', { session: false }), reservationController.addReservation)
+  .get(reservationController.getReservations)
 
 
 //rutas de signIn y signUp

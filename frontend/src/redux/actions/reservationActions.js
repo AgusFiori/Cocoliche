@@ -15,10 +15,13 @@ const reservedActions = {
                         }      
             }
             )
+            console.log(response)
             if(response.data.success){
-                Swal.fire("Reserva enviada")
+                Swal.fire("Reserva enviada, recibirá un mail con la confirmación")
+                dispatch({type: 'RESERVATION', payload: response.data.response})
+                
             } else {
-                Swal.fire("Algo falló")
+                Swal.fire("Lo siento, su reserva no se ha podido registrar")
             }
         }
     }

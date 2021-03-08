@@ -42,7 +42,7 @@ const Navbar = (props) => {
     } else {
         var links =
             <>
-             <NavLink to={'/cart'} className="text-decoration-none mt-2">
+             <NavLink to={'/profile'} className="text-decoration-none mt-2">
               <div className="container d-flex justify-content-between">
                 <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
                 <span className="h5">Hola {props.loggedUser.firstname}</span>

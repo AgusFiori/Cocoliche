@@ -67,6 +67,7 @@ function App(props) {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/reservation" component={Reservation} />
+          <Route path="/profile" component={Profile} />
           <Redirect to="/" />
         </Switch>
       </ScrollToTop>
