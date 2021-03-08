@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import cartActions from "../redux/actions/cartActions";
+import { RiShoppingCart2Line } from "react-icons/ri";
 
 const SubCategory = (props) => {
   const [productToAdd, setProductToAdd] = useState({
@@ -24,19 +25,14 @@ const SubCategory = (props) => {
   const addToCart = () => {
     props.addToCart(productToAdd);
   };
-
   
   return (
-    <div className="container">
+    <div className="card-body">
       <h3>{props.sub.subcategory}</h3>
-      <h3>Precio: {props.sub.subcategoryPrice}</h3>
-      <h3>Stock: {props.sub.subcategoryStock}</h3>
-
-      {/* <input type="number" defaultValue={0} onChange={handleChange}/> */}
-
+      <h3>$:{props.sub.subcategoryPrice}</h3>
+      {/* <h3>Stock: {props.sub.subcategoryStock}</h3> */}
       <select name="subcategory" onChange={handleChange} defaultValue="default">
         <option value="default">Elegi cantidad</option>
-
         {[...Array(10)].map(() => {
           return (
             <option
@@ -53,7 +49,7 @@ const SubCategory = (props) => {
           );
         })}
       </select>
-      <button onClick={addToCart}>Agregar</button>
+      <button onClick={addToCart}><RiShoppingCart2Line/></button>
     </div>
   );
 };
