@@ -5,6 +5,7 @@ const initialState = {
 
 function authReducer(state = initialState, action) {
     switch (action.type) {
+        
         case 'LOG_USER':
             localStorage.setItem('firstname', action.payload.firstname)
             localStorage.setItem('urlPic', action.payload.urlPic)

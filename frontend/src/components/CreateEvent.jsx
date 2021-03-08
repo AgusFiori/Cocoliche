@@ -89,7 +89,7 @@ const CreateEvent = (props) => {
             <input id="inputUpload" name="picture" type="file" onChange={onFileChange} />
             <span onChange={captureNewEvent}>
                 <select name="category" id="categoria">
-                <option disabled>--</option>
+                <option disabled selected>--</option>
                 <option value="Comida">Comida</option> 
                 <option value="Bebida">Bebida</option>
                 <option value="Cantante">Cantante</option>
