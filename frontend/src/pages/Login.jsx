@@ -65,7 +65,7 @@ const Login = (props) => {
             Ingresar
           </button>
           <label>{errores}</label>
-          <button onClick={loginWithRS}>Ingresar con otros métodos</button>
+          <button onClick={loginWithRS} className='h3'>Ingresar con Google</button>
         </div>
       </div>
     </div>

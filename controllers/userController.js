@@ -1,8 +1,9 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { findOne } = require('../models/User')
+
 const userController = {
+    
     signUp: async (req, res) => {
         const errores = []
         const { username, password, firstname, lastname} = req.body
@@ -32,7 +33,6 @@ const userController = {
             }
         })
     },
-
     signGoogle: async(req, res)=>{
         const {displayName, email,  refreshToken, photoURL} = req.body
         const userExists = await User.findOne({username: email})
@@ -63,7 +63,6 @@ const userController = {
         
         }
     },
-
     signin: async (req, res) => {
         const { username, password } = req.body
 
@@ -88,15 +87,12 @@ const userController = {
 
     },
     logFromLS: (req, res) => {
-        console.log(req.user)
         res.json({
-            success: true, response: {
-                token: req.body.token,
                 firstname: req.user.firstname,
                 urlPic: req.user.urlPic,
                 role: req.user.role
             }
-        })
+        )
     }
 }
 
