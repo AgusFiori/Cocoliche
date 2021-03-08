@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import { API } from '../../components/Api'
 
@@ -111,7 +110,7 @@ const productActions = {
         )
         dispatch({
           type: 'ADD_SUBCATEGORY',
-          payload: updatedProduct
+          payload: response.data
         })
       } catch (error) {
         console.log(error)

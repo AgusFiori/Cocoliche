@@ -40,4 +40,3 @@ export function productReducer(state = initialState, action) {
       return state
   }
 }
-

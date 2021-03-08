@@ -34,17 +34,14 @@ const Menu = (props) => {
             </div>
             
             <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              <div className="row justify-content-center">
-              
+              <div className="row justify-content-center">              
               {props.allProducts.map((product) => (
                 <MenuItem key={product._id} product={product} />
               ))}
               </div>
             </div>
           </div>
-        </div>
-        
-        
+        </div>        
       </div>
     </div>
   );

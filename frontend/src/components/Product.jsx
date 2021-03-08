@@ -23,7 +23,6 @@ const Product = (props) => {
   const [subCategory, setSubCategory] = useState({});
   const [subCategories, setSubCategories] = useState([]);
   const [newSubcategory, setNewSubcategory] = useState({});
- 
 
   useEffect(() => {
     props.getProducts();
@@ -83,9 +82,13 @@ const Product = (props) => {
   // FIN EDICION DE PRODUCTOS
 
   // *****************************************
-  // EDICION DE SUBCATEGORIAS LOCALES
+  // EDICION DE SUBCATEGORIAS
 
-  
+  const addSubcategory = () => {
+    setVisibleSub(!visibleSub);
+    subCategories.push(subCategory);
+  };
+
   // const handleSubcategory = (e) => {
   //   // subcategory
   //   const { name, value } = e.target;
@@ -114,16 +117,6 @@ const Product = (props) => {
   const addNewSubcategory = () => {
     props.addSubcategories(newSubcategory, props.product._id);
   };
-
-  const elimLocalSubCategory=(idLocal)=>{
-    const elimSubCategories=subCategories.filter((subcategory)=>{
-      return subcategory.idLocal !== idLocal
-    })
-    setSubCategories(elimSubCategories)
-  }
-
-  // ******************************************
-  // FIN EDICION DE SUBCATEGORIAS LOCALES
 
   return (
     <>
@@ -157,14 +150,14 @@ const Product = (props) => {
           <td>
             <input
               type="text"
-              name="name"
+              name="subcategory"
               onChange={handleChange}
               defaultValue={props.product.name}
             />
           </td>
           <td>
             <input
-              type="text"
+              type="subcategoryPrice"
               name="category"
               onChange={handleChange}
               defaultValue={props.product.category}
@@ -180,7 +173,7 @@ const Product = (props) => {
           </td>
           <td>
             <input
-              type="number"
+              type="text"
               name="delay"
               onChange={handleChange}
               defaultValue={props.product.delay}
