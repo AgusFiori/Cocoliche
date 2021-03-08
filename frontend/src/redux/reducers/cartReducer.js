@@ -52,7 +52,7 @@ function cartReducer(state = initialState, action) {
     case 'GET_CART':
       return {
         ...state,
-        cart: [...state.cart]
+        // cart: [...state.cart]
       }
     default:
       return state

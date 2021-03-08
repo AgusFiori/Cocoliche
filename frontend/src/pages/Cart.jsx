@@ -18,18 +18,30 @@ const Cart = (props) => {
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
   return (
-    <div className="container">
-      <h2>Cart</h2>
+    <div className="container bg-light p-5 mt-5">
+      <h1>Cart</h1>
       {props.cart && props.cart.length ? (
-        <>
+        <div className="container">
           {" "}
           {props.cart && props.cart.map((item) => <CartItem props={item} />)}
           {props.cart.map((item) => {
             acc.push(item.subcategory.price * item.subcategory.qty);
           })}
-          <h5>{acc.length && acc.reduce(reducer)}</h5>
-          <button onClick={sendCart}>Confirmar Compra</button>
-        </>
+          <div className="p-4 mt-5 d-flex justify-content-between border border-dark rounded">
+            <p class="h1">TOTAL:</p>
+            <p class="h1">{acc.length && acc.reduce(reducer)}</p>
+          </div>
+          <div className="container-fluid d-flex justify-content-center p-3">
+            <button
+              type="button"
+              class="btn btn-primary p-2 pr-5 pl-5"
+              style={{ fontSize: "32px" }}
+              onClick={sendCart}
+            >
+              Confirmar Compra
+            </button>
+          </div>
+        </div>
       ) : (
         <Link to="/menu">
           <h4>Agrega algun producto a tu carrito !</h4>
