@@ -26,12 +26,17 @@ const SubCategory = (props) => {
   };
 
   return (
-    <>
+    <div className="container">
       <h3>{props.sub.subcategory}</h3>
-      <h3>{props.sub.subcategoryPrice}</h3>
+      <h3>Precio: {props.sub.subcategoryPrice}</h3>
+      <h3>Stock: {props.sub.subcategoryStock}</h3>
+
+      {/* <input type="number" defaultValue={0} onChange={handleChange}/> */}
+
       <select name="subcategory" onChange={handleChange} defaultValue="default">
         <option value="default">Elegi cantidad</option>
-        {[...Array(props.sub.subcategoryStock)].map(() => {
+
+        {[...Array(10)].map(() => {
           return (
             <option
               value={JSON.stringify({
@@ -48,7 +53,7 @@ const SubCategory = (props) => {
         })}
       </select>
       <button onClick={addToCart}>Agregar</button>
-    </>
+    </div>
   );
 };
 

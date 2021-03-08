@@ -3,8 +3,8 @@ import { API } from './../../components/Api';
 
 const productActions = {
   addToCart: (product) => {
-    try {
-      return async (dispatch, getState) => {
+    return async (dispatch, getState) => {
+      try {
 
         var copyCart = getState().cartReducer.cart.slice()
         var otherCart = getState().cartReducer.cart.slice()
@@ -30,9 +30,9 @@ const productActions = {
           type: 'ADD_TO_CART',
           payload: otherCart
         })
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
     }
   },
   localStorageCart: (cart) => {
