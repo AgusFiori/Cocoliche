@@ -55,5 +55,18 @@ router.route('/user/ls')
 //Rutas de pedidos
 router.route('/purchases')
   .post(passport.authenticate('jwt', { session: false }), orderController.newOrder)
+  .get(orderController.getOrders)
+
+router.route('/purchases/confirm/:orderId')
+  .put(orderController.confirmOrder)
+
+router.route('/purchases/cancel/:orderId')
+  .put(orderController.cancelOrder)
+
+router.route('/purchases/complete/:orderId')
+  .put(orderController.completeOrder)
+
+router.route('/purchases/user/:customerId')
+  .get(orderController.getCustomer)
 
 module.exports = router

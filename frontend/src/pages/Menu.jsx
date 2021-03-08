@@ -5,12 +5,12 @@ import productActions from "../redux/actions/productActions";
 import cartActions from "../redux/actions/cartActions";
 
 const Menu = (props) => {
-  const { getProducts } = props;
+  const { getProducts, getCart } = props;
 
   useEffect(() => {
     getProducts();
-    props.getCart();
-  }, [getProducts]);
+    getCart();
+  }, [getProducts, getCart]);
 
   return (
     <div>

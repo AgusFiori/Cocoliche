@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import productActions from "../redux/actions/productActions";
+import orderActions from "../redux/actions/orderActions";
 import Compressor from "compressorjs";
 import Swal from "sweetalert2";
 import { connect } from "react-redux";
@@ -8,6 +9,7 @@ import Product from "../components/Product.jsx";
 import CreateEvent from "../components/CreateEvent";
 import agregarProducto from "../assets/agregar-producto.jpg";
 import Navbar from "../components/Navbar";
+import Order from "../components/Order.jsx";
 
 const Admin = (props) => {
   const [product, setProduct] = useState({});
@@ -18,12 +20,13 @@ const Admin = (props) => {
   const [newCategory, setNewCategory] = useState("");
 
   const { allProducts } = props;
-  const { getProducts, getCategories } = props;
+  const { getProducts, getCategories, getOrders } = props;
 
   useEffect(() => {
     getProducts();
     getCategories();
-  }, [getProducts, getCategories]);
+    getOrders();
+  }, [getProducts, getCategories, getOrders]);
 
   useEffect(() => {
     setProducts(allProducts);
@@ -32,7 +35,6 @@ const Admin = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
-    console.log(product);
   };
 
   const handleSubcategory = (e) => {
@@ -233,6 +235,23 @@ const Admin = (props) => {
                 <CreateEvent />
               </div>
             </div>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Pedido</th>
+                  <th>Estado</th>
+                  <th>Timestamp</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {props.allOrders.map((order) => (
+                  <tr>
+                    <Order order={order} />
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           </div>
         </div>
       </div>
@@ -244,6 +263,7 @@ const mapStateToProps = (state) => {
   return {
     allProducts: state.productR.allProducts,
     allCategories: state.productR.allCategories,
+    allOrders: state.orderReducer.allOrders,
   };
 };
 
@@ -253,6 +273,7 @@ const mapDispatchToProps = {
   deleteProduct: productActions.deleteProduct,
   createCategory: productActions.createCategory,
   getCategories: productActions.getCategories,
+  getOrders: orderActions.getOrders,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);

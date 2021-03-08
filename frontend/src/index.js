@@ -9,13 +9,13 @@ import firebase from 'firebase'
 
 // Initialize Firebase
 firebase.initializeApp({
-  apiKey: "AIzaSyCh_2wXwWjDBtutpYaJoq7w3NqF2JnMdAE",
-  authDomain: "cocoliche-306717.firebaseapp.com",
-  projectId: "cocoliche-306717",
-  storageBucket: "cocoliche-306717.appspot.com",
-  messagingSenderId: "444514934040",
-  appId: "1:444514934040:web:a4e707f518d46fb0eb926d",
-  measurementId: "G-KRETDG744D"
+  apiKey: "AIzaSyA39V7iOwT-_TJ4NwP1P0IfjKxFEhoE6q4",
+    authDomain: "cocoliche-resto-bar.firebaseapp.com",
+    projectId: "cocoliche-resto-bar",
+    storageBucket: "cocoliche-resto-bar.appspot.com",
+    messagingSenderId: "909495572810",
+    appId: "1:909495572810:web:40ece9ce94e5dca61049b3",
+    measurementId: "G-EV08JYJD0C"
 });
 
 ReactDOM.render(
@@ -24,3 +24,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+

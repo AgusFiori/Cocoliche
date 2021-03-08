@@ -7,7 +7,7 @@ const userController = {
         const errores = []
         const { username, password, firstname, lastname, urlPic, role, purchases, date } = req.body
 
-        const existingUser = await user.findOne({ username: username })
+        const existingUser = await User.findOne({ username: username })
         if (existingUser) {
             errores.push('existing user, choose another')
         }
@@ -67,7 +67,7 @@ const userController = {
     signin: async (req, res) => {
         const { username, password } = req.body
 
-        const usuarioExistente = await user.findOne({ username: username })
+        const usuarioExistente = await User.findOne({ username: username })
         if (!usuarioExistente) {
             return res.json({ success: false, respuesta: 'wrong username or password' })
         }
@@ -88,7 +88,6 @@ const userController = {
 
     },
     logFromLS: (req, res) => {
-        console.log(req.body)
         res.json({
             success: true, response: {
                 token: req.body.token,
