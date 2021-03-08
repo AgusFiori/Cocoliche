@@ -114,15 +114,14 @@ const productController = {
     }
 
   },
-  addSubProducts: async (req, res) => {
-    console.log(req.body)
+  addSubcategories: async (req, res) => {
     const { subcategories, productId } = req.body
     try {
       var addSubProd = await Product.findOneAndUpdate(
         { _id: productId },
         {
-          "$set": {
-            subcategories: subcategories
+          "$push": {
+            subcategories: {"$each":subcategories}
           }
         },
         { new: true }
@@ -130,6 +129,39 @@ const productController = {
       return res.json({ success: true, response: addSubProd })
     } catch (error) {
       return res.json({ success: false, response: error })
+    }
+  },
+  modifySubCategory: async (req,res)=>{
+
+    const {newSubcategory} = req.body
+
+    try{
+      const modifySubcategory = await Product.findOneAndUpdate(
+        {"_id":newSubcategory.idProduct, "subcategories._id":newSubcategory.idSubcategory},
+        {"$set": {
+          "subcategories.$.subcategory":newSubcategory.subcategory,
+          "subcategories.$.subcategoryPrice":newSubcategory.subcategoryPrice,
+          "subcategories.$.subcategoryStock":newSubcategory.subcategoryStock
+        }},
+        {new: true}
+      )
+      return res.json({success:true, response:modifySubcategory})
+    }catch(error){
+      return res.json({success:false, response:error})
+    }
+  },
+  delSubcategory: async (req,res)=>{
+    console.log(req.body)
+  const {idProduct, idSubcategory} = req.body
+    try{
+    const deleteSubcategory = await Product.findOneAndUpdate(
+      {"_id":idProduct},
+      {"$pull": {subcategories:{"_id":idSubcategory}}},
+      {new:true}
+    )
+      return res.json({success:true, response:deleteSubcategory})
+    }catch(error){
+      return res.json({success:false, response:error})
     }
   }
 }

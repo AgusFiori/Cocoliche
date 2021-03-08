@@ -4,6 +4,7 @@ import productActions from "../redux/actions/productActions";
 import Compressor from "compressorjs";
 import Swal from "sweetalert2";
 import NewSubcategories from "./NewSubcategories";
+import DbSubcategories from "./DbSubcategories"
 
 const Product = (props) => {
   const [visible, setVisible] = useState(false);
@@ -81,7 +82,7 @@ const Product = (props) => {
   // FIN EDICION DE PRODUCTOS
 
   // *****************************************
-  // EDICION DE SUBCATEGORIAS
+  // EDICION DE SUBCATEGORIAS LOCALES
 
   const addSubcategory = () => {
     setVisibleSub(!visibleSub);
@@ -91,7 +92,7 @@ const Product = (props) => {
   const handleSubcategory = (e) => {
     // subcategory
     const { name, value } = e.target;
-    setSubCategory({ ...subCategory, [name]: value, id: contador });
+    setSubCategory({ ...subCategory, [name]: value});
   };
 
   const agregarSubcategoria = () => {
@@ -99,9 +100,7 @@ const Product = (props) => {
   };
 
   const aceptarModif = (subCat, id) => {
-    console.log(subCat);
-    console.log(id);
-    console.log(subCategories);
+    // ESTO NO FUNCIONA, TENDRIA QUE ESTAR EN UNA VARIABLE PROBABLEMENTE?
     subCategories.map((subcategory) => {
       if (subcategory.id === id) {
         return (subcategory = subCat);
@@ -113,6 +112,11 @@ const Product = (props) => {
   const confirmChanges = () => {
     props.addSubcategories(subCategories, props.product._id);
   };
+
+  console.log(props)
+
+  // ******************************************
+  // FIN EDICION DE SUBCATEGORIAS LOCALES
 
   return (
     <>
@@ -146,14 +150,14 @@ const Product = (props) => {
           <td>
             <input
               type="text"
-              name="subcategory"
+              name="name"
               onChange={handleChange}
               defaultValue={props.product.name}
             />
           </td>
           <td>
             <input
-              type="subcategoryPrice"
+              type="text"
               name="category"
               onChange={handleChange}
               defaultValue={props.product.category}
@@ -169,7 +173,7 @@ const Product = (props) => {
           </td>
           <td>
             <input
-              type="text"
+              type="number"
               name="delay"
               onChange={handleChange}
               defaultValue={props.product.delay}
@@ -194,11 +198,22 @@ const Product = (props) => {
       )}
       {!visibleSub ? (
         <>
-          <tr>
+          <>
             {props.product.subcategories.map((subcategory) => (
-              <td>{subcategory.subcategory}</td>
+              <>
+              <tr>
+                <th colspan="2">Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                {/* <th>Editar</th>
+                <th>Eliminar</th> */}
+              </tr>
+              <tr>
+                <DbSubcategories idProduct={props.product._id} subcategoryDb={subcategory} />
+              </tr>
+              </>
             ))}
-          </tr>
+          </>
           <tr>
             <td>subcategorias del producto</td>
             {subCategories.map((newSubCategory) => {
@@ -206,7 +221,6 @@ const Product = (props) => {
                 <NewSubcategories
                   newSubCategory={newSubCategory}
                   productId={props.product._id}
-                  id={contador++}
                   aceptarModif={aceptarModif}
                 />
               );

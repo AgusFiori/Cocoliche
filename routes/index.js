@@ -15,7 +15,12 @@ router.route('/category').post(categoryController.addCategory).get(categoryContr
 
 router.route('/product/:productId').delete(productController.deleteProduct)
 
-router.route('/product/subproduct').post(productController.addSubProducts)
+router.route('/product/subcategory').post(productController.addSubcategories).put(productController.modifySubCategory)
+
+// TEMPORAL, REVISAR SI EXISTE MEJOR IMPLEMENTACIÓN
+router.route('/product/delsubcategory').post(productController.delSubcategory)
+
+
 
 const validator = require('../controllers/validator')
 const userController = require('../controllers/userController')

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+// ESTE COMPONENTE SE ENCARGA DE MODIFICAR LAS SUBCATEGORIAS EXISTENTES
+
 const NewSubcategories = (props) => {
   const [visible, setVisible] = useState(false);
   const [modSubcategory, setModSubcategory] = useState({
@@ -15,6 +17,8 @@ const NewSubcategories = (props) => {
   //   const aceptarModif = () => {
   //     setVisible(!visible);
   //   };
+
+  console.log(modSubcategory)
 
   const modificarSub = () => {
     setVisible(!visible);
@@ -34,7 +38,7 @@ const NewSubcategories = (props) => {
           <button onClick={modificarSub}>Modificar</button>
         </>
       ) : (
-        <button>
+        <>
           <td>
             <input
               type="text"
@@ -59,11 +63,15 @@ const NewSubcategories = (props) => {
               defaultValue={props.newSubCategory.subcategoryStock}
             />
           </td>
-          <button onClick={() => props.aceptarModif(modSubcategory, props.id)}>
-            Aceptar
-          </button>
-          <button onClick={() => setVisible(!visible)}>Cancelar</button>
-        </button>
+          <td>
+            <button onClick={() => props.aceptarModif(modSubcategory, props.id)}>
+              Aceptar
+            </button>
+          </td>
+          <td>
+            <button onClick={() => setVisible(!visible)}>Cancelar</button>
+          </td>          
+        </>
       )}
     </>
   );
