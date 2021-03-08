@@ -15,16 +15,8 @@ router.route('/category').post(categoryController.addCategory).get(categoryContr
 
 router.route('/product/:productId').delete(productController.deleteProduct)
 
-<<<<<<< HEAD
-router.route('/product/subcategory').post(productController.addSubcategories).put(productController.modifySubCategory)
-
-// TEMPORAL, REVISAR SI EXISTE MEJOR IMPLEMENTACIÓN
-router.route('/product/delsubcategory').post(productController.delSubcategory)
-
-=======
 router.route('/product/subcategory').post(productController.addSubProducts).put(productController.editSubcategory)
 router.route('/product/subcategory/delete/:productId/:subcategoryId').delete(productController.deleteSubcategory)
->>>>>>> copy_agus
 
 
 const validator = require('../controllers/validator')

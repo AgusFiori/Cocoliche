@@ -23,6 +23,7 @@ const Product = (props) => {
   const [subCategory, setSubCategory] = useState({});
   const [subCategories, setSubCategories] = useState([]);
   const [newSubcategory, setNewSubcategory] = useState({});
+ 
 
   useEffect(() => {
     props.getProducts();
@@ -84,13 +85,7 @@ const Product = (props) => {
   // *****************************************
   // EDICION DE SUBCATEGORIAS LOCALES
 
-  const addSubcategory = () => {
-    setLocalId(localId + 1)
-    setVisibleSub(!visibleSub);
-    subCategories.push(subCategory);
-    
-  };
-
+  
   // const handleSubcategory = (e) => {
   //   // subcategory
   //   const { name, value } = e.target;
