@@ -22,13 +22,6 @@ const NewSubcategories = (props) => {
     setVisible(!visible);
   };
 
-  const aceptarModif=()=>{
-    setVisible(!visible);
-    props.aceptarModif(modSubcategory, props.newSubCategory.idLocal)
-  }
-
-  console.log(props);
-
   return (
     <>
       {!visible ? (
@@ -65,14 +58,10 @@ const NewSubcategories = (props) => {
               defaultValue={props.newSubCategory.subcategoryStock}
             />
           </td>
-          <td>
-            <button onClick={aceptarModif}>
-              Aceptar
-            </button>
-          </td>
-          <td>
-            <button onClick={() => setVisible(!visible)}>Cancelar</button>
-          </td>          
+          <button onClick={() => props.aceptarModif(modSubcategory, props.id)}>
+            Aceptar
+          </button>
+          <button onClick={() => setVisible(!visible)}>Cancelar</button>
         </>
       )}
     </>

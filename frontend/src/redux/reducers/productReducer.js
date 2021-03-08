@@ -20,21 +20,21 @@ export function productReducer(state = initialState, action) {
         ...state,
         allCategories: action.payload
       }
+    case 'EDIT_SUBCATEGORY':
+      console.log(action.payload)
+      return {
+        ...state,
+        allProducts: state.allProducts.map(product => product._id === action.payload.response._id ? action.payload.response : product)
+      }
+    case 'DELETE_SUB':
+      return {
+        ...state,
+        allProducts: state.allProducts.map(product => product._id === action.payload.response._id ? action.payload.response : product)
+      }
     case 'ADD_SUBCATEGORY':
-      return{
+      return {
         ...state,
-        allProducts:action.payload
-      }
-    case 'MODIFY_SUBCATEGORIES':
-      return{
-        ...state,
-        allProducts: action.payload
-      }
-    case 'DELETE_SUBCATEGORY':
-      console.log("PASO")
-      return{
-        ...state,
-        allProducts: action.payload
+        allProducts: state.allProducts.map(product => product._id === action.payload.response._id ? action.payload.response : product)
       }
     default:
       return state

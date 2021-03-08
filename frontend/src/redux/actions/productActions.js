@@ -106,15 +106,9 @@ const productActions = {
   addSubcategories: (subcategories, productId) => {
     return async (dispatch, getState) => {
       try {
-        const response = await axios.post(`${API}/product/subcategory`, { subcategories, productId },)
-        console.log(response.data)
-        const copyProduct = getState().productR.allProducts.slice()
-        const updatedProduct = copyProduct.map(product=>{
-          if(product._id === response.data.response._id){
-            return product = response.data.response
-          }
-          return product
-        })
+        const response = await axios.post(`${API}/product/subcategory`, { subcategories, productId },
+
+        )
         dispatch({
           type: 'ADD_SUBCATEGORY',
           payload: updatedProduct
@@ -124,36 +118,28 @@ const productActions = {
       }
     }
   },
-  modifySubcategories:(newSubcategory)=>{
-    return async (dispatch, getState)=>{
-      try{
-        const response = await axios.put(`${API}/product/subcategory`, { newSubcategory})
-        const copyProduct = getState().productR.allProducts.slice()
-        const updatedProduct = copyProduct.map(product=>{
-          if(product._id === response.data.response._id){
-            return product = response.data.response
-          }
-          return product
+  deleteSubcategory: (productId, subcategoryId) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await axios.delete(`${API}/product/subcategory/delete/${productId}/${subcategoryId}`)
+        dispatch({
+          type: "DELETE_SUB",
+          payload: response.data
         })
-        dispatch({type:"MODIFY_SUBCATEGORIES", payload:updatedProduct})        
-      }catch(error){
+      } catch (error) {
         console.log(error)
       }
     }
   },
-  delSubcategory:(idProduct, idSubcategory)=>{
-    return async (dispatch, getState)=>{
-      try{
-        const response = await axios.post(`${API}/product/delsubcategory`, {idProduct, idSubcategory})
-        const copyProduct = getState().productR.allProducts.slice()
-        const updatedProduct = copyProduct.map(product=>{
-          if(product._id === response.data.response._id){
-            return product = response.data.response
-          }
-          return product
+  editSubcategory: (editedSubcategory) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await axios.put(`${API}/product/subcategory/`, editedSubcategory)
+        dispatch({
+          type: "EDIT_SUBCATEGORY",
+          payload: response.data
         })
-        dispatch({type:"DELETE_SUBCATEGORY", payload:updatedProduct})
-      }catch(error){
+      } catch (error) {
         console.log(error)
       }
     }

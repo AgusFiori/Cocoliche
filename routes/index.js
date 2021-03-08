@@ -15,11 +15,16 @@ router.route('/category').post(categoryController.addCategory).get(categoryContr
 
 router.route('/product/:productId').delete(productController.deleteProduct)
 
+<<<<<<< HEAD
 router.route('/product/subcategory').post(productController.addSubcategories).put(productController.modifySubCategory)
 
 // TEMPORAL, REVISAR SI EXISTE MEJOR IMPLEMENTACIÓN
 router.route('/product/delsubcategory').post(productController.delSubcategory)
 
+=======
+router.route('/product/subcategory').post(productController.addSubProducts).put(productController.editSubcategory)
+router.route('/product/subcategory/delete/:productId/:subcategoryId').delete(productController.deleteSubcategory)
+>>>>>>> copy_agus
 
 
 const validator = require('../controllers/validator')
@@ -55,5 +60,18 @@ router.route('/user/ls')
 //Rutas de pedidos
 router.route('/purchases')
   .post(passport.authenticate('jwt', { session: false }), orderController.newOrder)
+  .get(orderController.getOrders)
+
+router.route('/purchases/confirm/:orderId')
+  .put(orderController.confirmOrder)
+
+router.route('/purchases/cancel/:orderId')
+  .put(orderController.cancelOrder)
+
+router.route('/purchases/complete/:orderId')
+  .put(orderController.completeOrder)
+
+router.route('/purchases/user/:customerId')
+  .get(orderController.getCustomer)
 
 module.exports = router

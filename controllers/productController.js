@@ -1,5 +1,6 @@
 const Product = require('../models/Product.js')
 const path = require('path')
+const { response } = require('express')
 
 const productController = {
   getProducts: async (req, res) => {
@@ -113,21 +114,74 @@ const productController = {
     }
 
   },
-  addSubcategories: async (req, res) => {
+  addSubProducts: async (req, res) => {
     const { subcategories, productId } = req.body
     try {
       var addSubProd = await Product.findOneAndUpdate(
         { _id: productId },
         {
-          "$push": {
-            subcategories: {"$each":subcategories}
+          "$push": { subcategories: subcategories }
+        },
+        { new: true }
+      )
+      res.json({ success: true, response: addSubProd })
+    } catch (error) {
+      res.json({ success: false, response: error })
+    }
+  },
+  deleteSubcategory: async (req, res) => {
+    try {
+      const { productId, subcategoryId } = req.params
+
+      const response = await Product.findOneAndUpdate(
+        { _id: productId },
+        {
+          $pull: {
+            subcategories: {
+              _id: subcategoryId
+            }
+          }
+        },
+        { new: true })
+
+      console.log(response)
+
+      res.json({
+        success: true,
+        response
+      })
+    } catch (error) {
+      console.log(error)
+
+      res.json({
+        success: false,
+        error
+      })
+    }
+  },
+  editSubcategory: async (req, res) => {
+    try {
+      const { subcategoryId, productId, subcategory, subcategoryPrice, subcategoryStock } = req.body
+      const response = await Product.findOneAndUpdate(
+        { _id: productId, "subcategories._id": subcategoryId },
+        {
+          $set: {
+            "subcategories.$.subcategory": subcategory,
+            "subcategories.$.subcategoryPrice": subcategoryPrice,
+            "subcategories.$.subcategoryStock": subcategoryStock,
           }
         },
         { new: true }
       )
-      return res.json({ success: true, response: addSubProd })
+      res.json({
+        success: true,
+        response
+      })
     } catch (error) {
-      return res.json({ success: false, response: error })
+      res.json({
+        success: false,
+        error
+      })
     }
   },
   modifySubCategory: async (req,res)=>{
