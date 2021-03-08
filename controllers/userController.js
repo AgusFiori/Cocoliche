@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const userController = {
-    
+
     signUp: async (req, res) => {
         const errores = []
-        const { username, password, firstname, lastname} = req.body
+        const { username, password, firstname, lastname } = req.body
 
         const existingUser = await User.findOne({ username: username })
         if (existingUser) {
@@ -33,34 +33,38 @@ const userController = {
             }
         })
     },
-    signGoogle: async(req, res)=>{
-        const {displayName, email,  refreshToken, photoURL} = req.body
-        const userExists = await User.findOne({username: email})
+    signGoogle: async (req, res) => {
+        const { displayName, email, refreshToken, photoURL } = req.body
+        const userExists = await User.findOne({ username: email })
         const nombre = displayName.split(" ")
 
         if (userExists) {
-            var token = jwt.sign({...userExists}, process.env.SECRET_KEY, {})
-            return res.json({success: true, response: {
-                success: true,
-                token,
-                firstname: userExists.firstname,
-                urlPic: userExists.urlPic,
-                role: userExists.role
-            }})
-        }else{
+            var token = jwt.sign({ ...userExists }, process.env.SECRET_KEY, {})
+            return res.json({
+                success: true, response: {
+                    success: true,
+                    token,
+                    firstname: userExists.firstname,
+                    urlPic: userExists.urlPic,
+                    role: userExists.role
+                }
+            })
+        } else {
             var newUser = new User({
-                firstname: nombre[0], lastname:nombre[nombre.length - 1], username:email, urlPic:photoURL, logginGoogle: refreshToken
+                firstname: nombre[0], lastname: nombre[nombre.length - 1], username: email, urlPic: photoURL, logginGoogle: refreshToken
             })
             var newUserSaved = await newUser.save()
-            var token = jwt.sign({...newUserSaved}, process.env.SECRET_KEY, {})
-            return res.json({success: true, response: {
-                success: true,
-                token, 
-                firstname: newUserSaved.firsname,
-                urlPic: newUserSaved.urlPic,
-                role: newUserSaved.role
-            }})
-        
+            var token = jwt.sign({ ...newUserSaved }, process.env.SECRET_KEY, {})
+            return res.json({
+                success: true, response: {
+                    success: true,
+                    token,
+                    firstname: newUserSaved.firsname,
+                    urlPic: newUserSaved.urlPic,
+                    role: newUserSaved.role
+                }
+            })
+
         }
     },
     signin: async (req, res) => {
@@ -88,10 +92,13 @@ const userController = {
     },
     logFromLS: (req, res) => {
         res.json({
+            response: {
                 firstname: req.user.firstname,
                 urlPic: req.user.urlPic,
-                role: req.user.role
+                role: req.user.role,
+                token: req.body.token
             }
+        }
         )
     }
 }
