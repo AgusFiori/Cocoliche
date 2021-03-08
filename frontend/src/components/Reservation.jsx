@@ -38,17 +38,17 @@ const Reservation = (props) => {
     }
 
     return(
-        <div className="container-fluid">
+        <div className="container-fluid background">
             <div className="row">
                 <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
                     <Navbar />
                 </div>
-                <div className="col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
+                <div className="trasparent col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
                     <div className="row d-flex justify-content-center">
-                        <h1 className="col-12 text-center">Haga su reserva</h1>
+                        <h1 className="col-12 text-center m-5">Haga su reserva</h1>
                         <input defaultValue={reservation.dia} name="dia" onChange={captureReservation} type="date" className="col-8 d-block"/>
                         <input defaultValue={reservation.cantidad} name="cantidad" onChange={captureReservation}  type="number" className="col-8 mt-3"/>
-                        <button aria-autocomplete="false" onClick={sendReservation} className="btn btn-primary m-5 col-6">Reservar</button>
+                        <button aria-autocomplete="false" onClick={sendReservation} className="btn btn-primary mt-4 col-6">Reservar</button>
                     </div>            
                     <div>
                         <Link to="/calendar" className="mt-2 d-flex align-items-center justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-calendar mb-3 mr-1" viewBox="0 0 16 16">

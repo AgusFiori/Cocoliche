@@ -25,11 +25,13 @@ const SubCategory = (props) => {
     props.addToCart(productToAdd);
   };
 
+  console.log(props)
 
   return (
     <ul className="list-group list-group-flush">
       {/* <div className="list-group-item"> */}
-        
+        <h3 className="mb-0">
+          <button className="btn btn-link btn-block text-center" type="button" data-toggle="collapse" data-target={`#collapse${props.sub._id}`} aria-expanded="true" aria-controls={`collapse${props.sub._id}`}></button>
             {props.sub.subcategory}
                      
         <h3>$: {props.sub.subcategoryPrice}</h3>

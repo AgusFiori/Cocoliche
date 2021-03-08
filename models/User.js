@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  username: String,
+  username: {type: String, unique: true},
   password: String,
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   role: { type: String, default: "user" },
   purchases: Array,
   date: { type: Date, default: Date.now },
+  logginGoogle: String,
 });
 
 const User = mongoose.model("user", userSchema);

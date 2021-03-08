@@ -1,20 +1,21 @@
-const user = require('../models/User')
+const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { findOne } = require('../models/User')
+
 const userController = {
+
     signUp: async (req, res) => {
         const errores = []
-        const { username, password, firstname, lastname, urlPic, role, purchases, date } = req.body
+        const { username, password, firstname, lastname } = req.body
 
-        const existingUser = await user.findOne({ username: username })
+        const existingUser = await User.findOne({ username: username })
         if (existingUser) {
-            errores.push('existing user, choose another')
+            errores.push('Usuario existente')
         }
         if (errores.length === 0) {
             const passHasheado = bcrypt.hashSync(password, 10)
-            const validatedUser = new user({
-                username, password: passHasheado, firstname, lastname, urlPic, role, purchases, date
+            const validatedUser = new User({
+                username, password: passHasheado, firstname, lastname
             })
             var userValidation = await validatedUser.save()
             var token = jwt.sign({ ...userValidation }, process.env.SECRET_KEY, {})
@@ -32,12 +33,44 @@ const userController = {
             }
         })
     },
+    signGoogle: async (req, res) => {
+        const { displayName, email, refreshToken, photoURL } = req.body
+        const userExists = await User.findOne({ username: email })
+        const nombre = displayName.split(" ")
 
+        if (userExists) {
+            var token = jwt.sign({ ...userExists }, process.env.SECRET_KEY, {})
+            return res.json({
+                success: true, response: {
+                    success: true,
+                    token,
+                    firstname: userExists.firstname,
+                    urlPic: userExists.urlPic,
+                    role: userExists.role
+                }
+            })
+        } else {
+            var newUser = new User({
+                firstname: nombre[0], lastname: nombre[nombre.length - 1], username: email, urlPic: photoURL, logginGoogle: refreshToken
+            })
+            var newUserSaved = await newUser.save()
+            var token = jwt.sign({ ...newUserSaved }, process.env.SECRET_KEY, {})
+            return res.json({
+                success: true, response: {
+                    success: true,
+                    token,
+                    firstname: newUserSaved.firsname,
+                    urlPic: newUserSaved.urlPic,
+                    role: newUserSaved.role
+                }
+            })
 
+        }
+    },
     signin: async (req, res) => {
         const { username, password } = req.body
 
-        const usuarioExistente = await user.findOne({ username: username })
+        const usuarioExistente = await User.findOne({ username: username })
         if (!usuarioExistente) {
             return res.json({ success: false, respuesta: 'wrong username or password' })
         }
@@ -59,14 +92,18 @@ const userController = {
     },
     logFromLS: (req, res) => {
         res.json({
-            success: true, response: {
-                token: req.body.token,
+            response: {
                 firstname: req.user.firstname,
                 urlPic: req.user.urlPic,
-                role: req.user.role
+                role: req.user.role,
+                token: req.body.token
             }
-        })
+        }
+        )
     }
 }
 
 module.exports = userController
+
+
+
