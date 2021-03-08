@@ -25,45 +25,35 @@ const SubCategory = (props) => {
     props.addToCart(productToAdd);
   };
 
+
   return (
     <ul className="list-group list-group-flush">
-      <div className="list-group-item">
+      {/* <div className="list-group-item"> */}
         
-            <h3>
-              <button >
-                {props.sub.subcategory}
-              </button>              
-            </h3>
-            <div >
-              <div >
-                <h3>Precio: {props.sub.subcategoryPrice}</h3>
-                <h3>Stock: {props.sub.subcategoryStock}</h3>
-                  {/* <input type="number" defaultValue={0} onChange={handleChange}/> */}
-
-                  <select name="subcategory" onChange={handleChange} defaultValue="default">
-                    <option value="default">Elegi cantidad</option>
-
-                    {[...Array(10)].map(() => {
-                      return (
-                        <option
-                          value={JSON.stringify({
-                            subcategory: props.sub.subcategory,
-                            price: props.sub.subcategoryPrice,
-                            subcategoryId: props.sub._id,
-                            qty,
-                            stock: props.sub.subcategoryStock,
-                          })}
-                        >
-                          {qty++}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <button onClick={addToCart}>Agregar</button>
-              </div>              
-            </div>
-                 
-      </div>
+            {props.sub.subcategory}
+                     
+        <h3>$: {props.sub.subcategoryPrice}</h3>
+        <h3>Stock: {props.sub.subcategoryStock}</h3>
+        <select name="subcategory" onChange={handleChange} defaultValue="default">
+          <option value="default">Elegi cantidad</option>
+          {[...Array(10)].map(() => {
+            return (
+              <option
+                value={JSON.stringify({
+                  subcategory: props.sub.subcategory,
+                  price: props.sub.subcategoryPrice,
+                  subcategoryId: props.sub._id,
+                  qty,
+                  stock: props.sub.subcategoryStock,
+                })}
+              >
+                {qty++}
+              </option>
+            );
+          })}
+        </select>
+        <button onClick={addToCart}>Agregar</button>
+      {/* </div> */}
     </ul>
   );
 };
