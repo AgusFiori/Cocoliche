@@ -1,20 +1,21 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { findOne } = require('../models/User')
+
 const userController = {
+    
     signUp: async (req, res) => {
         const errores = []
-        const { username, password, firstname, lastname, urlPic, role, purchases, date } = req.body
+        const { username, password, firstname, lastname} = req.body
 
         const existingUser = await User.findOne({ username: username })
         if (existingUser) {
-            errores.push('existing user, choose another')
+            errores.push('Usuario existente')
         }
         if (errores.length === 0) {
             const passHasheado = bcrypt.hashSync(password, 10)
             const validatedUser = new User({
-                username, password: passHasheado, firstname, lastname, urlPic, role, purchases, date
+                username, password: passHasheado, firstname, lastname
             })
             var userValidation = await validatedUser.save()
             var token = jwt.sign({ ...userValidation }, process.env.SECRET_KEY, {})
@@ -32,7 +33,6 @@ const userController = {
             }
         })
     },
-
     signGoogle: async(req, res)=>{
         const {displayName, email,  refreshToken, photoURL} = req.body
         const userExists = await User.findOne({username: email})
@@ -63,7 +63,6 @@ const userController = {
         
         }
     },
-
     signin: async (req, res) => {
         const { username, password } = req.body
 
@@ -89,13 +88,11 @@ const userController = {
     },
     logFromLS: (req, res) => {
         res.json({
-            success: true, response: {
-                token: req.body.token,
                 firstname: req.user.firstname,
                 urlPic: req.user.urlPic,
                 role: req.user.role
             }
-        })
+        )
     }
 }
 
