@@ -12,7 +12,7 @@ function authReducer(state = initialState, action) {
             localStorage.setItem('role', action.payload.role)
             return {
                 ...state,
-                loggedUser: action.payload.response
+                loggedUser: action.payload
             }
         case 'LOG_OUT_USER':
             localStorage.removeItem('firstname')

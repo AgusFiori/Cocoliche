@@ -10,10 +10,18 @@ const authActions = {
       if (!respuesta.data.success) {
         return respuesta.data;
       }
-      dispatch({ type: "LOG_USER", payload: respuesta.data });
+      dispatch({ type: "LOG_USER", payload: respuesta.data.response });
     };
   },
- 
+  loginUser: (user) => {
+    return async (dispatch, getState) => {
+      const respuesta = await axios.post(`${API}/user/signin`, user);
+      if (!respuesta.data.success) {
+        return respuesta.data;
+      }
+      dispatch({ type: "LOG_USER", payload: respuesta.data.response});
+    };
+  },
   loginWithGoogle:(response)=>{
 
     return async (dispatch, getState) => {
@@ -39,15 +47,7 @@ const authActions = {
             dispatch({type:'LOG_USER', payload: respuesta.data})
         }
     },
-  loginUser: (user) => {
-    return async (dispatch, getState) => {
-      const respuesta = await axios.post(`${API}/user/signin`, user);
-      if (!respuesta.data.success) {
-        return respuesta.data;
-      }
-      dispatch({ type: "LOG_USER", payload: respuesta.data.response});
-    };
-  },
+
   logoutUser: () => {
     return (dispatch, getState) => {
       dispatch({ type: "LOG_OUT_USER" });

@@ -5,16 +5,16 @@ const { findOne } = require('../models/User')
 const userController = {
     signUp: async (req, res) => {
         const errores = []
-        const { username, password, firstname, lastname, urlPic, role, purchases, date } = req.body
+        const { username, password, firstname, lastname} = req.body
 
-        const existingUser = await user.findOne({ username: username })
+        const existingUser = await User.findOne({ username: username })
         if (existingUser) {
-            errores.push('existing user, choose another')
+            errores.push('Usuario existente')
         }
         if (errores.length === 0) {
             const passHasheado = bcrypt.hashSync(password, 10)
             const validatedUser = new User({
-                username, password: passHasheado, firstname, lastname, urlPic, role, purchases, date
+                username, password: passHasheado, firstname, lastname
             })
             var userValidation = await validatedUser.save()
             var token = jwt.sign({ ...userValidation }, process.env.SECRET_KEY, {})
@@ -67,7 +67,7 @@ const userController = {
     signin: async (req, res) => {
         const { username, password } = req.body
 
-        const usuarioExistente = await user.findOne({ username: username })
+        const usuarioExistente = await User.findOne({ username: username })
         if (!usuarioExistente) {
             return res.json({ success: false, respuesta: 'wrong username or password' })
         }
@@ -88,7 +88,7 @@ const userController = {
 
     },
     logFromLS: (req, res) => {
-        console.log(req.body)
+        console.log(req.user)
         res.json({
             success: true, response: {
                 token: req.body.token,

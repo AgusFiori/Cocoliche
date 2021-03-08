@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { useState } from "react";
 import authActions from "../redux/actions/authActions";
 import Navbar from "../components/Navbar.jsx";
-import blackboard from "../assets/blackboard.jpg";
 import firebase from 'firebase'
 
 const Login = (props) => {
@@ -24,7 +23,7 @@ const Login = (props) => {
   const login = async (e) => {
     e.preventDefault();
     if (users.username === "" || users.password === "") {
-      alert("fill in all fields");
+      alert("Completa todos los campos");
       return false;
     }
     const respuesta = await props.loginUser(users);
@@ -44,10 +43,7 @@ const Login = (props) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div
-          className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco"
-          style={{ backgroundImage: `url(${blackboard})` }}
-        >
+        <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0">
           <Navbar />
         </div>
         <div className="trasparent col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
