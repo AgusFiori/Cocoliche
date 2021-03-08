@@ -36,7 +36,7 @@ console.log(response)
                     timer: 1500
                   })
             }
-            dispatch({type:'LOG_USER', payload: respuesta.data})
+            dispatch({type:'LOG_USER', payload: respuesta.data.response})
         }
     },
   loginUser: (user) => {
