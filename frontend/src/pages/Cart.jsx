@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import cartActions from "../redux/actions/cartActions";
 import CartItem from "../components/CartItem.jsx";
+import { Link } from "react-router-dom";
 
 const Cart = (props) => {
   useEffect(() => {
@@ -19,7 +20,7 @@ const Cart = (props) => {
   return (
     <div className="container">
       <h2>Cart</h2>
-      {props.cart.length ? (
+      {props.cart && props.cart.length ? (
         <>
           {" "}
           {props.cart && props.cart.map((item) => <CartItem props={item} />)}
@@ -30,7 +31,9 @@ const Cart = (props) => {
           <button onClick={sendCart}>Confirmar Compra</button>
         </>
       ) : (
-        <h4>Agrega algun producto a tu carrito !</h4>
+        <Link to="/menu">
+          <h4>Agrega algun producto a tu carrito !</h4>
+        </Link>
       )}
     </div>
   );
