@@ -1,7 +1,6 @@
 import axios from "axios";
 import swal from "sweetalert2";
 import { API } from "../../components/Api";
-import firebase from 'firebase'
 
 const authActions = {
   newUser: (newUser) => {
@@ -10,12 +9,19 @@ const authActions = {
       if (!respuesta.data.success) {
         return respuesta.data;
       }
-      dispatch({ type: "LOG_USER", payload: respuesta.data });
+      dispatch({ type: "LOG_USER", payload: respuesta.data.response });
     };
   },
- 
+  loginUser: (user) => {
+    return async (dispatch, getState) => {
+      const respuesta = await axios.post(`${API}/user/signin`, user);
+      if (!respuesta.data.success) {
+        return respuesta.data;
+      }
+      dispatch({ type: "LOG_USER", payload: respuesta.data.response});
+    };
+  },
   loginWithGoogle:(response)=>{
-console.log(response)
     return async (dispatch, getState) => {
         const respuesta = await axios.post(`${API}/user/sign_google`, response)
         if (!respuesta.data.success) {
@@ -31,23 +37,15 @@ console.log(response)
                 swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Welcome to Mytinerary',
+                    title: 'Bienvenido a Cocoliche Resto Bar',
                     showConfirmButton: false,
                     timer: 1500
                   })
             }
-            dispatch({type:'LOG_USER', payload: respuesta.data})
+            dispatch({type:'LOG_USER', payload: respuesta.data.response})
         }
     },
-  loginUser: (user) => {
-    return async (dispatch, getState) => {
-      const respuesta = await axios.post(`${API}/user/signin`, user);
-      if (!respuesta.data.success) {
-        return respuesta.data;
-      }
-      dispatch({ type: "LOG_USER", payload: respuesta.data.response});
-    };
-  },
+
   logoutUser: () => {
     return (dispatch, getState) => {
       dispatch({ type: "LOG_OUT_USER" });
