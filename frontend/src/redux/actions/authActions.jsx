@@ -1,7 +1,6 @@
 import axios from "axios";
 import swal from "sweetalert2";
 import { API } from "../../components/Api";
-import firebase from 'firebase'
 
 const authActions = {
   newUser: (newUser) => {
@@ -23,7 +22,6 @@ const authActions = {
     };
   },
   loginWithGoogle:(response)=>{
-console.log(response)
     return async (dispatch, getState) => {
         const respuesta = await axios.post(`${API}/user/sign_google`, response)
         if (!respuesta.data.success) {
@@ -39,7 +37,7 @@ console.log(response)
                 swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Welcome to Mytinerary',
+                    title: 'Bienvenido a Cocoliche Resto Bar',
                     showConfirmButton: false,
                     timer: 1500
                   })

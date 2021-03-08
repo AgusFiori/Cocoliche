@@ -92,5 +92,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
   newUser: authActions.newUser,
+  loginWithGoogle: authActions.loginWithGoogle
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
