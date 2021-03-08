@@ -20,6 +20,11 @@ export function productReducer(state = initialState, action) {
         ...state,
         allCategories: action.payload
       }
+    case 'ADD_SUBCATEGORY':
+      return{
+        ...state,
+        allProducts:action.payload
+      }
     case 'MODIFY_SUBCATEGORIES':
       return{
         ...state,

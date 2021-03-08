@@ -8,15 +8,13 @@ const NewSubcategories = (props) => {
     subcategory: props.newSubCategory.subcategory,
     subcategoryPrice: props.newSubCategory.subcategoryPrice,
     subcategoryStock: props.newSubCategory.subcategoryStock,
+    idLocal: props.newSubCategory.idLocal
   });
 
   const handleSubcategoryChange = (e) => {
     const { name, value } = e.target;
     setModSubcategory({ ...modSubcategory, [name]: value });
   };
-  //   const aceptarModif = () => {
-  //     setVisible(!visible);
-  //   };
 
   console.log(modSubcategory)
 
@@ -24,18 +22,22 @@ const NewSubcategories = (props) => {
     setVisible(!visible);
   };
 
+  const aceptarModif=()=>{
+    setVisible(!visible);
+    props.aceptarModif(modSubcategory, props.newSubCategory.idLocal)
+  }
+
   console.log(props);
 
   return (
     <>
       {!visible ? (
         <>
-          <tr>
-            <td>{props.newSubCategory.subcategory}</td>
-            <td>{props.newSubCategory.subcategoryPrice}</td>
-            <td>{props.newSubCategory.subcategoryStock}</td>
-          </tr>
-          <button onClick={modificarSub}>Modificar</button>
+          <td>{props.newSubCategory.subcategory}</td>
+          <td>{props.newSubCategory.subcategoryPrice}</td>
+          <td>{props.newSubCategory.subcategoryStock}</td>
+          <td><button onClick={modificarSub}>Modificar</button></td>
+          <td><button onClick={()=>props.elimLocalSubCategory(props.newSubCategory.idLocal)}>Eliminar</button></td>
         </>
       ) : (
         <>
@@ -64,7 +66,7 @@ const NewSubcategories = (props) => {
             />
           </td>
           <td>
-            <button onClick={() => props.aceptarModif(modSubcategory, props.id)}>
+            <button onClick={aceptarModif}>
               Aceptar
             </button>
           </td>

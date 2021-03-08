@@ -106,11 +106,18 @@ const productActions = {
   addSubcategories: (subcategories, productId) => {
     return async (dispatch, getState) => {
       try {
-        console.log(subcategories)
-        const response = axios.post(`${API}/product/subcategory`, { subcategories, productId },)
+        const response = await axios.post(`${API}/product/subcategory`, { subcategories, productId },)
+        console.log(response.data)
+        const copyProduct = getState().productR.allProducts.slice()
+        const updatedProduct = copyProduct.map(product=>{
+          if(product._id === response.data.response._id){
+            return product = response.data.response
+          }
+          return product
+        })
         dispatch({
           type: 'ADD_SUBCATEGORY',
-          payload: response.data
+          payload: updatedProduct
         })
       } catch (error) {
         console.log(error)
@@ -139,16 +146,13 @@ const productActions = {
       try{
         const response = await axios.post(`${API}/product/delsubcategory`, {idProduct, idSubcategory})
         const copyProduct = getState().productR.allProducts.slice()
-        // MODIFICAR NOMBRE, ESTA DE MÁS, CREO QUE NO ES NECESARIO EL REDUCE EN ESTE CASO
-        const test = []
-        const updatedProduct = copyProduct.reduce((accumulator, currentValue)=>{
-          if(currentValue._id === idProduct){
-            currentValue.subcategories = response.data.response.subcategories
-            test.push(currentValue)
+        const updatedProduct = copyProduct.map(product=>{
+          if(product._id === response.data.response._id){
+            return product = response.data.response
           }
-          test.push(currentValue)
+          return product
         })
-        dispatch({type:"DELETE_SUBCATEGORY", payload:test})
+        dispatch({type:"DELETE_SUBCATEGORY", payload:updatedProduct})
       }catch(error){
         console.log(error)
       }

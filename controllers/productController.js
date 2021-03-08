@@ -17,7 +17,6 @@ const productController = {
     }
   },
   addProduct: async (req, res) => {
-    console.log(req.body, req.body.subcategories)
 
     const parsedSubcategories = JSON.parse(req.body.subcategories)
 
@@ -151,7 +150,6 @@ const productController = {
     }
   },
   delSubcategory: async (req,res)=>{
-    console.log(req.body)
   const {idProduct, idSubcategory} = req.body
     try{
     const deleteSubcategory = await Product.findOneAndUpdate(

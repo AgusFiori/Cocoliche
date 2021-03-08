@@ -24,9 +24,8 @@ const Product = (props) => {
   const [subCategory, setSubCategory] = useState({});
   const [subCategories, setSubCategories] = useState([]);
 
+  const [localId, setLocalId] = useState(0)
   // VARIABLE CONTADOR
-
-  let contador = 0;
 
   // *****************************************
   // EDICION DE PRODUCTOS
@@ -85,8 +84,10 @@ const Product = (props) => {
   // EDICION DE SUBCATEGORIAS LOCALES
 
   const addSubcategory = () => {
+    setLocalId(localId + 1)
     setVisibleSub(!visibleSub);
     subCategories.push(subCategory);
+    
   };
 
   const handleSubcategory = (e) => {
@@ -96,24 +97,31 @@ const Product = (props) => {
   };
 
   const agregarSubcategoria = () => {
+    setSubCategory({ ...subCategory, idLocal:localId});
     setVisibleSub(!visibleSub);
   };
 
   const aceptarModif = (subCat, id) => {
-    // ESTO NO FUNCIONA, TENDRIA QUE ESTAR EN UNA VARIABLE PROBABLEMENTE?
-    subCategories.map((subcategory) => {
-      if (subcategory.id === id) {
-        return (subcategory = subCat);
+    const modSubCategories = subCategories.map((subcategory) => {
+      if (subcategory.idLocal === subCat.idLocal) {
+        return subcategory = subCat
       }
-      return subcategory;
+      return subcategory
     });
+    setSubCategories(modSubCategories)
   };
 
   const confirmChanges = () => {
     props.addSubcategories(subCategories, props.product._id);
+    setSubCategories([])
   };
 
-  console.log(props)
+  const elimLocalSubCategory=(idLocal)=>{
+    const elimSubCategories=subCategories.filter((subcategory)=>{
+      return subcategory.idLocal !== idLocal
+    })
+    setSubCategories(elimSubCategories)
+  }
 
   // ******************************************
   // FIN EDICION DE SUBCATEGORIAS LOCALES
@@ -205,7 +213,8 @@ const Product = (props) => {
                 <th colspan="2">Nombre</th>
                 <th>Precio</th>
                 <th>Stock</th>
-                {/* <th>Editar</th>
+                {/* 
+                <th>Editar</th>
                 <th>Eliminar</th> */}
               </tr>
               <tr>
@@ -216,12 +225,14 @@ const Product = (props) => {
           </>
           <tr>
             <td>subcategorias del producto</td>
+          </tr>
+          <tr>            
             {subCategories.map((newSubCategory) => {
               return (
                 <NewSubcategories
                   newSubCategory={newSubCategory}
-                  productId={props.product._id}
                   aceptarModif={aceptarModif}
+                  elimLocalSubCategory={elimLocalSubCategory}
                 />
               );
             })}
