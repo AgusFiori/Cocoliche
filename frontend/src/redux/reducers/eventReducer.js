@@ -1,7 +1,6 @@
 
 const initialState = {
     events: [],
-    filter: [],
   }
   
 function eventReducer(state = initialState, action) {
@@ -15,7 +14,6 @@ function eventReducer(state = initialState, action) {
         return {
           ...state,
           events: action.payload,
-          filter: action.payload
         }
       case 'SEARCH_EVENTS':
           return {
