@@ -13,21 +13,20 @@ const Menu = (props) => {
   }, [getProducts, getCart]);
 
   return (
-    <div>
-      <div>
+    <div className="container-fluid">
+      <div className="row">
         <h2>Filtros</h2>
         <select>
           <option>Precio ascendente</option>
           <option>Precio descendente</option>
           <option>Popularidad</option>
         </select>
-      </div>
-      <div>
-        <h2>Menu</h2>
-
-        {props.allProducts.map((product) => (
-          <MenuItem key={product._id} product={product} />
-        ))}
+      </div>      
+      <h2>Menu</h2>
+      <div className="row justify-content-center">
+      {props.allProducts.map((product) => (
+        <MenuItem key={product._id} product={product} />
+      ))}
       </div>
     </div>
   );
