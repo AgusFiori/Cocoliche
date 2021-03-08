@@ -49,6 +49,9 @@ router.route('/user/signin')
 router.route('/user/ls')
   .post(passport.authenticate('jwt', { session: false }), userController.logFromLS)
 
+
+  router.route('/user/sign_google')
+  .post(userController.signGoogle)
 //Rutas de pedidos
 router.route('/purchases')
   .post(passport.authenticate('jwt', { session: false }), orderController.newOrder)

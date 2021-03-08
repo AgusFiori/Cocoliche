@@ -11,17 +11,18 @@ import Navbar from "../components/Navbar";
 import blackboard from '../assets/blackboard.jpg'
 
 const Calendary = (props) => {
-  const [event, setEvent] = useState([])
-  const [numero, setNumeroReserva] = useState("")
+  const [events, setEvents] = useState([])
+ const {getEvents, allEvents } = props
 
-  const { getEvents } = props;
-  useEffect( () => {
+  useEffect( () => {  
     getEvents();
-    setEvent(props.events)
-  }, [getEvents, event]);
+  
+  }, []);
+  useEffect(() => {
+      setEvents(allEvents)
+  }, [allEvents])
 
-
-  const eventos = event.map(event => {
+  const eventos = events.map(event => {
     return (
       event = {
         id: event._id,
@@ -32,11 +33,11 @@ const Calendary = (props) => {
     )
   })
   const handleDateClick = (arg) => {
-    event.map(event => {
+    events.map(event => {
       if (event.dateEvent === arg.dateStr) {
         Swal.fire({
           title: event.title,
-          text: 'Modal with a custom image.',
+          text: '',
           imageUrl: event.picture,
           imageWidth: 400,
           imageHeight: 200,
@@ -85,13 +86,13 @@ const Calendary = (props) => {
   
   return (
       
-      <div className="container-fluid">
+      <div className="container-fluid background">
             <div className="row">
                 <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
                     <Navbar />
                 </div>
                 
-              <div className="calendario col-sm-12 col-md-7 col-lg-10 col-xl-10">
+              <div className="trasparent p-4 m-auto col-sm-12 col-md-7 col-lg-10 col-xl-10">
                 <FullCalendar
                   plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
                   locale="es-ES"
@@ -102,13 +103,13 @@ const Calendary = (props) => {
                       text:"Ver eventos",
                       click: function() {
                           Swal.fire({
-                            html: eventos.map(events =>
+                            html: eventos.map(event =>
                               '<div class="card bg-dark text-white">'+
-                                `<img class="card-img" src=${events.picture} alt="Card image"/> ` +
+                                `<img class="card-img" src=${event.picture} alt="Card image"/> ` +
                                   '<div class="card-img-overlay">'+
-                                    `<h5 class="card-title">${events.title}</h5>` +
+                                    `<h5 class="card-title">${event.title}</h5>` +
                                     '<p class="card-text"></p>'+
-                                    `<p class="card-text">${events.start}</p>` +
+                                    `<p class="card-text">${event.start}</p>` +
                                 '</div>'+
                               '</div>')
                           })
@@ -134,7 +135,7 @@ const Calendary = (props) => {
 
 const mapStateToProps = state => {
   return {
-    events: state.eventR.events,
+    allEvents: state.eventR.events,
     loggedUser: state.authReducer.loggedUser,
   }
 }   

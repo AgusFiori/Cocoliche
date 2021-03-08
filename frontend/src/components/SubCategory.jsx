@@ -25,6 +25,7 @@ const SubCategory = (props) => {
     props.addToCart(productToAdd);
   };
 
+  
   return (
     <div className="container">
       <h3>{props.sub.subcategory}</h3>
