@@ -7,91 +7,89 @@ import { connect } from 'react-redux'
 import logo from '../assets/cocoliche-logo.png'
 import blackboard from '../assets/blackboard.jpg'
 import { AiFillFacebook, AiFillInstagram } from "react-icons/ai";
+import BurgerMenu from "./BurgerMenu";
 
-
-import Swal from 'sweetalert2';
-
-const Navbar = (props) => {
-
-  
+const Navbar = (props) => { 
   if (props.loggedUser === null) {
     var links = <>
-          <NavLink to="/login" className="text-decoration-none mt-2">
-            <span className="h4" >Ingresar</span>
+          <NavLink to="/login" className="text-decoration-none">
+            <p className="h4 color-white" >Ingresar</p>
           </NavLink>
-          <NavLink to="/register" className="text-decoration-none mt-2">
-            <span className="h4">Registrarse</span>
+          <NavLink to="/register" className="text-decoration-none">
+            <p className="h4 color-white">Registrarse</p>
           </NavLink>
     </>
 } else {
     if (props.loggedUser.role === "admin") {
         var links = <>
-            <NavLink to={'/cart'} className="text-decoration-none mt-2">
-              <div className="container d-flex justify-content-between">
-                <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
-                <span className="h5">Hola {props.loggedUser.firstname}</span>
-              </div>
-            </NavLink>
-            <NavLink to="/">
-                <GoSignOut className="logOut" onClick={() => props.logoutUser()} />
-            </NavLink>
-            <NavLink to="/admin" className="text-decoration-none mt-2">
-                <span className="h4">Administracion</span>
+            <div className="d-flex justify-content-between">
+              <NavLink to={'/cart'} className="text-decoration-none">
+                <div className="container-fluid p-0 d-flex justify-content-between">
+                  <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
+                  <p className="h4 color-white">{props.loggedUser.firstname}</p>
+                </div>
+              </NavLink>
+            </div>
+            <NavLink to="/admin" className="text-decoration-none">
+                <p className="h4 color-white">Administracion</p>
             </NavLink>
         </>
     } else {
         var links =
             <>
-             <NavLink to={'/cart'} className="text-decoration-none mt-2">
-              <div className="container d-flex justify-content-between">
+             <NavLink to={'/cart'} className="text-decoration-none">
+              <div className="container-fluid p-0 d-flex justify-content-between">
                 <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
-                <span className="h5">Hola {props.loggedUser.firstname}</span>
+                <p className="h4 color-white">{props.loggedUser.firstname}</p>
               </div>
             </NavLink>
-            <NavLink to="/">
-                <GoSignOut className="logOut" onClick={() => props.logoutUser()} />
-            </NavLink>
-           
             </> }
     }
   return (
-      <div className="d-flex flex-column nav-coco " style={{backgroundImage: `url(${blackboard})`}}>
+    <>
+    <div className="navBar-width" style={{backgroundImage: `url(${blackboard})`}}>
+        <div className="menu position-fixed" style={{backgroundImage: `url(${blackboard})`}}>
           <NavLink to="/" className="text-decoration-none">
-            <div className="logo mt-4 mb-2" style={{backgroundImage: `url(${logo})`}}>
+            <div className="logo mt-3" style={{backgroundImage: `url(${logo})`}}>
             </div>
           </NavLink>
-          <div className="menu d-flex flex-column mx-auto">
+          <div className="nav-buttons">
             {links}
-            <NavLink to="/menu" className="text-decoration-none mt-2">
-              <span className="h4">Menú</span>
+            <NavLink to="/menu" className="text-decoration-none">
+              <p className="h4 color-white">Menú</p>
             </NavLink>
             <NavLink to="/cart" className="text-decoration-none mt-2 d-flex">
-              <span className="h4 d-flex align-items-center">Mi pedido</span> <IoFastFoodOutline className="cartIcono"/>
+              <p className="h4 color-white d-flex align-items-center">Mi pedido</p> <IoFastFoodOutline className="cartIcono"/>
             </NavLink>
-            <NavLink to="/calendar" className="text-decoration-none mt-2">
-              <span className="h4">Eventos</span>
+            <NavLink to="/calendar" className="text-decoration-none">
+              <p className="h4 color-white">Eventos</p>
             </NavLink>
-            <NavLink to="/contact" className="text-decoration-none mt-2">
-              <span className="h4">Contacto</span>
+            <NavLink to="/contact" className="text-decoration-none">
+              <p className="h4 color-white">Contacto</p>
             </NavLink>
-            <NavLink  className="text-decoration-none mt-2" to="/reservation">
-              <span className="h4">HACER UNA RESERVA</span>
+            <NavLink to="/reservation" className="text-decoration-none">
+              <p className="h4 color-white">HACER UNA RESERVA</p>
             </NavLink>
-            <div className="mt-3 d-flex justify-content-around">
+            {props.loggedUser&&
+            <NavLink to="/" className="text-decoration-none">
+              <p className="h4 color-white" className="logOut" onClick={() => props.logoutUser()} >
+                <GoSignOut />Cerrar Sesión
+              </p>
+          </NavLink>}
+         </div>
+          <div className="mt-3 d-flex justify-content-around">
             <Link>
-              <p>
                 <AiFillFacebook className="rd"></AiFillFacebook>
-              </p>
             </Link>
             <Link>
-              <p>
                 <AiFillInstagram className="rd"></AiFillInstagram>
-              </p>
             </Link>
-
-            </div>
           </div>
-      </div>
+        </div>
+    </div>
+    <BurgerMenu props={props}/>
+
+    </>
   );
 };
 
