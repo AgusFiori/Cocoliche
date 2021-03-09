@@ -203,6 +203,7 @@ const Product = (props) => {
               <ProductSubcategory
                 subcategory={subcategory}
                 productId={props.product._id}
+                key={props.product._id}
               />
             ))}
           </tr>

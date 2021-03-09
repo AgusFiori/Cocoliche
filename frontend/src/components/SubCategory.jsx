@@ -25,7 +25,6 @@ const SubCategory = (props) => {
     props.addToCart(productToAdd);
   };
 
-  
   return (
     <div className="container">
       <h3>{props.sub.subcategory}</h3>
@@ -40,6 +39,7 @@ const SubCategory = (props) => {
         {[...Array(10)].map(() => {
           return (
             <option
+              key={props.sub._id}
               value={JSON.stringify({
                 subcategory: props.sub.subcategory,
                 price: props.sub.subcategoryPrice,

@@ -14,6 +14,7 @@ import authActions from './redux/actions/authActions'
 import React, { useState } from 'react'
 import Admin from './pages/Admin.jsx';
 import Reservation from './components/Reservation'
+import ConfirmPurchase from './pages/ConfirmPurchase'
 
 
 function App(props) {
@@ -32,6 +33,7 @@ function App(props) {
             <Route path="/contact" component={Contact} />
             <Route path="/profile" component={Profile} />
             <Route path="/admin" component={Admin} />
+            <Route path="/confirm" component={ConfirmPurchase} />
             <Redirect to="/" />
           </Switch>
         </ScrollToTop>
@@ -46,6 +48,7 @@ function App(props) {
             <Route path="/menu" component={Menu} />
             <Route path="/contact" component={Contact} />
             <Route path="/profile" component={Profile} />
+            <Route path="/confirm" component={ConfirmPurchase} />
             <Redirect to="/" />
           </Switch>
         </ScrollToTop>
