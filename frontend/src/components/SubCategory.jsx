@@ -25,7 +25,7 @@ const SubCategory = (props) => {
   const addToCart = () => {
     props.addToCart(productToAdd);
   };
-  
+
   return (
     <div className="card-body">
       <div className="d-flex justify-content-around">
@@ -33,10 +33,13 @@ const SubCategory = (props) => {
         <h3>$:{props.sub.subcategoryPrice}</h3>
         {/* <h3>Stock: {props.sub.subcategoryStock}</h3> */}
       </div>
-      
-      
+
       <div className="d-flex justify-content-around align-items-center">
-        <select name="subcategory" onChange={handleChange} defaultValue="default">
+        <select
+          name="subcategory"
+          onChange={handleChange}
+          defaultValue="default"
+        >
           <option value="default">Elegi cantidad</option>
           {[...Array(10)].map(() => {
             return (
@@ -54,8 +57,8 @@ const SubCategory = (props) => {
             );
           })}
         </select>
-        <RiShoppingCart2Line className="addCart"  onClick={addToCart}/>
-      </div>      
+        <RiShoppingCart2Line className="addCart" onClick={addToCart} />
+      </div>
     </div>
   );
 };

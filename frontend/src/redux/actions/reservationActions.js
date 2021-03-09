@@ -41,6 +41,18 @@ const reservationActions = {
             })
             dispatch({type: 'EDIT_RESERVATION', payload: response.data.response})
         }
+    },
+    deleteReservation: dates => {
+        const {id, token} = dates
+        return async (dispatch, getState) => {
+            const response = await axios.delete(`${API}/reservation/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                        }      
+            })
+            dispatch({type:'DELETE_RESERVATIONS', payload: response.data.response})
+        }
     }
 }
 

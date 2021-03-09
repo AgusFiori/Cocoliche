@@ -26,27 +26,34 @@ const PendingReservations = (props) => {
         setVisible(!visible)
     }
     const deleteReservation = e => {
-       e.preventDefault()       
+       e.preventDefault()   
+       props.deleteReservation({
+            id: e.target.id,
+            token: props.loggedUser.token})   
     }
 
     return (
         <div>
             {visible ? 
             <>
-                <span>Ingrese la nueva fecha</span>
+                <p>Ingrese la nueva fecha</p>
                 <input defaultValue={props.day} name="day" onChange={captureNewDate} type="date"  />  
-                <span>Ingrese la nueva cantidad</span>
+                <p>Ingrese la nueva cantidad</p>
                 <input onChange={captureNewDate} name="quantity" type="number" defaultValue={props.quantity} />
                 <button id={props._id} onClick={editReservation}>Enviar</button>
                 <button id={props._id} onClick={() => setVisible(!visible)}>Cancelar</button>
             </>
             :
             <>
-                <span className="col-12">DÍA</span>
-                <span className="col-12">{props.day}</span>
-                <span className="col-12">Sillas reservadas</span>
-                <span className="col-12">{props.quantity}</span>
-                <button  onClick={() => setVisible(!visible)}>Editar</button>
+                <div>
+                    <p>DÍA </p>
+                    <p >{props.day}</p>
+                </div>
+                <div>
+                    <p >Sillas reservadas: </p>
+                    <p>{props.quantity}</p>
+                </div>       
+                <button onClick={() => setVisible(!visible)}>Editar</button>
                 <button id={props._id}  onClick={deleteReservation}>Elimiar</button>
             </>
         }
@@ -63,7 +70,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    editReservation: reservationActions.editReservation
+    editReservation: reservationActions.editReservation,
+    deleteReservation: reservationActions.deleteReservation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PendingReservations)

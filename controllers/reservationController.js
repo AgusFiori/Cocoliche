@@ -77,6 +77,17 @@ const reservationController = {
         }catch(error){
             res.json({success: false, error})
         }
+    },
+    deleteReservations: async (req, res) => {
+        const {id} = req.params
+        try{
+            await Reservation.findOneAndRemove({_id: id})
+            const response = await Reservation.find()
+
+            res.json({success: true, response})
+        }catch(error){
+            res.json({success: false, error})
+        }
     }
 }
 

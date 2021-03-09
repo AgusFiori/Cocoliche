@@ -142,6 +142,24 @@ const productActions = {
         console.log(error)
       }
     }
+  },
+  rateProduct: (rating, productId, token) => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await axios.post(`${API}/rate/${productId}`, { rating },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          })
+        dispatch({
+          type: "RATE_PRODUCT",
+          payload: response.data
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 

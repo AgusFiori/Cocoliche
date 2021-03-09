@@ -20,6 +20,11 @@ function reservationsReducer (state = initialState, action) {
                 ...state,
                 reservations: state.reservations.map(reservation => reservation._id === action.payload._id ? action.payload : reservation)
             }
+        case 'DELETE_RESERVATIONS':
+            return {
+                ...state,
+                reservations: action.payload
+            }
         default:
             return state
     }

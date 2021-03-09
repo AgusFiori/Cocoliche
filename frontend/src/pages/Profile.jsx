@@ -13,24 +13,30 @@ const Profile = (props) => {
   }, [])
 
 useEffect(() => {
-  setReservated(reservations.filter(reservation => reservation.customer._id === props.loggedUser._id && reservation))
+  setReservated( reservations.length > 0 && reservations.filter(reservation => reservation.customer._id === props.loggedUser._id && reservation))
 }, [reservations])
 
+
   return (
-    <div>
-      <h2>Tu perfil</h2> 
-      <span>Tus reservas</span>
-      {reservated.length ?
-       reservated.map(res => {
-        return( !res.info &&
-            <div>
-              <PendingReservations _id={res._id} day={res.day} quantity={res.quantity} />
-            </div>
-        )      
-      })
-      :
-      <span>No tienes reservas</span>
-      }
+    <div className="container">
+      <div className="row">
+        <div className="col-6 text-center mx-auto">
+          <h2>Tu perfil</h2> 
+          <div> 
+            <span>Tus reservas</span>
+            {reservated.length ?
+            reservated.map(res => {
+              return( !res.info &&
+                  <div key={res._id}>
+                    <PendingReservations _id={res._id} day={res.day} quantity={res.quantity} />
+                  </div>
+                )}) :
+            <p>No tienes reservas</p>}
+          </div>    
+          <div>Tus compras</div>
+        <p>{}</p>
+        </div>     
+      </div>     
     </div>
   );
 };
