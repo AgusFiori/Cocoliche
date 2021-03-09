@@ -8,6 +8,8 @@ import eventsActions from "../redux/actions/eventsActions";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 import Swal from "sweetalert2";
 import Navbar from "../components/Navbar";
+import fondo1 from '../assets/fondos/fondo-1.jpg'
+
 
 const Calendary = (props) => {
   const [events, setEvents] = useState([])
@@ -84,50 +86,44 @@ const Calendary = (props) => {
 
   
   return (
-      
-      <div className="container-fluid background">
-            <div className="row">
-                <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0" >
-                    <Navbar />
-                </div>
-                
-              <div className="trasparent p-4 m-auto col-sm-12 col-md-7 col-lg-10 col-xl-10">
-                <FullCalendar
-                  plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
-                  locale="es-ES"
-                  themeSystem = 'bootstrap'
-                  customButtons= {{
-                    myCustomButton: {
-                      icon: 'fa-times',
-                      text:"Ver eventos",
-                      click: function() {
-                          Swal.fire({
-                            html: eventos.map(event =>
-                              '<div class="card bg-dark text-white">'+
-                                `<img class="card-img" src=${event.picture} alt="Card image"/> ` +
-                                  '<div class="card-img-overlay">'+
-                                    `<h5 class="card-title">${event.title}</h5>` +
-                                    '<p class="card-text"></p>'+
-                                    `<p class="card-text">${event.start}</p>` +
-                                '</div>'+
-                              '</div>')
-                          })
-                        
-                      }
-                    },
-                  }}
-                  headerToolbar= {{
-                    end: 'myCustomButton'
-                  }}
-                  selectable={true}
-                  events= {eventos}
-                  dayMaxEvents={true}
-                  dateClick={handleDateClick}   
-                  contentHeight={500}
-                />
-              </div>
-            </div>
+    <div className="container-fluid d-flex p-0 menu-responsive calendar-fondo" style={{backgroundImage: `url(${fondo1})`}}>
+      <Navbar />
+        <div className="container-fluid px-5 my-auto" >
+          <FullCalendar
+            plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
+            locale="es-ES"
+            themeSystem = 'bootstrap'
+            customButtons= {{
+              myCustomButton: {
+                icon: 'fa-times',
+                text:"Ver eventos",
+                click: function() {
+                    Swal.fire({
+                      html: eventos.map(event =>
+                        '<div class="card bg-dark text-white">'+
+                          `<img class="card-img" src=${event.picture} alt="Card image"/> ` +
+                            '<div class="card-img-overlay">'+
+                              `<h5 class="card-title">${event.title}</h5>` +
+                              '<p class="card-text"></p>'+
+                              `<p class="card-text">${event.start}</p>` +
+                          '</div>'+
+                        '</div>')
+                    })
+                  
+                }
+              },
+            }}
+            headerToolbar= {{
+              end: 'myCustomButton'
+            }}
+            selectable={true}
+            events= {eventos}
+            dayMaxEvents={true}
+            dateClick={handleDateClick}   
+            contentHeight={500}
+          />
         </div>
+    </div>   
   )
 }
 
