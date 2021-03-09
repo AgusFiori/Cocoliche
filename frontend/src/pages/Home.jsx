@@ -8,42 +8,34 @@ import banner_4 from '../assets/Img/banner_4.jpg'
 
 const Home = () => {
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0">
-          <Navbar />
-        </div>
-        <div className="col-sm-12 col-md-12 col-lg-10 col-xl-10 bg-primary">
-            <div className="row">
-              <div className="col-sm-12 col-md-5 col-lg-5 banner-lg-home" style={{backgroundImage: `url(${banner_1})`}}>
+    <div className="container-fluid d-flex p-0 menu-responsive">
+      <Navbar />
+      <div className="container-fluid p-0 d-flex">
+        <div className="col-sm-12 col-md-5 col-lg-5 banner-lg-home" style={{backgroundImage: `url(${banner_1})`}}>
 
-              </div>
-              <div className="col-sm-12 col-md-7 col-lg-7">
-                <div className="container-fluid p-0">
-                  
-                  <div className="row">
-                    <div className="col-12 banner-md-home" style={{backgroundImage: `url(${banner_2})`}}>
-                      
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12  banner-sm-home" style={{backgroundImage: `url(${banner_3})`}}>
-                        
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12 banner-sm-home" style={{backgroundImage: `url(${banner_4})`}}>
-                        
-                    </div>
-                  </div>
+        </div>
+        <div className="col-sm-12 col-md-7 col-lg-7">
+          <div className="container-fluid p-0">
+            <div className="row">
+              <div className="col-12 banner-md-home" style={{backgroundImage: `url(${banner_2})`}}>
                 
-               
-                </div>
               </div>
             </div>
+            <div className="row">
+              <div className="col-12  banner-sm-home" style={{backgroundImage: `url(${banner_3})`}}>
+                  
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12 banner-sm-home" style={{backgroundImage: `url(${banner_4})`}}>
+                  
+              </div>
+            </div>               
+          </div>
         </div>
       </div>
     </div>
+
   );
 };
 

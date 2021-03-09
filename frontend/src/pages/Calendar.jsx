@@ -8,7 +8,6 @@ import eventsActions from "../redux/actions/eventsActions";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 import Swal from "sweetalert2";
 import Navbar from "../components/Navbar";
-import blackboard from '../assets/blackboard.jpg'
 
 const Calendary = (props) => {
   const [events, setEvents] = useState([])
@@ -88,7 +87,7 @@ const Calendary = (props) => {
       
       <div className="container-fluid background">
             <div className="row">
-                <div className="col-sm-12 col-md-3 col-lg-2 col-xl-2 position-sticky nav-coco" style={{backgroundImage: `url(${blackboard})`}}>
+                <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0" >
                     <Navbar />
                 </div>
                 
