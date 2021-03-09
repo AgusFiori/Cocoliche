@@ -372,3 +372,26 @@ body {
       width: 100% !important;
     }
   }
+// *****************
+// ESTILO MENU
+.addCart{
+    padding: 1vh;
+    margin: 0;
+    font-size:3.2rem;
+    background-color: #474747;
+    color:black;
+    height: auto;
+    border-radius: 100%;
+    border:1px solid black;
+}
+.addCart:hover{
+    color:goldenrod;
+    cursor: pointer;
+}
+.btnSubCategory button{
+    border:none;
+    margin:0;
+}
+.btnSubCategory button:hover{
+    background-color: #ed1650;
+}

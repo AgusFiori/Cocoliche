@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import cartActions from "../redux/actions/cartActions";
 import CartItem from "../components/CartItem.jsx";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Cart = (props) => {
   useEffect(() => {
@@ -10,16 +11,19 @@ const Cart = (props) => {
     props.localStorageCart(localCart);
   }, []);
 
-  const sendCart = () => {
-    props.confirmPurchase({ cart: props.cart, token: props.loggedUser.token });
-  };
-
   let acc = [];
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
+  const history = useHistory();
+
+  const goToPay = () => {
+    let path = `/confirm`;
+    history.push(path);
+  };
+
   return (
     <div className="container bg-light p-5 mt-5">
-      <h1>Cart</h1>
+      <h1>Carrito</h1>
       {props.cart && props.cart.length ? (
         <div className="container">
           {" "}
@@ -36,9 +40,9 @@ const Cart = (props) => {
               type="button"
               class="btn btn-primary p-2 pr-5 pl-5"
               style={{ fontSize: "32px" }}
-              onClick={sendCart}
+              onClick={goToPay}
             >
-              Confirmar Compra
+              Continuar
             </button>
           </div>
         </div>

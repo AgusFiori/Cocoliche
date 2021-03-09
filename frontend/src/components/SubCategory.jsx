@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import cartActions from "../redux/actions/cartActions";
+import { RiShoppingCart2Line } from "react-icons/ri";
 
 const SubCategory = (props) => {
   const [productToAdd, setProductToAdd] = useState({
@@ -25,35 +26,39 @@ const SubCategory = (props) => {
     props.addToCart(productToAdd);
   };
 
-  
   return (
-    <div className="container">
-      <h3>{props.sub.subcategory}</h3>
-      <h3>Precio: {props.sub.subcategoryPrice}</h3>
-      <h3>Stock: {props.sub.subcategoryStock}</h3>
+    <div className="card-body">
+      <div className="d-flex justify-content-around">
+        <h3>{props.sub.subcategory}</h3>
+        <h3>$:{props.sub.subcategoryPrice}</h3>
+        {/* <h3>Stock: {props.sub.subcategoryStock}</h3> */}
+      </div>
 
-      {/* <input type="number" defaultValue={0} onChange={handleChange}/> */}
-
-      <select name="subcategory" onChange={handleChange} defaultValue="default">
-        <option value="default">Elegi cantidad</option>
-
-        {[...Array(10)].map(() => {
-          return (
-            <option
-              value={JSON.stringify({
-                subcategory: props.sub.subcategory,
-                price: props.sub.subcategoryPrice,
-                subcategoryId: props.sub._id,
-                qty,
-                stock: props.sub.subcategoryStock,
-              })}
-            >
-              {qty++}
-            </option>
-          );
-        })}
-      </select>
-      <button onClick={addToCart}>Agregar</button>
+      <div className="d-flex justify-content-around align-items-center">
+        <select
+          name="subcategory"
+          onChange={handleChange}
+          defaultValue="default"
+        >
+          <option value="default">Elegi cantidad</option>
+          {[...Array(10)].map(() => {
+            return (
+              <option
+                value={JSON.stringify({
+                  subcategory: props.sub.subcategory,
+                  price: props.sub.subcategoryPrice,
+                  subcategoryId: props.sub._id,
+                  qty,
+                  stock: props.sub.subcategoryStock,
+                })}
+              >
+                {qty++}
+              </option>
+            );
+          })}
+        </select>
+        <RiShoppingCart2Line className="addCart" onClick={addToCart} />
+      </div>
     </div>
   );
 };

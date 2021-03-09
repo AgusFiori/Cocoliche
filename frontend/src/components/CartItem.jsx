@@ -43,7 +43,7 @@ const CartItem = (props) => {
               >
                 <option value="default">{props.props.subcategory.qty}</option>
                 {[...Array(20)].map(() => {
-                  return <option>{qty++}</option>;
+                  return <option key={qty}>{qty++}</option>;
                 })}
               </select>
               <button
