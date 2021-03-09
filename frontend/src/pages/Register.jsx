@@ -3,6 +3,9 @@ import { useState } from "react";
 import authActions from "../redux/actions/authActions.jsx";
 import Navbar from "../components/Navbar";
 import firebase from 'firebase'
+import fondo3 from '../assets/fondos/fondo-3.jpg'
+import {FcGoogle} from 'react-icons/fc'
+
 
 const Register = (props) => {
   const [user, setUser] = useState({
@@ -42,14 +45,12 @@ const Register = (props) => {
     const dates = await firebase.auth().signInWithPopup(provider)
     props.loginWithGoogle(dates.user)
   }
-
+  
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0">
-          <Navbar />
-        </div>
-        <div className="trasparent col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border py-4">
+    <div className="container-fluid d-flex p-0 menu-responsive " >
+    <Navbar />
+    <div className="container-fluid pt-3 d-flex align-items-center calendar-fondo" style={{backgroundImage: `url(${fondo3})`}} >
+        <div className="trasparent col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto d-flex flex-column text-center border py-4">
           <span className="h1">Registrate</span>
           <input
             className='text-center my-3 h3'
@@ -77,7 +78,7 @@ const Register = (props) => {
             onChange={validateUser}
           ></input>
           <button onClick={createUser} className='h3 my-3'>Crear Cuenta</button>
-          <button onClick={loginWithRS} className='h3'>Ingresar con Google</button>
+          <button onClick={loginWithRS} className='h3 d-flex justify-content-center align-items-center'>Ingresar con Google <FcGoogle/></button>
           {errores.map(error=><label>{error.message}</label>)}
         </div>
       </div>

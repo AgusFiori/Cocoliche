@@ -1,51 +1,60 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import MenuItem from "../components/MenuItem";
+import Preloader from '../components/Preloader'
 import productActions from "../redux/actions/productActions";
 import cartActions from "../redux/actions/cartActions";
 import Navbar from "../components/Navbar";
+import fondo1 from '../assets/fondos/fondo-1.jpg'
 
 const Menu = (props) => {
   const { getProducts, getCart } = props;
+  const [preloader, setPreloader]= useState(false)
 
   console.log(props);
 
   useEffect(() => {
+    fetch()
+  }, []);
+
+  async function fetch () {
+    await getProducts();
     getProducts();
-    getCart();
-  }, [getProducts, getCart]);
-
+    setPreloader(true)
+ }
   return (
-    <div className="container-fluid p-0">
-      <div className="row m-0">
-        <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0">
-          <Navbar />
+    <div className="container-fluid d-flex p-0 menu-responsive calendar-fondo" style={{backgroundImage: `url(${fondo1})`}}>
+      <Navbar />
+        {preloader?
+          <>
+      <div className="container pl-5">
+        <div className="container-fluid trasparent">
+        <h2 className="text-center mt-3">Hoy Cocina Cocoliche</h2>
+        <h4 className="text-center">Conocé nuestras especialidades</h4>
+        <div className="col-12 d-flex justify-content-center align-items-center">
+          <h2 className="px-2 py-4">Filtros</h2>
+          <select>
+            <option>Precio ascendente</option>
+            <option>Precio descendente</option>
+            <option>Popularidad</option>
+          </select>
         </div>
-        <div className="col-sm-12 col-md-12 col-lg-10 col-xl-10">
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center align-items-center">
-              <h2 className="px-2 py-4">Filtros</h2>
-              <select>
-                <option>Precio ascendente</option>
-                <option>Precio descendente</option>
-                <option>Popularidad</option>
-              </select>
-            </div>
-            <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-              <h2 className="text-center py-4">Menu</h2>
-            </div>
-
-            <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              <div className="row justify-content-center">
-                {props.allProducts.map((product) => (
-                  <MenuItem key={product._id} product={product} />
-                ))}
-              </div>
-            </div>
+        <div className="col-12">
+          <div className="row ">
+            {props.allProducts.map((product) => (
+              <MenuItem key={product._id} product={product} />
+            ))}
           </div>
         </div>
-      </div>
-    </div>
+        </div>
+
+</div>        
+
+        </>
+        :
+            <Preloader/>}
+          
+          </div>  
   );
 };
 

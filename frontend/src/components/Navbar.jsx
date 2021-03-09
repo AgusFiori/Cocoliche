@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink} from "react-router-dom";
 import authActions from '../redux/actions/authActions'
-import {IoFastFoodOutline} from 'react-icons/io5'
 import { GoSignOut } from "react-icons/go";
 import { connect } from 'react-redux'
 import logo from '../assets/cocoliche-logo.png'
@@ -59,7 +58,7 @@ const Navbar = (props) => {
               <p className="h4 color-white">Menú</p>
             </NavLink>
             <NavLink to="/cart" className="text-decoration-none mt-2 d-flex">
-              <p className="h4 color-white d-flex align-items-center">Mi pedido</p> <IoFastFoodOutline className="cartIcono"/>
+              <p className="h4 color-white d-flex align-items-center">Mi pedido</p> 
             </NavLink>
             <NavLink to="/calendar" className="text-decoration-none">
               <p className="h4 color-white">Eventos</p>
@@ -71,7 +70,7 @@ const Navbar = (props) => {
               <p className="h4 color-white">HACER UNA RESERVA</p>
             </NavLink>
             {props.loggedUser&&
-            <NavLink to="/" className="text-decoration-none">
+            <NavLink to="/" className="text-decoration-none bg-light">
               <p className="h4 color-white" className="logOut" onClick={() => props.logoutUser()} >
                 <GoSignOut />Cerrar Sesión
               </p>
