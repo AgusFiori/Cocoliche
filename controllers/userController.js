@@ -106,7 +106,8 @@ const userController = {
                     urlPic: req.user.urlPic,
                     role: req.user.role,
                     token: req.body.token,
-                    _id: req.user._id
+                    _id: req.user._id,
+                    purchases: req.user.purchases
                 }
             })
         } catch (error) {

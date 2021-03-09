@@ -16,7 +16,7 @@ useEffect(() => {
   setReservated( reservations.length > 0 && reservations.filter(reservation => reservation.customer._id === props.loggedUser._id && reservation))
 }, [reservations])
 
-console.log(props.loggedUser.purchases)
+console.log(props.loggedUser)
   return (
     <div className="container">
       <div className="row">
