@@ -21,17 +21,20 @@ const Admin = (props) => {
   const [newCategory, setNewCategory] = useState("");
 
   const { allProducts } = props;
-  const { getProducts, getCategories, getOrders } = props;
+  const { getProducts, getCategories } = props;
 
   useEffect(() => {
     getProducts();
     getCategories();
-    getOrders();
-  }, [getProducts, getCategories, getOrders]);
+  }, [getProducts, getCategories]);
 
   useEffect(() => {
     setProducts(allProducts);
+    props.getOrders();
   }, [allProducts]);
+
+  // useEffect(() => {
+  // }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,158 +110,158 @@ const Admin = (props) => {
 
   return (
     <>
-    <div className="container-fluid d-flex p-0 menu-responsive">
-      <Navbar />
-      <div className="container-fluid p-0">
-        <div className="col-12 mt-5">
-          <div className="row">
-            <div className="col-sm-12 col-md-8 col-lg-8 d-flex flex-column mx-auto">
-              <span className="h3">
-                Crear una nueva Categoría de Productos
-              </span>
-              <input
-                className="my-3 h5 pl-3"
-                type="text"
-                name="category"
-                placeholder="Crear categoria"
-                onChange={handleChangeCategory}
-              />
-              {/* <button onClick={submitCategory} className="h4">
+      <div className="container-fluid d-flex p-0 menu-responsive">
+        <Navbar />
+        <div className="container-fluid p-0">
+          <div className="col-12 mt-5">
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 d-flex flex-column mx-auto">
+                <span className="h3">
+                  Crear una nueva Categoría de Productos
+                </span>
+                <input
+                  className="my-3 h5 pl-3"
+                  type="text"
+                  name="category"
+                  placeholder="Crear categoria"
+                  onChange={handleChangeCategory}
+                />
+                {/* <button onClick={submitCategory} className="h4">
                 Enviar
               </button> */}
+              </div>
             </div>
-          </div>
-          <hr></hr>
-          <div className="row">
-            <div className="col-sm-12 col-md-8 col-lg-8 d-flex flex-column mx-auto">
-              <span className="h3">Cargar un nuevo Producto</span>
-              <input
-                className="h5 pl-3"
-                type="text"
-                name="name"
-                placeholder="Nombre del producto"
-                onChange={handleChange}
-              />
-
-              <input
-                className="d-none"
-                type="file"
-                id="productPicture"
-                name="file"
-                onChange={onFileChange}
-              />
-              <label
-                htmlFor="productPicture"
-                className="text-center d-flex flex-column align-items-center"
-              >
-                <span className="h4">Cargar imagen del Producto</span>
-                <span className="h6">Tamaño recomendado 200px * 200px</span>
-                <img className="img-prev" src={pathImage} alt="Producto" />
-              </label>
-              {props.allCategories.length && (
-                <select
-                  className="my-2 h5 p-1"
-                  defaultValue="default"
+            <hr></hr>
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 d-flex flex-column mx-auto">
+                <span className="h3">Cargar un nuevo Producto</span>
+                <input
+                  className="h5 pl-3"
+                  type="text"
+                  name="name"
+                  placeholder="Nombre del producto"
                   onChange={handleChange}
-                  name="category"
+                />
+
+                <input
+                  className="d-none"
+                  type="file"
+                  id="productPicture"
+                  name="file"
+                  onChange={onFileChange}
+                />
+                <label
+                  htmlFor="productPicture"
+                  className="text-center d-flex flex-column align-items-center"
                 >
-                  <option value="default" disabled>
-                    Seleccione la Categoria del Producto
-                  </option>
-                  {props.allCategories.map((category) => (
-                    <option
-                      key={category.category}
-                      value={category.category}
-                      name="category"
-                    >
-                      {category.category}
+                  <span className="h4">Cargar imagen del Producto</span>
+                  <span className="h6">Tamaño recomendado 200px * 200px</span>
+                  <img className="img-prev" src={pathImage} alt="Producto" />
+                </label>
+                {props.allCategories.length && (
+                  <select
+                    className="my-2 h5 p-1"
+                    defaultValue="default"
+                    onChange={handleChange}
+                    name="category"
+                  >
+                    <option value="default" disabled>
+                      Seleccione la Categoria del Producto
                     </option>
-                  ))}
-                </select>
-              )}
-              <input
-                className="h5 pl-3"
-                type="number"
-                name="delay"
-                placeholder="Demora estimada"
-                onChange={handleChange}
-              />
-              <textarea
-                className="my-2 h5 p-3"
-                minLength="25"
-                maxlength="140"
-                type="text"
-                name="description"
-                placeholder="Descripcion del producto"
-                onChange={handleChange}
-              />
-              <button onClick={addProduct} className="h4">
-                Enviar
-              </button>
+                    {props.allCategories.map((category) => (
+                      <option
+                        key={category.category}
+                        value={category.category}
+                        name="category"
+                      >
+                        {category.category}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                <input
+                  className="h5 pl-3"
+                  type="number"
+                  name="delay"
+                  placeholder="Demora estimada"
+                  onChange={handleChange}
+                />
+                <textarea
+                  className="my-2 h5 p-3"
+                  minLength="25"
+                  maxlength="140"
+                  type="text"
+                  name="description"
+                  placeholder="Descripcion del producto"
+                  onChange={handleChange}
+                />
+                <button onClick={addProduct} className="h4">
+                  Enviar
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div className="row">
-            <div className="col-sm-12 col-md-8 col-lg-8 mx-auto ">
-              <span className="h1">Listado de Productos</span>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Delay</th>
-                    <th>Picture</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products &&
-                    products.map((product) => {
-                      return (
-                        <Product
-                          key={product._id}
-                          product={product}
-                          remove={remove}
-                        />
-                      );
-                    })}
-                </tbody>
-              </Table>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-12 col-md-8 col-lg-8 mx-auto">
-              <CreateEvent />
-            </div>
-          </div>
-          
-          <div className="row">
-            <div className="col-sm-12 col-md-8 col-lg-8 mx-auto">
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Pedido</th>
-                    <th>Estado</th>
-                    <th>Timestamp</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {props.allOrders.map((order) => (
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 mx-auto ">
+                <span className="h1">Listado de Productos</span>
+                <Table striped bordered hover>
+                  <thead>
                     <tr>
-                      <Order order={order} />
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Description</th>
+                      <th>Delay</th>
+                      <th>Picture</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {products &&
+                      products.map((product) => {
+                        return (
+                          <Product
+                            key={product._id}
+                            product={product}
+                            remove={remove}
+                          />
+                        );
+                      })}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 mx-auto">
+                <CreateEvent />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-sm-12 col-md-8 col-lg-8 mx-auto">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Pedido</th>
+                      <th>Estado</th>
+                      <th>Timestamp</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {props.allOrders.map((order) => (
+                      <tr>
+                        <Order order={order} />
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

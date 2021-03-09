@@ -7,12 +7,17 @@ function authReducer(state = initialState, action) {
     switch (action.type) {
 
         case 'LOG_USER':
+            if (localStorage.getItem('cart')) {
+                var savedCart = localStorage.getItem('cart')
+            } else {
+                var savedCart = "[]"
+            }
             localStorage.setItem('firstname', action.payload.firstname)
             localStorage.setItem('urlPic', action.payload.urlPic)
             localStorage.setItem('token', action.payload.token)
             localStorage.setItem('role', action.payload.role)
             localStorage.setItem('_id', action.payload._id)
-            localStorage.setItem('cart', '[]')
+            localStorage.setItem('cart', savedCart)
 
 
             const purchases = JSON.stringify(action.payload.purchases)

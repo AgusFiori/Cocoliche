@@ -54,7 +54,6 @@ function App(props) {
         </ScrollToTop>
     }
   } else if (localStorage.getItem('token')) {
-    console.log(localStorage.getItem('token'))
     props.logFromLS(localStorage.getItem('token'))
       .then(respuesta => {
         if (respuesta === '/') setReload(!reload)
