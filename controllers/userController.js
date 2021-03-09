@@ -31,7 +31,8 @@ const userController = {
                 username: userValidation.username,
                 firstname: userValidation.firstname,
                 role: userValidation.role,
-                _id: userValidation._id
+                _id: userValidation._id,
+                purchases: userValidation.purchases
             }
         })
     },
@@ -49,7 +50,8 @@ const userController = {
                     firstname: userExists.firstname,
                     urlPic: userExists.urlPic,
                     role: userExists.role,
-                    _id: userExists._id
+                    _id: userExists._id,
+                    purchases: userExists.purchases,
                 }
             })
         } else {
@@ -66,9 +68,9 @@ const userController = {
                     urlPic: newUserSaved.urlPic,
                     role: newUserSaved.role,
                     _id: newUserSaved._id,
+                    purchases: newUserSaved.purchases,
                 }
             })
-
         }
     },
     signin: async (req, res) => {
@@ -90,7 +92,8 @@ const userController = {
                 urlPic: usuarioExistente.urlPic,
                 firstname: usuarioExistente.firstname,
                 role: usuarioExistente.role,
-                _id: usuarioExistente._id
+                _id: usuarioExistente._id,
+                purchases: usuarioExistente.purchases,
             }
         })
 
@@ -102,7 +105,8 @@ const userController = {
                 urlPic: req.user.urlPic,
                 role: req.user.role,
                 token: req.body.token,
-                _id: req.user._id
+                _id: req.user._id,
+                purchases: req.user.purchases
             }
         }
         )
