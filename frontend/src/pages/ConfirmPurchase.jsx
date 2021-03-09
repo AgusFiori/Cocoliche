@@ -38,6 +38,7 @@ const ConfirmPurchase = (props) => {
         token: props.loggedUser.token,
         urlPic: props.loggedUser.urlPic,
       },
+      total: acc,
     });
   };
 

@@ -4,7 +4,7 @@ const User = require('../models/User')
 const orderController = {
   newOrder: (req, res) => {
     const { _id } = req.user
-    console.log('llega', req.user, req.body)
+    console.log(req.body)
     // const newOrder = new Order({ customer: _id, cart: req.body })
     // newOrder.save()
     //   .then(async (newOrder) => {

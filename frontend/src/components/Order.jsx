@@ -60,7 +60,6 @@ const mapDispatchToProps = {
   confirmOrder: orderActions.confirmOrder,
   cancelOrder: orderActions.cancelOrder,
   completeOrder: orderActions.completeOrder,
-  getCustomer: orderActions.getCustomer,
 };
 
 export default connect(null, mapDispatchToProps)(Order);
