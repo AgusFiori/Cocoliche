@@ -45,6 +45,38 @@ const reservationController = {
         }catch(error){
             res.json({success: false, error})
         }
+    },
+    editReservations: async (req, res) => {
+        const {id} = req.body
+        const {day, quantity} = req.body.newDates   
+        try{
+            if(!day){
+            var respuesta = await Reservation.findOneAndUpdate({_id: id},
+                {$set: {
+                    quantity
+                }},
+                {new: true}
+                )
+            }else if(!quantity){
+                var respuesta = await Reservation.findOneAndUpdate({_id: id},
+                    {$set: {
+                        day
+                    }},
+                    {new: true})
+            }else{
+                var respuesta = await Reservation.findOneAndUpdate({_id: id},
+                    {$set: {
+                        day,
+                        quantity
+                    }},
+                    {new: true})
+            }  
+            const responsePopulate = await respuesta.populate('customer').execPopulate()
+
+            res.json({success: true, response: responsePopulate})
+        }catch(error){
+            res.json({success: false, error})
+        }
     }
 }
 

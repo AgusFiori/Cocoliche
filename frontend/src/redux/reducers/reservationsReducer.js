@@ -15,6 +15,11 @@ function reservationsReducer (state = initialState, action) {
                 ...state,
                 reservations: state.reservations.concat(action.payload)
             }
+        case 'EDIT_RESERVATION':
+            return {
+                ...state,
+                reservations: state.reservations.map(reservation => reservation._id === action.payload._id ? action.payload : reservation)
+            }
         default:
             return state
     }

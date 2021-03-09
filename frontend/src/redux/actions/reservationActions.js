@@ -25,11 +25,21 @@ const reservationActions = {
         }
     },
     getReservations: () => {
-
         return async (dispatch, getState) => {
             const response = await axios.get(`${API}/reservation`)
-            dispatch({type:'GET_RESERVATIONS', payload: response.data.response })
-          
+            dispatch({type:'GET_RESERVATIONS', payload: response.data.response })         
+        }
+    },
+    editReservation: (dates) => {
+        const { token, id , newDates } = dates
+        return async (dispatch, getState) => {
+            const response = await axios.put(`${API}/reservation`, {id, newDates},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                        }      
+            })
+            dispatch({type: 'EDIT_RESERVATION', payload: response.data.response})
         }
     }
 }
