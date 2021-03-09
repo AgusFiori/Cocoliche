@@ -20,6 +20,7 @@ module.exports = passport.use(
           }
         })
         .catch((error) => {
+          console.log(error)
           return done(error, false);
         });
     }

@@ -13,6 +13,10 @@ function authReducer(state = initialState, action) {
             localStorage.setItem('role', action.payload.role)
             localStorage.setItem('_id', action.payload._id)
             localStorage.setItem('cart', '[]')
+
+
+            const purchases = JSON.stringify(action.payload.purchases)
+            localStorage.setItem('purchases', purchases)
             return {
                 ...state,
                 loggedUser: action.payload
@@ -23,6 +27,7 @@ function authReducer(state = initialState, action) {
             localStorage.removeItem('token')
             localStorage.removeItem('role')
             localStorage.removeItem('_id')
+            localStorage.removeItem('purchases')
             localStorage.setItem('cart', [])
 
             return {

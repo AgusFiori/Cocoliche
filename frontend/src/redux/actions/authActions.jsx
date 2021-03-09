@@ -70,11 +70,7 @@ const authActions = {
         console.log(err);
         if (err.response.status === 401) {
           alert("Access denied");
-          localStorage.remove("firstname");
-          localStorage.remove("urlPic");
-          localStorage.remove("token");
-          localStorage.remove("role");
-          localStorage.remove("_id");
+          localStorage.clear();
           return "/";
         }
       }
