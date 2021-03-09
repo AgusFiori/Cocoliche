@@ -23,14 +23,14 @@ const Navbar = (props) => {
         var links = <>
             <div className="d-flex justify-content-between">
               <NavLink to={'/cart'} className="text-decoration-none">
-                <div className="container-fluid p-0 d-flex justify-content-between">
-                  <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
-                  <p className="h4 color-white">{props.loggedUser.firstname}</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <img src={props.loggedUser.urlPic} alt="profile" className="userImg mr-2" />
+                  <span className="h4 m-0 color-white">{props.loggedUser.firstname}</span>
                 </div>
               </NavLink>
             </div>
-            <NavLink to="/admin" className="text-decoration-none">
-                <p className="h4 color-white">Administracion</p>
+            <NavLink to="/admin" className="text-decoration-none ">
+                <p className="h4 color-white mt-2">Administracion</p>
             </NavLink>
         </>
     } else {
@@ -57,8 +57,8 @@ const Navbar = (props) => {
             <NavLink to="/menu" className="text-decoration-none">
               <p className="h4 color-white">Menú</p>
             </NavLink>
-            <NavLink to="/cart" className="text-decoration-none mt-2 d-flex">
-              <p className="h4 color-white d-flex align-items-center">Mi pedido</p> 
+            <NavLink to="/cart" className="text-decoration-none">
+              <p className="h4 color-white">Mi pedido</p> 
             </NavLink>
             <NavLink to="/calendar" className="text-decoration-none">
               <p className="h4 color-white">Eventos</p>
@@ -70,10 +70,13 @@ const Navbar = (props) => {
               <p className="h4 color-white">HACER UNA RESERVA</p>
             </NavLink>
             {props.loggedUser&&
-            <NavLink to="/" className="text-decoration-none bg-light">
-              <p className="h4 color-white" className="logOut" onClick={() => props.logoutUser()} >
-                <GoSignOut />Cerrar Sesión
-              </p>
+            <NavLink to="/" className="text-decoration-none">
+              <div className="d-flex justify-content-start align-items-center mt-3">
+                <p className="h4 color-white mr-2" onClick={() => props.logoutUser()} >
+                Cerrar Sesión
+                </p>
+                <GoSignOut className="h4 color-white "/>
+              </div>
           </NavLink>}
          </div>
           <div className="mt-3 d-flex justify-content-around">
