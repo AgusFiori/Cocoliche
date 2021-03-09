@@ -21,8 +21,8 @@ const Menu = (props) => {
         </div>
         <div className="col-sm-12 col-md-12 col-lg-10 col-xl-10">
           <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center">
-              <h2 className="px-2">Filtros</h2>
+            <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center align-items-center">
+              <h2 className="px-2 py-4">Filtros</h2>
               <select>
                 <option>Precio ascendente</option>
                 <option>Precio descendente</option>
@@ -30,7 +30,7 @@ const Menu = (props) => {
               </select>
             </div>
             <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-              <h2 className="text-center py-3">Menu</h2>
+              <h2 className="text-center py-4">Menu</h2>
             </div>
             
             <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">

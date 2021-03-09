@@ -19,7 +19,8 @@ const MenuItems = (props) => {
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 vh-100 align-self-center">
       <div class="card">
         <div className="card-body">
-          <h4 className="card-link">{props.product.rating.length}⭐</h4>
+          {/* ACÁ ESTAN LAS ESTRELLAS {props.product.rating.length} */}
+          <h4 className="card-link text-center">⭐⭐⭐⭐⭐</h4>
         </div>
         <img
           src={`${props.product.picture}`}
@@ -27,15 +28,15 @@ const MenuItems = (props) => {
           class="card-img-top rounded-0"
         ></img>
         <div className="card-body">
-          <h3 className="card-title">{props.product.name}</h3>
-          <p className="card-text">{props.product.description}</p>
+          {/* <h3 className="card-title">{props.product.name}</h3> */}
+          <h3 className="card-text text-center">{props.product.description}</h3>
         </div>
         
           <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle w-100 rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Seleccione subcategoría
             </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div className="dropdown-menu w-100 btnSubCategory m-0 p-0" aria-labelledby="dropdownMenuButton">
               {props.product.subcategories.map((sub)=>{
                 return <SubCategoryName subData={sub} display={displayOneSubcategory}/>
               })}
@@ -43,7 +44,7 @@ const MenuItems = (props) => {
           </div>
         
         
-        {filteredDisplaySubcategory !== 0 ? filteredDisplaySubcategory.map((sub) => (
+        {filteredDisplaySubcategory.length !== 0 ? filteredDisplaySubcategory.map((sub) => (
           <>
             <SubCategory
               sub={sub}
@@ -52,7 +53,9 @@ const MenuItems = (props) => {
             />
           </>
         )):
-        <h1>Seleccione una categoria</h1>
+        <div classNAme="card-body">
+          <h3>Seleccione una Subcategoria</h3>
+        </div>
         }          
       </div>
     </div>    
