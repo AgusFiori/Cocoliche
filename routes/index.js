@@ -50,7 +50,7 @@ router.route('/user/ls')
   .post(passport.authenticate('jwt', { session: false }), userController.logFromLS)
 
 
-  router.route('/user/sign_google')
+router.route('/user/sign_google')
   .post(userController.signGoogle)
 //Rutas de pedidos
 router.route('/purchases')
@@ -68,5 +68,10 @@ router.route('/purchases/complete/:orderId')
 
 router.route('/purchases/user/:customerId')
   .get(orderController.getCustomer)
+
+
+//RATING
+router.route('/rate/:productId')
+  .post(passport.authenticate('jwt', { session: false }), productController.rateProduct)
 
 module.exports = router

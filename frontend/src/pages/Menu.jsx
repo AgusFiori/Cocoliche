@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import MenuItem from "../components/MenuItem";
 import productActions from "../redux/actions/productActions";
 import cartActions from "../redux/actions/cartActions";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 const Menu = (props) => {
   const { getProducts, getCart } = props;
+
+  console.log(props);
 
   useEffect(() => {
     getProducts();
@@ -32,16 +34,16 @@ const Menu = (props) => {
             <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
               <h2 className="text-center py-4">Menu</h2>
             </div>
-            
+
             <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              <div className="row justify-content-center">              
-              {props.allProducts.map((product) => (
-                <MenuItem key={product._id} product={product} />
-              ))}
+              <div className="row justify-content-center">
+                {props.allProducts.map((product) => (
+                  <MenuItem key={product._id} product={product} />
+                ))}
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
   );

@@ -245,11 +245,13 @@ const Admin = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {props.allOrders.map((order) => (
-                  <tr>
-                    <Order order={order} />
-                  </tr>
-                ))}
+                {props.allOrders
+                  .map((order) => (
+                    <tr>
+                      <Order order={order} />
+                    </tr>
+                  ))
+                  .reverse()}
               </tbody>
             </Table>
           </div>
