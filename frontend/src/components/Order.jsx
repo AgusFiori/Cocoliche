@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import orderActions from "../redux/actions/orderActions";
 import axios from "axios";
@@ -30,11 +30,13 @@ const Order = (props) => {
       imageAlt: "Custom image",
     });
   };
-
+  useEffect(()=>{
+    props.getOrders()
+  },[])
   return (
     <>
       <td>
-        {props.order.cart.map((item) => (
+        {props.order && props.order.cart.map((item) => (
           <p>
             {item.name} {item.subcategory.subcategory} x{item.quantity}
           </p>
@@ -60,7 +62,7 @@ const mapDispatchToProps = {
   confirmOrder: orderActions.confirmOrder,
   cancelOrder: orderActions.cancelOrder,
   completeOrder: orderActions.completeOrder,
-  getCustomer: orderActions.getCustomer,
+  getOrders: orderActions.getOrders
 };
 
 export default connect(null, mapDispatchToProps)(Order);

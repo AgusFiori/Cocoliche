@@ -21,13 +21,13 @@ const Admin = (props) => {
   const [newCategory, setNewCategory] = useState("");
 
   const { allProducts } = props;
-  const { getProducts, getCategories, getOrders } = props;
+  const { getProducts, getCategories} = props;
 
   useEffect(() => {
     getProducts();
     getCategories();
-    getOrders();
-  }, [getProducts, getCategories, getOrders]);
+    
+  }, [getProducts, getCategories]);
 
   useEffect(() => {
     setProducts(allProducts);
@@ -277,7 +277,6 @@ const mapDispatchToProps = {
   deleteProduct: productActions.deleteProduct,
   createCategory: productActions.createCategory,
   getCategories: productActions.getCategories,
-  getOrders: orderActions.getOrders,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);
