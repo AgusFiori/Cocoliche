@@ -30,17 +30,32 @@ const Order = (props) => {
       imageAlt: "Custom image",
     });
   };
-  useEffect(()=>{
-    props.getOrders()
-  },[])
+  useEffect(() => {
+    props.getOrders();
+  }, []);
+
+  console.log(props.order.cart.map((element) => element.data));
   return (
     <>
       <td>
-        {props.order && props.order.cart.map((item) => (
-          <p>
-            {item.name} {item.subcategory.subcategory} x{item.quantity}
-          </p>
-        ))}
+        {props.order.cart.map((el) =>
+          el.cart.map((item) => (
+            <p>
+              {item.name +
+                " " +
+                item.subcategory.subcategory +
+                " " +
+                "x" +
+                item.subcategory.qty}
+            </p>
+          ))
+        )}
+        {/* {props.order &&
+          props.order.cart.map((item) => (
+            <p>
+              {item.name} {item.subcategory.subcategory} x{item.quantity}
+            </p>
+          ))}
       </td>
       <td>{props.order.state}</td>
       <td>
@@ -52,17 +67,24 @@ const Order = (props) => {
           <button onClick={cancelOrder}>Cancelar</button>
           <button onClick={completeOrder}>Completar</button>
           <button onClick={getCustomerData}>Datos</button>
-        </div>
+        </div> */}
       </td>
+      {/* <td>{props.order.cart.map((element) => element.data)}</td> */}
     </>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    allOrders: state.orderReducer.allOrders,
+  };
 };
 
 const mapDispatchToProps = {
   confirmOrder: orderActions.confirmOrder,
   cancelOrder: orderActions.cancelOrder,
   completeOrder: orderActions.completeOrder,
-  getOrders: orderActions.getOrders
+  getOrders: orderActions.getOrders,
 };
 
-export default connect(null, mapDispatchToProps)(Order);
+export default connect(mapStateToProps, mapDispatchToProps)(Order);

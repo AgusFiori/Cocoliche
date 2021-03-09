@@ -1,7 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { response } = require('express')
 
 const userController = {
 
@@ -99,17 +98,25 @@ const userController = {
 
     },
     logFromLS: (req, res) => {
-        res.json({
-            response: {
-                firstname: req.user.firstname,
-                urlPic: req.user.urlPic,
-                role: req.user.role,
-                token: req.body.token,
-                _id: req.user._id,
-                purchases: req.user.purchases
-            }
+        console.log(req.user)
+        try {
+            res.json({
+                response: {
+                    firstname: req.user.firstname,
+                    urlPic: req.user.urlPic,
+                    role: req.user.role,
+                    token: req.body.token,
+                    _id: req.user._id
+                }
+            })
+        } catch (error) {
+            console.log(error)
+            res.json({
+                success: false,
+                error
+            })
         }
-        )
+
     }
 }
 

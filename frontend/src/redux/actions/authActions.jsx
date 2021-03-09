@@ -67,6 +67,7 @@ const authActions = {
         );
         dispatch({ type: "LOG_USER", payload: respuesta.data.response });
       } catch (err) {
+        console.log(err);
         if (err.response.status === 401) {
           alert("Access denied");
           localStorage.clear();

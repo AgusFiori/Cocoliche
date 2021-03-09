@@ -5,7 +5,6 @@ const initialState = {
 function cartReducer(state = initialState, action) {
   switch (action.type) {
     case 'ADD_TO_CART':
-      console.log(action.payload)
       const cartLocal = JSON.stringify(action.payload)
       // let prodCart = []
       // prodCart.push(action.payload)
@@ -44,7 +43,7 @@ function cartReducer(state = initialState, action) {
         cart: action.payload
       }
     case 'CONFIRM_PURCHASE':
-      localStorage.removeItem('cart')
+      localStorage.setItem('cart', "[]")
       return {
         ...state,
         cart: []
