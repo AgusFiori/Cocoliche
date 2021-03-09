@@ -3,6 +3,8 @@ import { useState } from "react";
 import authActions from "../redux/actions/authActions";
 import Navbar from "../components/Navbar.jsx";
 import firebase from 'firebase'
+import {FcGoogle} from 'react-icons/fc'
+import fondo2 from '../assets/fondos/fondo-2.jpg'
 
 const Login = (props) => {
   const [users, setUsers] = useState({
@@ -41,12 +43,11 @@ const Login = (props) => {
 
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-12 col-md-12 col-lg-2 col-xl-2 p-0">
-          <Navbar />
-        </div>
-        <div className="trasparent col-sm-12 col-md-5 col-lg-5 col-xl-5 mx-auto my-auto d-flex flex-column text-center border ">
+    <div className="container-fluid d-flex p-0 menu-responsive " >
+      <Navbar />
+      <div className="container-fluid pt-3 d-flex align-items-center calendar-fondo" style={{backgroundImage: `url(${fondo2})`}} >
+        <div className="trasparent  col-sm-12 col-md-5 col-lg-5 col-xl-5 p-4 mx-auto d-flex flex-column text-center border"
+        >
           <span className="h1">Ingresar</span>
           <input
             className="text-center h3"
@@ -65,7 +66,7 @@ const Login = (props) => {
             Ingresar
           </button>
           <label>{errores}</label>
-          <button onClick={loginWithRS} className='h3'>Ingresar con Google</button>
+          <button onClick={loginWithRS} className='h3 d-flex justify-content-center align-items-center'>Ingresar con Google <FcGoogle/></button>
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@ const MenuItems = (props) => {
   }
 
   return (
-    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 vh-100 align-self-center">
+    <div className="col-sm-12 col-md-6 col-lg-3 col-xl-3 align-self-center">
       <div class="card">
         <div className="card-body">
           {/* ACÁ ESTAN LAS ESTRELLAS {props.product.rating.length} */}
