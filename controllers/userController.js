@@ -29,7 +29,8 @@ const userController = {
                 urlPic: userValidation.urlPic,
                 username: userValidation.username,
                 firstname: userValidation.firstname,
-                role: userValidation.role
+                role: userValidation.role,
+                _id: userValidation._id
             }
         })
     },
@@ -46,7 +47,8 @@ const userController = {
                     token,
                     firstname: userExists.firstname,
                     urlPic: userExists.urlPic,
-                    role: userExists.role
+                    role: userExists.role,
+                    _id: userExists._id
                 }
             })
         } else {
@@ -61,7 +63,8 @@ const userController = {
                     token,
                     firstname: newUserSaved.firsname,
                     urlPic: newUserSaved.urlPic,
-                    role: newUserSaved.role
+                    role: newUserSaved.role,
+                    _id: newUserSaved._id,
                 }
             })
 
@@ -85,7 +88,8 @@ const userController = {
                 token,
                 urlPic: usuarioExistente.urlPic,
                 firstname: usuarioExistente.firstname,
-                role: usuarioExistente.role
+                role: usuarioExistente.role,
+                _id: usuarioExistente._id
             }
         })
 
@@ -97,10 +101,10 @@ const userController = {
                     firstname: req.user.firstname,
                     urlPic: req.user.urlPic,
                     role: req.user.role,
-                    token: req.body.token
+                    token: req.body.token,
+                    _id: req.user._id
                 }
-            }
-            )
+            })
         } catch (error) {
             console.log(error)
             res.json({

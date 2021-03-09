@@ -70,14 +70,12 @@ const productActions = {
     }
   },
   confirmPurchase: (newCart) => {
-    localStorage.remove('cart')
-    const { cart, data } = newCart
-    console.log(newCart)
     return async (dispatch, getState) => {
-      const response = await axios.post(`${API}/purchases`, { cart, data },
+      const token = newCart.data.user.token
+      const response = await axios.post(`${API}/purchases`, newCart,
         {
           headers: {
-            Authorization: `Bearer ${data.user.token}`,
+            Authorization: `Bearer ${token}`,
           }
         }
       )

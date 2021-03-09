@@ -4,6 +4,8 @@ import cartActions from "../redux/actions/cartActions";
 import CartItem from "../components/CartItem.jsx";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import Navbar from "../components/Navbar";
+
 
 const Cart = (props) => {
   useEffect(() => {
@@ -22,7 +24,9 @@ const Cart = (props) => {
   };
 
   return (
-    <div className="container bg-light p-5 mt-5">
+    <div className="container-fluid d-flex p-0 menu-responsive">
+    <Navbar />
+    <div className="container">
       <h1>Carrito</h1>
       {props.cart && props.cart.length ? (
         <div className="container">
@@ -51,6 +55,7 @@ const Cart = (props) => {
           <h4>Agrega algun producto a tu carrito !</h4>
         </Link>
       )}
+    </div>
     </div>
   );
 };

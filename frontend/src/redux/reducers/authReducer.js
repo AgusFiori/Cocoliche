@@ -11,8 +11,8 @@ function authReducer(state = initialState, action) {
             localStorage.setItem('urlPic', action.payload.urlPic)
             localStorage.setItem('token', action.payload.token)
             localStorage.setItem('role', action.payload.role)
-            localStorage.setItem('cart', [""])
-
+            localStorage.setItem('_id', action.payload._id)
+            localStorage.setItem('cart', '[]')
             return {
                 ...state,
                 loggedUser: action.payload
@@ -22,6 +22,8 @@ function authReducer(state = initialState, action) {
             localStorage.removeItem('urlPic')
             localStorage.removeItem('token')
             localStorage.removeItem('role')
+            localStorage.removeItem('_id')
+            localStorage.setItem('cart', [])
 
             return {
                 ...state,

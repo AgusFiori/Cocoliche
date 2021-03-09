@@ -5,6 +5,7 @@ import { productReducer } from './productReducer'
 import eventReducer from './eventReducer'
 import cartReducer from './cartReducer'
 import { orderReducer } from './orderReducer'
+import reservationsReducer from './reservationsReducer'
 
 const reducer = combineReducers({
   eventReducer,
@@ -12,7 +13,8 @@ const reducer = combineReducers({
   cartReducer,
   orderReducer,
   productR: productReducer,
-  eventR: eventReducer
+  eventR: eventReducer,
+  reservationsR: reservationsReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

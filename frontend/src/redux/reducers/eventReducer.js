@@ -1,6 +1,7 @@
 
 const initialState = {
     events: [],
+    filter: []
   }
   
 function eventReducer(state = initialState, action) {
