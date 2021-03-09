@@ -36,8 +36,8 @@ const Navbar = (props) => {
     } else {
         var links =
             <>
-             <NavLink to={'/cart'} className="text-decoration-none">
-              <div className="container-fluid p-0 d-flex justify-content-between">
+             <NavLink to={'/profile'} className="text-decoration-none mt-2">
+              <div className="container d-flex justify-content-between">
                 <img src={props.loggedUser.urlPic} alt="profile" className="userImg" />
                 <p className="h4 color-white">{props.loggedUser.firstname}</p>
               </div>

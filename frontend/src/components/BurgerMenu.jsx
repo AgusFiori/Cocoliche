@@ -30,7 +30,7 @@ const BurgerMenu = (props) => {
     var links = (
       <>
         <NavLink
-          to={'/cart'}
+          to={'/profile'}
           className="userLinkBurger"
         >
           <img

@@ -18,7 +18,7 @@ const Reservation = (props) => {
         [name]: value})
     }
 
-    const sendReservation = e => {
+    const sendReservation = async e => {
         if(!props.loggedUser){
             Swal.fire("Ingresa a tu cuenta para hacer una reserva")
             props.history.push('/login')
@@ -34,7 +34,7 @@ const Reservation = (props) => {
             dia: "",
             cantidad:""
         })
-
+        props.history.push('/')
     }
 
     return(
