@@ -3,7 +3,7 @@ import { API } from '../../components/Api';
 import  Swal  from 'sweetalert2';
 
 
-const reservedActions = {
+const reservationActions = {
 
     sendReservation: (pedido) => {
         const {reservation, token} = pedido
@@ -15,7 +15,6 @@ const reservedActions = {
                         }      
             }
             )
-            console.log(response)
             if(response.data.success){
                 Swal.fire("Reserva enviada, recibirá un mail con la confirmación")
                 dispatch({type: 'RESERVATION', payload: response.data.response})
@@ -24,7 +23,15 @@ const reservedActions = {
                 Swal.fire("Lo siento, su reserva no se ha podido registrar")
             }
         }
+    },
+    getReservations: () => {
+
+        return async (dispatch, getState) => {
+            const response = await axios.get(`${API}/reservation`)
+            dispatch({type:'GET_RESERVATIONS', payload: response.data.response })
+          
+        }
     }
 }
 
-export default reservedActions
+export default reservationActions

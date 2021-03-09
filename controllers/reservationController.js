@@ -3,7 +3,7 @@ const smtpTransport = require('nodemailer-smtp-transport')
 const Reservation = require('../models/Revervation')
 
 const reservationController = {
-    reservation : async (req, res) => {
+    addReservation : async (req, res) => {
         try{
             const {username, firstname, _id} = req.user
             const {dia, cantidad} = req.body
@@ -34,6 +34,14 @@ const reservationController = {
                      response: populateResponse
                  })
            
+        }catch(error){
+            res.json({success: false, error})
+        }
+    },
+    getReservations: async (req, res) => {
+        try {
+            const response = await Reservation.find().populate('customer')
+            res.json({success: true, response})
         }catch(error){
             res.json({success: false, error})
         }

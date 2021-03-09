@@ -1,4 +1,5 @@
 import axios from "axios";
+import { compareSync } from "bcryptjs";
 import swal from "sweetalert2";
 import { API } from "../../components/Api";
 
@@ -65,6 +66,7 @@ const authActions = {
             },
           }
         );
+        console.log(respuesta)
         dispatch({ type: "LOG_USER", payload: respuesta.data.response});
       } catch (err) {
         if (err.response.status === 401) {
