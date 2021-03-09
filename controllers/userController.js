@@ -91,15 +91,24 @@ const userController = {
 
     },
     logFromLS: (req, res) => {
-        res.json({
-            response: {
-                firstname: req.user.firstname,
-                urlPic: req.user.urlPic,
-                role: req.user.role,
-                token: req.body.token
+        try {
+            res.json({
+                response: {
+                    firstname: req.user.firstname,
+                    urlPic: req.user.urlPic,
+                    role: req.user.role,
+                    token: req.body.token
+                }
             }
+            )
+        } catch (error) {
+            console.log(error)
+            res.json({
+                success: false,
+                error
+            })
         }
-        )
+
     }
 }
 

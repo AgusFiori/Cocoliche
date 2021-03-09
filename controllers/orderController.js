@@ -3,25 +3,25 @@ const User = require('../models/User')
 
 const orderController = {
   newOrder: (req, res) => {
-
     const { _id } = req.user
-
-    const newOrder = new Order({ customer: _id, cart: req.body })
-    newOrder.save()
-      .then(async (newOrder) => {
-        const populateOrder = await newOrder.populate('customer').execPopulate()
-        const response = await User.findOneAndUpdate(
-          { "_id": _id },
-          {
-            $push: {
-              purchases: req.body
-            }
-          },
-          { new: true }
-        )
-        res.json({ success: true, response: populateOrder })
-      })
-      .catch(error => { return res.json({ success: false, response: error }) })
+    console.log('llega', req.user, req.body)
+    // const newOrder = new Order({ customer: _id, cart: req.body })
+    // newOrder.save()
+    //   .then(async (newOrder) => {
+    //     const populateOrder = await newOrder.populate('customer').execPopulate()
+    //     const response = await User.findOneAndUpdate(
+    //       { "_id": _id },
+    //       {
+    //         $push: {
+    //           purchases: req.body
+    //         }
+    //       },
+    //       { new: true }
+    //     )
+    //     console.log(response)
+    //     res.json({ success: true, response: populateOrder })
+    //   })
+    //   .catch(error => { return res.json({ success: false, response: error }) })
   },
   getOrders: async (req, res) => {
     try {

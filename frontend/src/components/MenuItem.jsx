@@ -31,10 +31,6 @@ const MenuItems = (props) => {
 
   props.product.rating.map((rating) => arr.push(rating.value));
 
-  // console.log(arr.reduce(reducer));
-
-  console.log(arr);
-
   if (arr.length) {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     var avgRating = arr.reduce(reducer) / arr.length;
@@ -44,13 +40,13 @@ const MenuItems = (props) => {
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 vh-100 align-self-center">
       <div class="card">
         <div className="card-body">
-          {/* ACÁ ESTAN LAS ESTRELLAS {props.product.rating.length} */}
-          <Rating
-            fractions={2}
-            onChange={handleChange}
-            initialRating={avgRating}
-          />
-          {/* <h4 className="card-link text-center">⭐⭐⭐⭐⭐</h4> */}
+          <div className="container w-100 d-flex justify-content-center">
+            <Rating
+              fractions={2}
+              onChange={handleChange}
+              initialRating={avgRating}
+            />
+          </div>
         </div>
         <img
           src={`${props.product.picture}`}
@@ -58,7 +54,6 @@ const MenuItems = (props) => {
           class="card-img-top rounded-0"
         ></img>
         <div className="card-body">
-          {/* <h3 className="card-title">{props.product.name}</h3> */}
           <h3 className="card-text text-center">{props.product.description}</h3>
         </div>
 

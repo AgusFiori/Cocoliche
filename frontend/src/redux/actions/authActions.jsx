@@ -66,11 +66,16 @@ const authActions = {
         );
         dispatch({ type: "LOG_USER", payload: respuesta.data.response });
       } catch (err) {
-        if (err.response.status === 401) {
-          alert("Access denied");
-          localStorage.clear();
-          return "/";
-        }
+        console.log(err);
+        // if (err.response.status === 401) {
+        //   alert("Access denied");
+        //   localStorage.remove("firstname");
+        //   localStorage.remove("urlPic");
+        //   localStorage.remove("token");
+        //   localStorage.remove("role");
+        //   localStorage.remove("_id");
+        //   return "/";
+        // }
       }
     };
   },
