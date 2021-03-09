@@ -1,4 +1,5 @@
 import axios from "axios";
+import { compareSync } from "bcryptjs";
 import swal from "sweetalert2";
 import { API } from "../../components/Api";
 
