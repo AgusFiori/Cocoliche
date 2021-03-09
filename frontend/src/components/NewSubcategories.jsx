@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 
+// ESTE COMPONENTE SE ENCARGA DE MODIFICAR LAS SUBCATEGORIAS EXISTENTES
+
 const NewSubcategories = (props) => {
   const [visible, setVisible] = useState(false);
   const [modSubcategory, setModSubcategory] = useState({
     subcategory: props.newSubCategory.subcategory,
     subcategoryPrice: props.newSubCategory.subcategoryPrice,
     subcategoryStock: props.newSubCategory.subcategoryStock,
+    idLocal: props.newSubCategory.idLocal
   });
 
   const handleSubcategoryChange = (e) => {
     const { name, value } = e.target;
     setModSubcategory({ ...modSubcategory, [name]: value });
   };
-  //   const aceptarModif = () => {
-  //     setVisible(!visible);
-  //   };
+
+  console.log(modSubcategory)
 
   const modificarSub = () => {
     setVisible(!visible);
@@ -24,12 +26,11 @@ const NewSubcategories = (props) => {
     <>
       {!visible ? (
         <>
-          <tr>
-            <td>{props.newSubCategory.subcategory}</td>
-            <td>{props.newSubCategory.subcategoryPrice}</td>
-            <td>{props.newSubCategory.subcategoryStock}</td>
-          </tr>
-          <button onClick={modificarSub}>Modificar</button>
+          <td>{props.newSubCategory.subcategory}</td>
+          <td>{props.newSubCategory.subcategoryPrice}</td>
+          <td>{props.newSubCategory.subcategoryStock}</td>
+          <td><button onClick={modificarSub}>Modificar</button></td>
+          <td><button onClick={()=>props.elimLocalSubCategory(props.newSubCategory.idLocal)}>Eliminar</button></td>
         </>
       ) : (
         <>
