@@ -24,20 +24,43 @@ const Order = (props) => {
     );
     Swal.fire({
       title:
-        response.data.response.firstname +
-        " " +
-        response.data.response.lastname,
-      text: "Telefono:",
+        props.order.cart.data.user.name + " " + response.data.response.lastname,
+      text: `Telefono: ${props.order.cart.data.phone}. Direccion: ${props.order.cart.data.address}. Notas:${props.order.cart.data.addressNotes}`,
       imageUrl: response.data.response.urlPic,
       imageWidth: 100,
       imageAlt: "Custom image",
     });
   };
+
+  console.log(props.order.cart.data);
+
   useEffect(() => {
     props.getOrders();
   }, []);
 
-  // console.log(props.order.cart.cart.map((item) => item));
+  switch (props.order.state) {
+    case "En curso":
+      var stateBg = {
+        backgroundColor: "yellow",
+      };
+      break;
+    case "Completada":
+      var stateBg = {
+        backgroundColor: "green",
+      };
+      break;
+    case "Cancelada":
+      var stateBg = {
+        backgroundColor: "firebrick",
+      };
+      break;
+    default:
+      var stateBg = {
+        backgroundColor: "orange",
+      };
+      break;
+  }
+
   return (
     <>
       <td>
@@ -47,15 +70,39 @@ const Order = (props) => {
           </p>
         ))}
       </td>
-      <td>{props.order.state}</td>
+      <td style={stateBg}>{props.order.state}</td>
       <td>
         {props.order.date.slice(5, 10)} {props.order.date.slice(11, 16)}
       </td>
+      <td>{props.order.cart.data.orderNotes}</td>
+
       <td>
-        <button onClick={confirmOrder}>Confirmar</button>
-        <button onClick={cancelOrder}>Cancelar</button>
-        <button onClick={completeOrder}>Completar</button>
-        <button onClick={getCustomerData}>Datos</button>
+        <div className="container d-flex flex-column">
+          <button
+            type="button"
+            className="btn-primary mb-1"
+            onClick={confirmOrder}
+          >
+            Confirmar
+          </button>
+          <button
+            type="button"
+            className="btn-danger mb-1"
+            onClick={cancelOrder}
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            className="btn-success mb-1"
+            onClick={completeOrder}
+          >
+            Completar
+          </button>
+          <button type="button" className="btn-info" onClick={getCustomerData}>
+            Datos
+          </button>
+        </div>
       </td>
     </>
   );

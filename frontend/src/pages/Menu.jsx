@@ -59,8 +59,6 @@ const Menu = (props) => {
       filteredMenu = props.allProducts;
   }
 
-  // console.log(filteredMenu);
-
   return (
     <div
       className="container-fluid d-flex p-0 menu-responsive calendar-fondo"

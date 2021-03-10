@@ -126,9 +126,6 @@ const Admin = (props) => {
                   placeholder="Crear categoria"
                   onChange={handleChangeCategory}
                 />
-                {/* <button onClick={submitCategory} className="h4">
-                Enviar
-              </button> */}
               </div>
             </div>
             <hr></hr>
@@ -246,6 +243,7 @@ const Admin = (props) => {
                       <th>Pedido</th>
                       <th>Estado</th>
                       <th>Timestamp</th>
+                      <th>Notas</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
