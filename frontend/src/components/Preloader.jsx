@@ -1,9 +1,10 @@
 import React from "react";
-
+import fondo4 from '../assets/fondos/fondo-4.jpg'
 const Preloader = () => {
   return (
     <>
-    <div className="container">
+    <div className="container calendar-fondo " style={{ backgroundImage: `url(${fondo4})`, backgroundAttachment: "fixed",
+      }}>
         <div className="row">
             <div className="col mx-auto text-center">
                 <span className="preloader-title">Cooking in progress..</span>

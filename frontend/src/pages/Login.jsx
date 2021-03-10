@@ -43,10 +43,10 @@ const Login = (props) => {
 
 
   return (
-    <div className="container-fluid d-flex p-0 menu-responsive " >
+    <div className="container-fluid d-flex p-0 menu-responsive calendar-fondo" style={{backgroundImage: `url(${fondo2})`,backgroundAttachment: "fixed"}}>
       <Navbar />
-      <div className="container-fluid pt-3 d-flex align-items-center calendar-fondo" style={{backgroundImage: `url(${fondo2})`,backgroundAttachment: "fixed"}} >
-        <div className="trasparent  col-sm-12 col-md-5 col-lg-5 col-xl-5 p-4 mx-auto d-flex flex-column text-center border"
+      <div className="container-fluid pt-3 d-flex align-items-center "  >
+        <div className="trasparent  col-sm-12 col-md-5 col-lg-5 col-xl-5 p-4 mx-auto d-flex flex-column text-center border "
         >
           <span className="h1">Ingresar</span>
           <input

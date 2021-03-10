@@ -47,7 +47,6 @@ const SubCategory = (props) => {
                 defaultValue="default"
                 className="menuCardBodyTextSelectCantidad px-4"
               >
-                <option value="default">0</option>
                 {[...Array(10)].map(()=> {
                   return (
                     <option

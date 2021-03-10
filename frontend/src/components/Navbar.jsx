@@ -22,7 +22,7 @@ const Navbar = (props) => {
     if (props.loggedUser.role === "admin") {
         var links = <>
             <div className="d-flex justify-content-between">
-              <NavLink to={'/cart'} className="text-decoration-none">
+              <NavLink to={'/profile'} className="text-decoration-none">
                 <div className="d-flex justify-content-between align-items-center">
                   <img src={props.loggedUser.urlPic} alt="profile" className="userImg mr-2" />
                   <span className="h4 m-0 color-white">{props.loggedUser.firstname}</span>
