@@ -11,9 +11,7 @@ const Menu = (props) => {
   const { getProducts, getCart } = props;
   const [preloader, setPreloader]= useState(false)
 
-  console.log(props);
-
-  useEffect(() => {
+ useEffect(() => {
     fetch()
   }, []);
 
