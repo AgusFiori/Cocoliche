@@ -19,6 +19,7 @@ const authActions = {
       if (!respuesta.data.success) {
         return respuesta.data;
       }
+    
       dispatch({ type: "LOG_USER", payload: respuesta.data.response });
     };
   },

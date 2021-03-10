@@ -25,6 +25,7 @@ const ConfirmPurchase = (props) => {
     props.confirmPurchase({
       cart: props.cart,
       data,
+      confirmed: false
     });
   };
 

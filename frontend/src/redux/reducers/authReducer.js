@@ -19,7 +19,6 @@ function authReducer(state = initialState, action) {
             localStorage.setItem('_id', action.payload._id)
             localStorage.setItem('cart', savedCart)
 
-
             const purchases = JSON.stringify(action.payload.purchases)
             localStorage.setItem('purchases', purchases)
             return {

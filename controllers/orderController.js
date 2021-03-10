@@ -5,7 +5,7 @@ const orderController = {
   newOrder: (req, res) => {
     const { _id } = req.user
     const newOrder = new Order({ customer: _id, cart: req.body })
-    console.log(req.body)
+
     newOrder.save()
       .then(async (newOrder) => {
         const populateOrder = await newOrder.populate('customer').execPopulate()
@@ -13,12 +13,12 @@ const orderController = {
           { "_id": _id },
           {
             $push: {
-              purchases: { cart: req.body.cart, total: req.body.data.total }
+              purchases: { cart: req.body.cart, total: req.body.data.total, id: newOrder._id, confirmed: req.body.confirmed }
             }
           },
           { new: true }
         )
-        console.log(response)
+
         res.json({ success: true, response: populateOrder })
       })
       .catch(error => { return res.json({ success: false, response: error }) })
@@ -26,7 +26,6 @@ const orderController = {
   getOrders: async (req, res) => {
     try {
       const response = await Order.find()
-      console.log(response)
       res.json({
         success: true,
         response
@@ -51,7 +50,6 @@ const orderController = {
         }
       )
       const updated = await Order.find()
-      console.log(updated)
       res.json({
         success: true,
         updated
