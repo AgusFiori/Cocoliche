@@ -1,11 +1,12 @@
 const Order = require('../models/Order')
 const User = require('../models/User')
+const { ObjectId } = require('mongodb'); // or ObjectID 
 
 const orderController = {
   newOrder: (req, res) => {
     const { _id } = req.user
     const newOrder = new Order({ customer: _id, cart: req.body })
-    console.log(req.body)
+
     newOrder.save()
       .then(async (newOrder) => {
         const populateOrder = await newOrder.populate('customer').execPopulate()
@@ -13,11 +14,12 @@ const orderController = {
           { "_id": _id },
           {
             $push: {
-              purchases: { cart: req.body.cart, total: req.body.data.total }
+              purchases: { cart: req.body.cart, total: req.body.data.total, id: newOrder._id, confirmed: req.body.confirmed }
             }
           },
           { new: true }
         )
+
         res.json({ success: true, response: populateOrder })
       })
       .catch(error => { return res.json({ success: false, response: error }) })
@@ -41,14 +43,13 @@ const orderController = {
     try {
       const { orderId, customerId } = req.params;
       const respuesta = await User.findOneAndUpdate(
-        { "_id": customerId, "purchases.id": orderId },
+        { "_id": customerId, "purchases.id": ObjectId(orderId) },
         {
           $set:
-            { "confirmed": true }
+            { "purchases.$.confirmed": true }
         },
         { new: true }
       )
-      console.log(respuesta)
 
       const response = await Order.findOneAndUpdate(
         { _id: orderId },
