@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import SubCategory from "./SubCategory.jsx";
-import SubCategoryName from "./SubCategoryName";
+//import SubCategoryName from "./SubCategoryName";
 import Rating from "react-rating";
 import productActions from "../redux/actions/productActions.js";
 import { connect } from "react-redux";
+import starYellow from '../assets/star-yellow.png'
+import starRed from '../assets/star-red.png'
+import starGrey from '../assets/star-grey.png'
 
 const MenuItems = (props) => {
-  const [displaySubcategory, setDisplaySubcategory] = useState([]);
-  const [filteredDisplaySubcategory, setFilteredDisplaySubcategory] = useState(
-    []
-  );
+  const [displaySubcategory, setDisplaySubcategory] = useState([
 
+  ]);
+  const [filteredDisplaySubcategory, setFilteredDisplaySubcategory] = useState(
+    [props.product.subcategories[0]]
+  );
   useEffect(() => {
     setDisplaySubcategory(props.product.subcategories);
   }, []);
-
-  const displayOneSubcategory = (_id) => {
+ 
+  const display = (_id) => {
     setFilteredDisplaySubcategory(
       displaySubcategory.filter((subcategory) => {
         return subcategory._id === _id;
@@ -24,7 +28,9 @@ const MenuItems = (props) => {
   };
 
   const handleChange = (e) => {
-    props.rateProduct(e, props.product._id, props.loggedUser.token);
+    props.loggedUser? 
+    props.rateProduct(e, props.product._id, props.loggedUser.token):
+    alert("logueate")
   };
 
   let arr = [];
@@ -35,56 +41,37 @@ const MenuItems = (props) => {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     var avgRating = arr.reduce(reducer) / arr.length;
   }
-
   return (
-    <div className="col-sm-12 col-md-6 col-lg-3 col-xl-3 align-self-center">
-      <div class="card">
-        <div className="card-body">
-          <div className="container w-100 d-flex justify-content-center">
-            <Rating
+    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <div className="d-flex flex-column menu-item">
+          <Rating
               fractions={2}
               onChange={handleChange}
-              initialRating={avgRating}
+              placeholderRating={avgRating}
+              emptySymbol={<img src={starGrey} className="icon" />}
+              placeholderSymbol={<img src={starRed} className="icon" />}
+              fullSymbol={<img src={starYellow} className="icon" />}
+              className="p-0 m-0"
             />
-          </div>
-        </div>
-        <img
-          src={`${props.product.picture}`}
-          alt="Comida"
-          class="card-img-top rounded-0"
-        ></img>
-        <div className="card-body">
-          <h3 className="card-text text-center">{props.product.description}</h3>
-        </div>
-
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle w-100 rounded-0"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Seleccione subcategoría
-          </button>
-          <div
-            className="dropdown-menu w-100 btnSubCategory m-0 p-0"
-            aria-labelledby="dropdownMenuButton"
-          >
-            {props.product.subcategories.map((sub) => {
-              return (
-                <SubCategoryName
-                  subData={sub}
-                  display={displayOneSubcategory}
-                />
-              );
-            })}
-          </div>
-        </div>
-
+          <img
+            src={`${props.product.picture}`}
+            alt="Comida"
+            class="card-img-top rounded-0"
+          ></img>
+          {props.product.subcategories.length ===1?
+            <span>{props.product.subcategories[0].subcategory}</span>
+        :
+        <select onChange={(e)=> display(e.target.value)} on>
+        {props.product.subcategories.map((sub) => {
+            return (
+              <option value={sub._id}>{sub.subcategory}</option>
+            );
+          })}
+      </select>
+        }
+         
         {filteredDisplaySubcategory.length !== 0
-          ? filteredDisplaySubcategory.map((sub) => (
+          && filteredDisplaySubcategory.map((sub) => (
               <>
                 <SubCategory
                   sub={sub}
@@ -93,9 +80,9 @@ const MenuItems = (props) => {
                 />
               </>
             ))
-          : ""}
+          }
+        </div>
       </div>
-    </div>
   );
 };
 
