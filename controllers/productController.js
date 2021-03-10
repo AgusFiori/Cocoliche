@@ -19,7 +19,7 @@ const productController = {
   },
   addProduct: async (req, res) => {
 
-    const parsedSubcategories = JSON.parse(req.body.subcategories)
+    // const parsedSubcategories = JSON.parse(req.body.subcategories)
 
     const { name, description, delay, category } = req.body
     const file = req.files.file
@@ -33,7 +33,7 @@ const productController = {
     const productPicturesLocation = `/assets/productPictures/${file.md5}.jpeg`
 
     const newProduct = new Product({
-      name, description, picture: productPicturesLocation, subcategories: parsedSubcategories, delay, category
+      name, description, picture: productPicturesLocation, delay, category
     })
     newProduct.save()
       .then(newProduct => { return res.json({ success: true, response: newProduct }) })
@@ -143,9 +143,6 @@ const productController = {
           }
         },
         { new: true })
-
-      console.log(response)
-
       res.json({
         success: true,
         response

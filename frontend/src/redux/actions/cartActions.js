@@ -70,16 +70,15 @@ const productActions = {
     }
   },
   confirmPurchase: (newCart) => {
-    const { token, cart } = newCart
     return async (dispatch, getState) => {
-      const response = await axios.post(`${API}/purchases`, cart,
+      const token = newCart.data.user.token
+      const response = await axios.post(`${API}/purchases`, newCart,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           }
         }
       )
-      console.log(response)
       dispatch({
         type: "CONFIRM_PURCHASE",
         payload: response.data

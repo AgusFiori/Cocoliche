@@ -10,9 +10,10 @@ const ConfirmPurchase = (props) => {
 
   let acc = 0;
 
-  parsedCart.map(
-    (item) => (acc += item.subcategory.price * item.subcategory.qty)
-  );
+  parsedCart &&
+    parsedCart.map(
+      (item) => (acc += item.subcategory.price * item.subcategory.qty)
+    );
 
   const history = useHistory();
 
@@ -21,17 +22,25 @@ const ConfirmPurchase = (props) => {
   };
 
   const sendCart = () => {
-    console.log(data);
-    // props.confirmPurchase({
-    //   cart: props.cart,
-    //   token: props.loggedUser.token,
-    //   data,
-    // });
+    props.confirmPurchase({
+      cart: props.cart,
+      data,
+      confirmed: false
+    });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+    setData({
+      ...data,
+      [name]: value,
+      user: {
+        name: props.loggedUser.firstname,
+        token: props.loggedUser.token,
+        urlPic: props.loggedUser.urlPic,
+      },
+      total: acc,
+    });
   };
 
   return (

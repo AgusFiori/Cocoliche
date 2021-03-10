@@ -196,7 +196,7 @@ const Product = (props) => {
           <button onClick={() => setVisible(!visible)}>CANCELAR</button>
         </>
       )}
-      {visibleSub ? (
+      {visibleSub && (
         <>
           <tr>
             {props.product.subcategories.map((subcategory) => (
@@ -233,36 +233,6 @@ const Product = (props) => {
           </td>
           <button onClick={addNewSubcategory}>Agregar Subcategoria</button>
           {/* <button onClick={confirmChanges}>Confirmar cambios</button> */}
-        </>
-      ) : (
-        <>
-          <td>
-            <input
-              type="text"
-              name="subcategory"
-              // onChange={handleSubcategory}
-              placeholder="Nombre de subcategoria"
-            />
-          </td>
-          <td>
-            <input
-              type="number"
-              name="subcategoryPrice"
-              // onChange={handleSubcategory}
-              placeholder="Precio"
-            />
-          </td>
-          <td>
-            <input
-              type="number"
-              name="subcategoryStock"
-              // onChange={handleSubcategory}
-              placeholder="Stock"
-            />
-          </td>
-          <td>
-            <button onClick={addSubcategory}>Añadir subcategoría</button>
-          </td>
         </>
       )}
       <tr>
