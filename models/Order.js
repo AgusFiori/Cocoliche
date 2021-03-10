@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now() },
   customer: { type: mongoose.Schema.ObjectId, ref: 'user' },
-  cart: Array,
+  cart: Object,
   state: { type: String, default: "sin confirmar" }
 });
 
