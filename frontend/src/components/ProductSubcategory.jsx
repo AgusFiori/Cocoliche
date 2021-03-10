@@ -30,11 +30,11 @@ const ProductSubcategory = (props) => {
     <>
       <tr>
         {!visible ? (
-          <>
+          <td>
             <td>{props.subcategory.subcategory}</td>
             <td>{props.subcategory.subcategoryPrice}</td>
             <td>{props.subcategory.subcategoryStock}</td>
-          </>
+          </td>
         ) : (
           <>
             <td>

@@ -14,8 +14,6 @@ const Menu = (props) => {
 
   let filteredMenu = [];
 
-  console.log(filteredMenu);
-
   useEffect(() => {
     fetch();
   }, []);
@@ -29,11 +27,6 @@ const Menu = (props) => {
     getProducts();
     setPreloader(true);
   }
-
-  const applyFilter = (e) => {
-    e.preventDefault();
-    console.log(filteredMenu);
-  };
 
   switch (checked) {
     case "todos":
@@ -169,19 +162,9 @@ const Menu = (props) => {
                   <h2 className="text-center mx-auto">Menu</h2>
                   <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div className="row justify-content-center">
-                      {/* {props.allProducts.map((product) =>
-                        product.category ? (
-                          <MenuItem key={product._id} product={product} />
-                        ) : (
-                          ""
-                        )
-                      )} */}
                       {filteredMenu.map((product) => (
                         <MenuItem key={product._id} product={product} />
                       ))}
-                      {/* {props.allProducts.map((product) => (
-                  <MenuItem key={product._id} product={product} />
-                ))} */}
                     </div>
                   </div>
                 </div>

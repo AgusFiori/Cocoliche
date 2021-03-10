@@ -7,16 +7,14 @@ import { connect } from "react-redux";
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai'
 
 const MenuItems = (props) => {
-  const [displaySubcategory, setDisplaySubcategory] = useState([
-
+  const [displaySubcategory, setDisplaySubcategory] = useState([]);
+  const [filteredDisplaySubcategory, setFilteredDisplaySubcategory] = useState([
+    props.product.subcategories[0],
   ]);
-  const [filteredDisplaySubcategory, setFilteredDisplaySubcategory] = useState(
-    [props.product.subcategories[0]]
-  );
   useEffect(() => {
     setDisplaySubcategory(props.product.subcategories);
   }, []);
- 
+
   const display = (_id) => {
     setFilteredDisplaySubcategory(
       displaySubcategory.filter((subcategory) => {
@@ -26,9 +24,9 @@ const MenuItems = (props) => {
   };
 
   const handleChange = (e) => {
-    props.loggedUser? 
-    props.rateProduct(e, props.product._id, props.loggedUser.token):
-    alert("logueate")
+    props.loggedUser
+      ? props.rateProduct(e, props.product._id, props.loggedUser.token)
+      : alert("logueate");
   };
 
   let arr = [];
@@ -39,6 +37,7 @@ const MenuItems = (props) => {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     var avgRating = arr.reduce(reducer) / arr.length;
   }
+
   return (
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
       <div className="d-flex flex-column menuCard">

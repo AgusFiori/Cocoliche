@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import '../index.css'
 
 const MercadoPago = (props) => {
+    console.log(props.cart[0].subcategory)
 
     const [visible, setVisible] = useState(false)
     var orderData = {
-            quantity: 2,
-            description: "Cocoliche",
-            price: 150
+            quantity: props.cart[0].subcategory.qty,
+            description: props.cart[0].name,
+            price: props.cart[0].subcategory.price,
           };
 
     const sendData = e => {

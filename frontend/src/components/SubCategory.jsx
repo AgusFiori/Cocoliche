@@ -4,11 +4,17 @@ import cartActions from "../redux/actions/cartActions";
 import { RiShoppingCart2Line } from "react-icons/ri";
 
 const SubCategory = (props) => {
-  
   const [productToAdd, setProductToAdd] = useState({
     picture: props.picture,
     productId: props.sub._id,
     name: props.sub.subcategory,
+    subcategory: {
+      price: props.sub.subcategoryPrice,
+      qty: 1,
+      stock: props.sub.subcategoryStock,
+      subcategory: props.sub.subcategory,
+      subcategoryId: props.sub._id,
+    },
   });
 
   let qty = 1;
@@ -24,7 +30,8 @@ const SubCategory = (props) => {
   };
 
   const addToCart = () => {
-    props.addToCart(productToAdd);
+    console.log(productToAdd);
+    // props.addToCart(productToAdd);
   };
 
   return (

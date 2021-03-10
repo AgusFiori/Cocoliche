@@ -197,7 +197,7 @@ const Product = (props) => {
         </>
       )}
       {visibleSub && (
-        <>
+        <td colspan={7}>
           <tr>
             {props.product.subcategories.map((subcategory) => (
               <ProductSubcategory
@@ -233,10 +233,10 @@ const Product = (props) => {
           </td>
           <button onClick={addNewSubcategory}>Agregar Subcategoria</button>
           {/* <button onClick={confirmChanges}>Confirmar cambios</button> */}
-        </>
+        </td>
       )}
       <tr>
-        <th>
+        <td className="bg-dark" colspan="7">
           <button
             onClick={() => {
               setVisibleSub(!visibleSub);
@@ -244,7 +244,7 @@ const Product = (props) => {
           >
             Ver subcategorias
           </button>
-        </th>
+        </td>
       </tr>
     </>
   );
