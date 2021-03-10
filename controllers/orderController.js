@@ -18,7 +18,6 @@ const orderController = {
           },
           { new: true }
         )
-        console.log(response)
         res.json({ success: true, response: populateOrder })
       })
       .catch(error => { return res.json({ success: false, response: error }) })
@@ -26,7 +25,6 @@ const orderController = {
   getOrders: async (req, res) => {
     try {
       const response = await Order.find()
-      console.log(response)
       res.json({
         success: true,
         response
@@ -41,7 +39,17 @@ const orderController = {
   },
   confirmOrder: async (req, res) => {
     try {
-      const { orderId } = req.params;
+      const { orderId, customerId } = req.params;
+      const respuesta = await User.findOneAndUpdate(
+        { "_id": customerId, "purchases.id": orderId },
+        {
+          $set:
+            { "confirmed": true }
+        },
+        { new: true }
+      )
+      console.log(respuesta)
+
       const response = await Order.findOneAndUpdate(
         { _id: orderId },
         {
@@ -51,7 +59,6 @@ const orderController = {
         }
       )
       const updated = await Order.find()
-      console.log(updated)
       res.json({
         success: true,
         updated

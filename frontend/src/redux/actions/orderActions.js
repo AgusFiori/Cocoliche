@@ -17,10 +17,11 @@ const orderActions = {
       }
     }
   },
-  confirmOrder: (orderId) => {
+  confirmOrder: (ids) => {
     return async (dispatch, getState) => {
+      const { customerId, orderId } = ids
       try {
-        const response = await axios.put(`${API}/purchases/confirm/${orderId}`)
+        const response = await axios.put(`${API}/purchases/confirm/${orderId}/${customerId}`)
         dispatch({
           type: 'CONFIRM_ORDER',
           payload: response.data.updated
