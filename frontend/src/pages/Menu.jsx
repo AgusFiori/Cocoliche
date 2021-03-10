@@ -12,10 +12,8 @@ const Menu = (props) => {
   const [checked, setChecked] = useState("entrada");
   const [preloader, setPreloader] = useState(false);
 
-  console.log(props);
-
-  useEffect(() => {
-    fetch();
+ useEffect(() => {
+    fetch()
   }, []);
 
   const handleChange = (e) => {

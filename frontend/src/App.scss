@@ -309,7 +309,7 @@ body {
   }
   
   .menu-item:hover {
-    color: #82b74b;
+    color: #828380;
   }
   
   .optionMenu {
@@ -374,6 +374,12 @@ body {
   }
 // *****************
 // ESTILO MENU
+.menu-item{
+  height: 350px;
+  min-height: 350px;
+  max-height: 350px;
+  border-radius: 20px;
+}
 .addCart{
     padding: 1vh;
     margin: 0;

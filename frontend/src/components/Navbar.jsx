@@ -75,7 +75,7 @@ const Navbar = (props) => {
                 <p className="h4 color-white mr-2" onClick={() => props.logoutUser()} >
                 Cerrar Sesión
                 </p>
-                <GoSignOut className="h4 color-white "/>
+                <GoSignOut className="h4 color-white " onClick={() => props.logoutUser()}/>
               </div>
           </NavLink>}
          </div>
