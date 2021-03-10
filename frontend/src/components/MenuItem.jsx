@@ -39,7 +39,7 @@ const MenuItems = (props) => {
   }
 
   return (
-    <div className="col-sm-11 col-md-6 col-lg-4 col-xl-4 my-2">
+    <div className="col-sm-11 col-md-6 col-lg-4 col-xl-4 my-4">
       <div className="d-flex flex-column">
         <div className="menuCardImg" style={{backgroundImage: `url(${props.product.picture})`}}>
           <Rating

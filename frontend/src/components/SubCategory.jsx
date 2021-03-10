@@ -65,9 +65,9 @@ const SubCategory = (props) => {
               </select>
             </div>
         </div>
-        <span className="addCart">
-          Agregar al Carrito<RiShoppingCart2Line  onClick={addToCart} />
-        </span>
+        <p className="addCart">
+          <span className="scale-3 mx-auto">Agregar al Carrito<RiShoppingCart2Line  onClick={addToCart} /> </span> 
+        </p>
       </div>
   );
 };

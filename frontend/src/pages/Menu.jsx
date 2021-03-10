@@ -68,17 +68,17 @@ const Menu = (props) => {
       {preloader ? (
         <>
           
-            <div className="container-fluid d-flex flex-column calendar-fondo"style={{ backgroundImage: `url(${fondo1})`, backgroundAttachment: "fixed",
+            <div className="container-fluid px-0 d-flex flex-column calendar-fondo"style={{ backgroundImage: `url(${fondo1})`, backgroundAttachment: "fixed",
       }}>
-              <h2 className="text-center pt-4">Hoy Cocina Cocoliche</h2>
-              <h4 className="text-center">Conocé nuestras especialidades</h4>
+              
+              <h2 className="text-center pt-4 color-white">Hoy Cocina Cocoliche</h2>
+              <h4 className="text-center color-white">Conocé nuestras especialidades</h4>
+              
               <div className="col-12 mx-auto">
                 <div className="row">
-                  <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center align-items-center">
-                    <h2 className="px-2 py-4">Filtros</h2>
-                    {/* Entrada, principal, bebida s/alcohol, bebida c/alcohol, postre */}
-                    <form className="d-flex align-items-center">
-                      <div className="form-check">
+                  <div className="col-12 d-flex justify-content-center align-items-center">
+                    <form className="row justify-content-center">
+                      <div className="m-1">
                         <input
                           name="filterOption"
                           type="radio"
@@ -89,10 +89,10 @@ const Menu = (props) => {
                           onChange={handleChange}
                         ></input>
                         <label className="form-check-label" for="todos">
-                          Todos
+                          <span className="form-check-text mx-auto">Todas</span> 
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="m-1">
                         <input
                           name="filterOption"
                           type="radio"
@@ -102,10 +102,10 @@ const Menu = (props) => {
                           onChange={handleChange}
                         ></input>
                         <label className="form-check-label" for="entrada">
-                          Entrada
+                          <span className="form-check-text mx-auto">Entradas</span> 
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="m-1">
                         <input
                           name="filterOption"
                           type="radio"
@@ -115,10 +115,10 @@ const Menu = (props) => {
                           onChange={handleChange}
                         ></input>
                         <label className="form-check-label" for="principal">
-                          Plato principal
+                          <span className="form-check-text mx-auto">Platos Principales</span>
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="m-1">
                         <input
                           name="filterOption"
                           type="radio"
@@ -128,10 +128,10 @@ const Menu = (props) => {
                           onChange={handleChange}
                         ></input>
                         <label className="form-check-label" for="bebidas">
-                          Bebida sin alcohol
+                          <span className="form-check-text mx-auto">Gaseosas</span>
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="m-1">
                         <input
                           name="filterOption"
                           type="radio"
@@ -141,10 +141,10 @@ const Menu = (props) => {
                           onChange={handleChange}
                         ></input>
                         <label className="form-check-label" for="bebidas">
-                          Bebida con alcohol
+                          <span className="form-check-text mx-auto">Tragos</span>
                         </label>
                       </div>
-                      <div className="form-check">
+                      <div className="m-1">
                         <input
                           name="filterOption"
                           type="radio"
@@ -154,12 +154,11 @@ const Menu = (props) => {
                           onChange={handleChange}
                         ></input>
                         <label className="form-check-label" for="postre">
-                          Postre
+                          <span className="form-check-text mx-auto">Postres</span>
                         </label>
                       </div>
                     </form>
                   </div>
-                  <h2 className="text-center mx-auto">Menu</h2>
                   <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                     <div className="row">
                       {filteredMenu.map((product) => (
