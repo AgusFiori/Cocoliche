@@ -7,7 +7,10 @@ import Swal from "sweetalert2";
 
 const Order = (props) => {
   const confirmOrder = () => {
-    props.confirmOrder(props.order._id);
+    props.confirmOrder({
+      orderId: props.order._id,
+      customerId: props.order.customer,
+    });
   };
   const cancelOrder = () => {
     props.cancelOrder(props.order._id);
@@ -34,50 +37,28 @@ const Order = (props) => {
     props.getOrders();
   }, []);
 
-  console.log(props.order.cart.map((element) => element.data));
+  // console.log(props.order.cart.cart.map((item) => item));
   return (
     <>
       <td>
-        {props.order.cart.map((el) =>
-          el.cart.map((item) => (
-            <p>
-              {item.name +
-                " " +
-                item.subcategory.subcategory +
-                " " +
-                "x" +
-                item.subcategory.qty}
-            </p>
-          ))
-        )}
-        {/* {props.order &&
-          props.order.cart.map((item) => (
-            <p>
-              {item.name} {item.subcategory.subcategory} x{item.quantity}
-            </p>
-          ))}
+        {props.order.cart.cart.map((item) => (
+          <p>
+            {item.name} {item.subcategory.subcategory} x{item.subcategory.qty}
+          </p>
+        ))}
       </td>
       <td>{props.order.state}</td>
       <td>
         {props.order.date.slice(5, 10)} {props.order.date.slice(11, 16)}
       </td>
       <td>
-        <div>
-          <button onClick={confirmOrder}>Confirmar</button>
-          <button onClick={cancelOrder}>Cancelar</button>
-          <button onClick={completeOrder}>Completar</button>
-          <button onClick={getCustomerData}>Datos</button>
-        </div> */}
+        <button onClick={confirmOrder}>Confirmar</button>
+        <button onClick={cancelOrder}>Cancelar</button>
+        <button onClick={completeOrder}>Completar</button>
+        <button onClick={getCustomerData}>Datos</button>
       </td>
-      {/* <td>{props.order.cart.map((element) => element.data)}</td> */}
     </>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    allOrders: state.orderReducer.allOrders,
-  };
 };
 
 const mapDispatchToProps = {
@@ -87,4 +68,4 @@ const mapDispatchToProps = {
   getOrders: orderActions.getOrders,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Order);
+export default connect(null, mapDispatchToProps)(Order);

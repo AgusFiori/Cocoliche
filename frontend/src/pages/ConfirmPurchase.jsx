@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
+import  MercadoPago  from "../components/MercadoPago";
 import cartActions from "../redux/actions/cartActions";
 
 const ConfirmPurchase = (props) => {
@@ -150,7 +151,7 @@ const ConfirmPurchase = (props) => {
           ${acc} + (Propina: ${data.tip})
         </p>
         <p className="h1">TOTAL: ${acc + parseInt(data.tip)}</p>
-        <p className="h5">- Medios de pago van acá -</p>
+        <MercadoPago />
       </div>
       <div className="container d-flex justify-content-around">
         <button onClick={goBack} type="button" className="btn-danger">

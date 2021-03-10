@@ -98,7 +98,6 @@ const userController = {
 
     },
     logFromLS: (req, res) => {
-        console.log(req.user)
         try {
             res.json({
                 response: {
@@ -111,7 +110,6 @@ const userController = {
                 }
             })
         } catch (error) {
-            console.log(error)
             res.json({
                 success: false,
                 error

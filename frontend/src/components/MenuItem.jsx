@@ -78,7 +78,6 @@ const MenuItems = (props) => {
               ))
             }
           </div>
-         
         </div>
       </div>
   );

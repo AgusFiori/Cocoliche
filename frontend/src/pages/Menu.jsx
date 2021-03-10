@@ -9,16 +9,19 @@ import fondo1 from "../assets/fondos/fondo-1.jpg";
 
 const Menu = (props) => {
   const { getProducts, getCart } = props;
-  const [checked, setChecked] = useState("entrada");
+  const [checked, setChecked] = useState("todos");
   const [preloader, setPreloader] = useState(false);
 
- useEffect(() => {
-    fetch()
+  let filteredMenu = [];
+
+  console.log(filteredMenu);
+
+  useEffect(() => {
+    fetch();
   }, []);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    // setChecked(e.target.value)
+    setChecked(e.target.value);
   };
 
   async function fetch() {
@@ -26,34 +29,79 @@ const Menu = (props) => {
     getProducts();
     setPreloader(true);
   }
+
+  const applyFilter = (e) => {
+    e.preventDefault();
+    console.log(filteredMenu);
+  };
+
+  switch (checked) {
+    case "todos":
+      props.allProducts.map((product) => filteredMenu.push(product));
+      break;
+    case "entrada":
+      props.allProducts.map(
+        (product) =>
+          product.category === "entrada" && filteredMenu.push(product)
+      );
+      break;
+    case "principal":
+      props.allProducts.map(
+        (product) =>
+          product.category === "principal" && filteredMenu.push(product)
+      );
+      break;
+    case "bebidas":
+      props.allProducts.map(
+        (product) =>
+          product.category === "bebidas" && filteredMenu.push(product)
+      );
+      break;
+    case "postre":
+      props.allProducts.map(
+        (product) => product.category === "postre" && filteredMenu.push(product)
+      );
+      break;
+    default:
+      filteredMenu = props.allProducts;
+  }
+
   return (
     <div
-      className="container-fluid d-flex p-0 menu-responsive calendar-fondo"
-      style={{ backgroundImage: `url(${fondo1})` }}
+      className="container-fluid d-flex p-0 menu-responsive"
+      
     >
       <Navbar />
       {preloader ? (
         <>
-          <div className="container pl-5">
-            <div className="container-fluid">
-              <h2 className="text-center mt-3">Hoy Cocina Cocoliche</h2>
+          
+            <div className="container-fluid d-flex flex-column calendar-fondo"style={{ backgroundImage: `url(${fondo1})`, backgroundAttachment: "fixed",
+      }}>
+              <h2 className="text-center pt-4">Hoy Cocina Cocoliche</h2>
               <h4 className="text-center">Conocé nuestras especialidades</h4>
-              <div className="col-12 d-flex justify-content-center align-items-center">
-                <h2 className="px-2 py-4">Filtros</h2>
-                <select>
-                  <option>Precio ascendente</option>
-                  <option>Precio descendente</option>
-                  <option>Popularidad</option>
-                </select>
-              </div>
               <div className="col-sm-12 col-md-12 col-lg-10 col-xl-10">
                 <div className="row">
                   <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center align-items-center">
                     <h2 className="px-2 py-4">Filtros</h2>
                     {/* Entrada, principal, bebida s/alcohol, bebida c/alcohol, postre */}
-                    <form>
+                    <form className="d-flex align-items-center">
                       <div className="form-check">
                         <input
+                          name="filterOption"
+                          type="radio"
+                          className="form-check-input"
+                          id="todos"
+                          value="todos"
+                          defaultChecked={true}
+                          onChange={handleChange}
+                        ></input>
+                        <label className="form-check-label" for="todos">
+                          Todos
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          name="filterOption"
                           type="radio"
                           className="form-check-input"
                           id="entrada"
@@ -63,7 +111,10 @@ const Menu = (props) => {
                         <label className="form-check-label" for="entrada">
                           Entrada
                         </label>
+                      </div>
+                      <div className="form-check">
                         <input
+                          name="filterOption"
                           type="radio"
                           className="form-check-input"
                           id="principal"
@@ -73,27 +124,36 @@ const Menu = (props) => {
                         <label className="form-check-label" for="principal">
                           Plato principal
                         </label>
+                      </div>
+                      <div className="form-check">
                         <input
+                          name="filterOption"
                           type="radio"
                           className="form-check-input"
-                          id="sinAlcohol"
-                          value="sinAlcohol"
+                          id="bebidas"
+                          value="bebidas"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="beb">
+                        <label className="form-check-label" for="bebidas">
                           Bebida sin alcohol
                         </label>
+                      </div>
+                      <div className="form-check">
                         <input
+                          name="filterOption"
                           type="radio"
                           className="form-check-input"
-                          id="conAlcohol"
-                          value="conAlcohol"
+                          id="bebidas"
+                          value="bebidas"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="conAlcohol">
+                        <label className="form-check-label" for="bebidas">
                           Bebida con alcohol
                         </label>
+                      </div>
+                      <div className="form-check">
                         <input
+                          name="filterOption"
                           type="radio"
                           className="form-check-input"
                           id="postre"
@@ -103,25 +163,22 @@ const Menu = (props) => {
                         <label className="form-check-label" for="postre">
                           Postre
                         </label>
-                        <button type="submit" className="btn btn-primary">
-                          Aplicar
-                        </button>
                       </div>
                     </form>
                   </div>
-                  <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-                    <h2 className="text-center py-4">Menu</h2>
-                  </div>
-
+                  <h2 className="text-center mx-auto">Menu</h2>
                   <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div className="row justify-content-center">
-                      {props.allProducts.map((product) =>
+                      {/* {props.allProducts.map((product) =>
                         product.category ? (
                           <MenuItem key={product._id} product={product} />
                         ) : (
                           ""
                         )
-                      )}
+                      )} */}
+                      {filteredMenu.map((product) => (
+                        <MenuItem key={product._id} product={product} />
+                      ))}
                       {/* {props.allProducts.map((product) => (
                   <MenuItem key={product._id} product={product} />
                 ))} */}
@@ -130,7 +187,6 @@ const Menu = (props) => {
                 </div>
               </div>
             </div>
-          </div>
         </>
       ) : (
         <Preloader />
