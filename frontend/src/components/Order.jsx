@@ -46,24 +46,6 @@ const Order = (props) => {
             {item.name} {item.subcategory.subcategory} x{item.subcategory.qty}
           </p>
         ))}
-        {/* {props.order &&
-          props.order.cart.map((item) => (
-            <p>
-              {item.name} {item.subcategory.subcategory} x{item.quantity}
-            </p>
-          ))}
-      </td>
-      <td>{props.order.state}</td>
-      <td>
-        {props.order.date.slice(5, 10)} {props.order.date.slice(11, 16)}
-      </td>
-      <td>
-        <div>
-          <button onClick={confirmOrder}>Confirmar</button>
-          <button onClick={cancelOrder}>Cancelar</button>
-          <button onClick={completeOrder}>Completar</button>
-          <button onClick={getCustomerData}>Datos</button>
-        </div> */}
       </td>
       <td>{props.order.state}</td>
       <td>
