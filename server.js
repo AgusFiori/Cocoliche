@@ -5,6 +5,8 @@ const cors = require('cors')
 const router = require('./routes/index.js')
 require('./config/database')
 const fileUpload = require('express-fileupload')
+const mercadopago = require("mercadopago");
+
 
 const app = express()
 //Middlewares
@@ -15,6 +17,8 @@ app.use(cors())
 app.use(fileUpload())
 
 app.use('/api', router)
+
+
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))

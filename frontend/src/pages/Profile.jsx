@@ -16,7 +16,8 @@ useEffect(() => {
   setReservated( reservations.length > 0 && reservations.filter(reservation => reservation.customer._id === props.loggedUser._id && reservation))
 }, [reservations])
 
-console.log(props.loggedUser.purchases.map(purch => purch.cart[0].picture))
+console.log(props.loggedUser.purchases.map(purch => purch.cart.map(name => name)))
+console.log(props.loggedUser.purchases)
   return (
     <div className="container">
       <div className="row">

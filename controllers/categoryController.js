@@ -4,7 +4,6 @@ const categoryController = {
   addCategory: (req, res) => {
     const { category } = req.body
 
-    console.log(category)
 
     const newCategory = new Category({ category })
     newCategory.save()
