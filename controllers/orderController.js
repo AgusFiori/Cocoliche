@@ -32,7 +32,6 @@ const orderController = {
         response
       })
     } catch (error) {
-      console.log(error)
       res.json({
         success: false,
         error
@@ -65,7 +64,6 @@ const orderController = {
         updated
       })
     } catch (error) {
-      console.log(error)
       res.json({
         success: false,
         error
@@ -89,7 +87,6 @@ const orderController = {
         updated
       })
     } catch (error) {
-      console.log(error)
       res.json({
         success: false,
         error
@@ -113,7 +110,6 @@ const orderController = {
         updated
       })
     } catch (error) {
-      console.log(error)
       res.json({
         success: false,
         error
@@ -129,7 +125,6 @@ const orderController = {
         response
       })
     } catch (error) {
-      console.log(error)
       res.json({
         success: false,
         response

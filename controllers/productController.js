@@ -94,7 +94,6 @@ const productController = {
       })
     }
     catch (error) {
-      console.log(error)
       return res.json({ success: false, response: error })
     }
 
@@ -148,7 +147,6 @@ const productController = {
         response
       })
     } catch (error) {
-      console.log(error)
 
       res.json({
         success: false,
