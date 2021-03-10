@@ -72,7 +72,7 @@ const Menu = (props) => {
       }}>
               <h2 className="text-center pt-4">Hoy Cocina Cocoliche</h2>
               <h4 className="text-center">Conocé nuestras especialidades</h4>
-              <div className="col-sm-12 col-md-12 col-lg-10 col-xl-10">
+              <div className="col-12 mx-auto">
                 <div className="row">
                   <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center align-items-center">
                     <h2 className="px-2 py-4">Filtros</h2>
@@ -160,8 +160,8 @@ const Menu = (props) => {
                     </form>
                   </div>
                   <h2 className="text-center mx-auto">Menu</h2>
-                  <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <div className="row justify-content-center">
+                  <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
+                    <div className="row">
                       {filteredMenu.map((product) => (
                         <MenuItem key={product._id} product={product} />
                       ))}
