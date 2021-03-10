@@ -7,6 +7,7 @@ const passport = require('passport')
 const eventController = require('../controllers/eventController')
 const productController = require('../controllers/productController')
 const categoryController = require('../controllers/categoryController')
+const mercadoPagoController = require('../controllers/mercadoPagoController')
 
 // EL METODO PUT LO TENEMOS QUE MOVER A LA RUTA QUE TIENE EL PRODUCT ID
 router.route('/products').post(productController.addProduct).get(productController.getProducts).put(productController.editProduct)
@@ -23,6 +24,7 @@ const validator = require('../controllers/validator')
 const userController = require('../controllers/userController')
 const reservationController = require('../controllers/reservationController')
 const orderController = require('../controllers/orderController')
+const { mercadopago } = require('../controllers/mercadoPagoController')
 
 
 
@@ -73,6 +75,12 @@ router.route('/purchases/complete/:orderId')
 
 router.route('/purchases/user/:customerId')
   .get(orderController.getCustomer)
+
+router.route('/create_preference')
+.post(mercadoPagoController.mercadopago)
+
+router.route('feedback')
+.get(mercadoPagoController.payment)
 
 
 //RATING
