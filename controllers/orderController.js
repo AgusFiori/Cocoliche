@@ -1,5 +1,6 @@
 const Order = require('../models/Order')
 const User = require('../models/User')
+const { ObjectId } = require('mongodb'); // or ObjectID 
 
 const orderController = {
   newOrder: (req, res) => {
@@ -39,7 +40,16 @@ const orderController = {
   },
   confirmOrder: async (req, res) => {
     try {
-      const { orderId } = req.params;
+      const { orderId, customerId } = req.params;
+      const respuesta = await User.findOneAndUpdate(
+        { "_id": customerId, "purchases.id": ObjectId(orderId) },
+        {
+          $set:
+            { "purchases.$.confirmed": true }
+        },
+        { new: true }
+      )
+
       const response = await Order.findOneAndUpdate(
         { _id: orderId },
         {

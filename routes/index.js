@@ -44,7 +44,7 @@ router.route('/reservation')
   .get(reservationController.getReservations)
   .put(passport.authenticate('jwt', { session: false }), reservationController.editReservations)
 
-router.route('/reservation/:id') 
+router.route('/reservation/:id')
   .delete(passport.authenticate('jwt', { session: false }), reservationController.deleteReservations)
 
 
@@ -64,7 +64,7 @@ router.route('/purchases')
   .post(passport.authenticate('jwt', { session: false }), orderController.newOrder)
   .get(orderController.getOrders)
 
-router.route('/purchases/confirm/:orderId')
+router.route('/purchases/confirm/:orderId/:customerId')
   .put(orderController.confirmOrder)
 
 router.route('/purchases/cancel/:orderId')
