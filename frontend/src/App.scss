@@ -348,12 +348,47 @@ nav > a {
     margin-top: 2vh;
     color: white;
   }
+  
+  .sideBarTitle {
+    margin: 0;
+    display: flex !important;
+    width: 100%;
+    border-bottom: 1px solid grey;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    margin-bottom: 1rem;
+    color: white;
+    font-family: 'Asfalto';
+  }
+  
+  .sideBarTitle > h2 {
+    font-size: 48px;
+  }
+  
+  .sideBarTitle:hover {
+    cursor: default;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #3e4444;
+    color: white;
+    height: 3rem;
+    font-size: 32px;
+    width: 100%;
+  }
+  
+  .menu-item:hover {
+    color: #828380;
 }
 
 @media (max-width: 500px) {
   .logOutIconBurger {
     margin-left: 4.7vw;
-  }
+  }}
   .userLinkBurger {
     margin-top: 2vh;
     margin-bottom: 1vh;
@@ -373,21 +408,131 @@ nav > a {
 }
 // *****************
 // ESTILO MENU
-.menu-item {
-  height: 350px;
-  min-height: 350px;
-  max-height: 350px;
+.menuCard{
+  height: 370px;
+  min-height: 370px;
+  max-height: 370px;
   border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 4px rgba(214, 214, 214, 0.287);
 }
-.addCart {
-  padding: 1vh;
+.menuCardImg{
+  height: 60%;
+  width: 100%;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.icon{
+  font-size: 20px;
+}
+.emptyStar{
+  color: white;
+}
+.placeholderStar{
+  color: red;
+}
+.fullStar{
+  color: yellow;
+}
+.menuCardBody{
+  background-color: white;
+  height: 39%;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.menuCardBodyText{
+  display: block;
+  width: 100%;
+  padding: .4em 1.4em .3em .8em;
+  font-size: 20px;  
+}
+.menuCardBodyTextSelect {
+  display: block;
+  font-size: 20px;
+  color: #444;
+  line-height: 1.3;
+  padding: .4em 1.4em .3em .8em;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0;
-  font-size: 3.2rem;
-  background-color: #474747;
-  color: black;
-  height: auto;
-  border-radius: 100%;
-  border: 1px solid black;
+  border: 1px solid #aaa;
+  box-shadow: 1px 1px 1px rgba(14, 14, 14, 0.287);
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url('https://pics.freeicons.io/uploads/icons/png/3301135961556279651-512.png'),
+    linear-gradient(to bottom, #ffffff 0%,#f7f7f7 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+  text-align: center !important;
+ }
+ .menuCardBodyTextSelect::-ms-expand {
+  display: none;
+ }
+ .menuCardBodyTextSelect:hover {
+  border-color: #888;
+ }
+ .menuCardBodyTextSelect:focus {
+  border-color: #aaa;
+  box-shadow: 1px 1px 2px rgba(14, 14, 14, 0.287);
+  box-shadow: 0 0 0 2px -moz-mac-focusring;
+  color: #222; 
+  outline: none;
+ }
+ .menuCardBodyTextSelect option {
+  font-weight:normal;
+ }
+ .menuCardBodyTextSelectCantidad{
+  display: inline-block;
+  font-size: 20px;
+  color: #444;
+  line-height: 1.3;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: 1px 1px 1px rgba(14, 14, 14, 0.287);
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url('https://pics.freeicons.io/uploads/icons/png/3301135961556279651-512.png'),
+    linear-gradient(to bottom, #ffffff 0%,#f7f7f7 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+  text-align: center !important;
+ }
+ .menuCardBodyTextSelectCantidad::-ms-expand {
+  display: none;
+ }
+ .menuCardBodyTextSelectCantidad:hover {
+  border-color: #888;
+ }
+ .menuCardBodyTextSelectCantidad:focus {
+  border-color: #aaa;
+  box-shadow: 1px 1px 2px rgba(14, 14, 14, 0.287);
+  box-shadow: 0 0 0 2px -moz-mac-focusring;
+  color: #222; 
+  outline: none;
+ }
+.addCart{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 25px;
+    padding: 1vh;
+    margin: 0;
+    background-color: #474747;
+    color:black;
+    height: auto;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 .addCart:hover {
   color: goldenrod;

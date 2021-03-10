@@ -35,33 +35,41 @@ const SubCategory = (props) => {
   };
 
   return (
-    <>
-      <h3>$ {props.sub.subcategoryPrice}</h3>
-      <label htmlFor={props.sub._id}>Cantidad</label>
-      <select
-        id={props.sub._id}
-        name="subcategory"
-        onChange={handleChange}
-        defaultValue="1"
-      >
-        {[...Array(10)].map(() => {
-          return (
-            <option
-              value={JSON.stringify({
-                subcategory: props.sub.subcategory,
-                price: props.sub.subcategoryPrice,
-                subcategoryId: props.sub._id,
-                qty,
-                stock: props.sub.subcategoryStock,
-              })}
-            >
-              {qty++}
-            </option>
-          );
-        })}
-      </select>
-      <RiShoppingCart2Line className="addCart" onClick={addToCart} />
-    </>
+    <div className="d-flex flex-column justify-content-between">
+        <div className="d-flex justify-content-around mt-2">
+          <h3>${" "}{props.sub.subcategoryPrice}</h3>
+          <div>
+            <label htmlFor={props.sub._id} className="h5">Cantidad:{" "}</label>
+              <select
+                id={props.sub._id}
+                name="subcategory"
+                onChange={handleChange}
+                defaultValue="default"
+                className="menuCardBodyTextSelectCantidad px-4"
+              >
+                <option value="default">0</option>
+                {[...Array(10)].map(()=> {
+                  return (
+                    <option
+                      value={JSON.stringify({
+                        subcategory: props.sub.subcategory,
+                        price: props.sub.subcategoryPrice,
+                        subcategoryId: props.sub._id,
+                        qty,
+                        stock: props.sub.subcategoryStock,
+                      })}
+                    >
+                      {qty++}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+        </div>
+        <span className="addCart">
+          Agregar al Carrito<RiShoppingCart2Line  onClick={addToCart} />
+        </span>
+      </div>
   );
 };
 

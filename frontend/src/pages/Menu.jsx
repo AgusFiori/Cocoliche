@@ -61,19 +61,16 @@ const Menu = (props) => {
 
   return (
     <div
-      className="container-fluid d-flex p-0 menu-responsive calendar-fondo"
-      style={{
-        backgroundImage: `url(${fondo1})`,
-        backgroundAttachment: "fixed",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="container-fluid d-flex p-0 menu-responsive"
+      
     >
       <Navbar />
       {preloader ? (
         <>
-          <div className="container pl-5">
-            <div className="container-fluid trasparent">
-              <h2 className="text-center mt-3">Hoy Cocina Cocoliche</h2>
+          
+            <div className="container-fluid d-flex flex-column calendar-fondo"style={{ backgroundImage: `url(${fondo1})`, backgroundAttachment: "fixed",
+      }}>
+              <h2 className="text-center pt-4">Hoy Cocina Cocoliche</h2>
               <h4 className="text-center">Conocé nuestras especialidades</h4>
               <div className="col-sm-12 col-md-12 col-lg-10 col-xl-10">
                 <div className="row">
@@ -160,19 +157,9 @@ const Menu = (props) => {
                           Postre
                         </label>
                       </div>
-                      {/* <button
-                        type="submit"
-                        className="btn btn-primary"
-                        onClick={applyFilter}
-                      >
-                        Aplicar
-                      </button> */}
                     </form>
                   </div>
-                  <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-                    <h2 className="text-center py-4">Menu</h2>
-                  </div>
-
+                  <h2 className="text-center mx-auto">Menu</h2>
                   <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div className="row justify-content-center">
                       {filteredMenu.map((product) => (
@@ -183,7 +170,6 @@ const Menu = (props) => {
                 </div>
               </div>
             </div>
-          </div>
         </>
       ) : (
         <Preloader />
