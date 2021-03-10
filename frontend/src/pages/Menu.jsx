@@ -35,7 +35,7 @@ const Menu = (props) => {
       {preloader ? (
         <>
           <div className="container pl-5">
-            <div className="container-fluid trasparent">
+            <div className="container-fluid">
               <h2 className="text-center mt-3">Hoy Cocina Cocoliche</h2>
               <h4 className="text-center">Conocé nuestras especialidades</h4>
               <div className="col-12 d-flex justify-content-center align-items-center">

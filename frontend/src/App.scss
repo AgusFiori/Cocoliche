@@ -374,12 +374,83 @@ body {
   }
 // *****************
 // ESTILO MENU
-.menu-item{
+.menuCard{
   height: 350px;
   min-height: 350px;
   max-height: 350px;
   border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 4px rgba(14, 14, 14, 0.287);
 }
+.menuCardImg{
+  height: 180px;
+  width: 100%;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.icon{
+  font-size: 20px;
+}
+.emptyStar{
+  color: white;
+}
+.placeholderStar{
+  color: red;
+}
+.fullStar{
+  color: yellow;
+}
+.menuCardBody{
+  background-color: white;
+}
+.menuCardBodyText{
+  display: block;
+  width: 100%;
+  padding: .4em 1.4em .3em .8em;
+  font-size: 20px;  
+}
+.menuCardBodyTextSelect {
+  display: block;
+  font-size: 20px;
+  color: #444;
+  line-height: 1.3;
+  padding: .4em 1.4em .3em .8em;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: 1px 1px 1px rgba(14, 14, 14, 0.287);
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url('https://pics.freeicons.io/uploads/icons/png/3301135961556279651-512.png'),
+    linear-gradient(to bottom, #ffffff 0%,#f7f7f7 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+  text-align: center !important;
+ }
+ .menuCardBodyTextSelect::-ms-expand {
+  display: none;
+ }
+ .menuCardBodyTextSelect:hover {
+  border-color: #888;
+ }
+ .menuCardBodyTextSelect:focus {
+  border-color: #aaa;
+  box-shadow: 1px 1px 2px rgba(14, 14, 14, 0.287);
+  box-shadow: 0 0 0 2px -moz-mac-focusring;
+  color: #222; 
+  outline: none;
+ }
+ .menuCardBodyTextSelect option {
+  font-weight:normal;
+ }
 .addCart{
     padding: 1vh;
     margin: 0;

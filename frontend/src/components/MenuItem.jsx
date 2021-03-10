@@ -4,9 +4,7 @@ import SubCategory from "./SubCategory.jsx";
 import Rating from "react-rating";
 import productActions from "../redux/actions/productActions.js";
 import { connect } from "react-redux";
-import starYellow from '../assets/star-yellow.png'
-import starRed from '../assets/star-red.png'
-import starGrey from '../assets/star-grey.png'
+import {AiOutlineStar, AiFillStar} from 'react-icons/ai'
 
 const MenuItems = (props) => {
   const [displaySubcategory, setDisplaySubcategory] = useState([
@@ -43,44 +41,44 @@ const MenuItems = (props) => {
   }
   return (
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-      <div className="d-flex flex-column menu-item">
+      <div className="d-flex flex-column menuCard">
+        <div className="menuCardImg" style={{backgroundImage: `url(${props.product.picture})`}}>
           <Rating
-              fractions={2}
-              onChange={handleChange}
-              placeholderRating={avgRating}
-              emptySymbol={<img src={starGrey} className="icon" />}
-              placeholderSymbol={<img src={starRed} className="icon" />}
-              fullSymbol={<img src={starYellow} className="icon" />}
-              className="p-0 m-0"
-            />
-          <img
-            src={`${props.product.picture}`}
-            alt="Comida"
-            class="card-img-top rounded-0"
-          ></img>
-          {props.product.subcategories.length ===1?
-            <span>{props.product.subcategories[0].subcategory}</span>
-        :
-        <select onChange={(e)=> display(e.target.value)} on>
-        {props.product.subcategories.map((sub) => {
-            return (
-              <option value={sub._id}>{sub.subcategory}</option>
-            );
-          })}
-      </select>
-        }
+                fractions={2}
+                onChange={handleChange}
+                placeholderRating={avgRating}
+                emptySymbol={<AiOutlineStar className="icon emptyStar" />}
+                placeholderSymbol={<AiFillStar  className="icon placeholderStar" />}
+                fullSymbol={<AiFillStar className="icon fullStar" />}
+                className="p-0 m-0"
+              />
+          </div>
+          <div className="menuCardBody">
+            {props.product.subcategories.length ===1?
+              <span className="menuCardBodyText">{props.product.subcategories[0].subcategory}</span>
+              :
+              <select className="menuCardBodyTextSelect" onChange={(e)=> display(e.target.value)} on>
+                {props.product.subcategories.map((sub) => {
+                  return (
+                    <option className="menuCardBodyTextSelect" value={sub._id}>{sub.subcategory}</option>
+                  );
+                })}
+              </select>
+            }
+          
+            {filteredDisplaySubcategory.length !== 0
+              && filteredDisplaySubcategory.map((sub) => (
+                  <>
+                    <SubCategory
+                      sub={sub}
+                      picture={props.product.picture}
+                      name={props.product.name}
+                    />
+                </>
+              ))
+            }
+          </div>
          
-        {filteredDisplaySubcategory.length !== 0
-          && filteredDisplaySubcategory.map((sub) => (
-              <>
-                <SubCategory
-                  sub={sub}
-                  picture={props.product.picture}
-                  name={props.product.name}
-                />
-              </>
-            ))
-          }
         </div>
       </div>
   );
