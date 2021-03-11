@@ -30,10 +30,9 @@ const SubCategory = (props) => {
   };
 
   const addToCart = () => {
-    console.log(productToAdd);
-    // props.addToCart(productToAdd);
+    props.addToCart(productToAdd);
   };
-
+  
   return (
     <div className="d-flex flex-column justify-content-between">
         <div className="d-flex justify-content-around mt-2">
@@ -65,9 +64,10 @@ const SubCategory = (props) => {
               </select>
             </div>
         </div>
-        <span className="addCart">
-          Agregar al Carrito<RiShoppingCart2Line  onClick={addToCart} />
-        </span>
+        <p className="addCart" onClick={addToCart}>
+          <span className="scale-3 mx-auto">Agregar al Carrito<RiShoppingCart2Line   /> </span> 
+        </p>
+        
       </div>
   );
 };

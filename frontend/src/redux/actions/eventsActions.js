@@ -3,8 +3,7 @@ import  Swal  from 'sweetalert2';
 import { API } from './../../components/Api';
 
 const eventsActions = {
-    newEvent: (newEvent, file, token) => {
-      console.log(newEvent, file)
+  newEvent: (newEvent, file, token) => {
         return async (dispatch, getState) => {
           try{
             const form = new FormData()
@@ -24,7 +23,6 @@ const eventsActions = {
                  return respuesta.data
              }
             dispatch({type: 'ADD_EVENT', payload: respuesta.data.response})
-            console.log(respuesta)
         }catch(error){
           Swal.fire(error)
         }       
@@ -40,7 +38,6 @@ const eventsActions = {
       }
   },
   editEvent:(newEvent)=>{      
-    console.log(newEvent)
     try {
       const {
         title, // ID del posteo
@@ -66,7 +63,7 @@ const eventsActions = {
       Swal.fire(error)
     } 
 },
-deleteEvent:(id) => {
+  deleteEvent:(id) => {
     return async (dispatch, getState) => {
       const response = await axios.delete(`${API}/events/delete/${id}` )
       dispatch({ type: 'DELETE_EVENT', payload: response.data.response })

@@ -8,7 +8,7 @@ const Contact = () => {
     <div className="container-fluid d-flex p-0 menu-responsive " >
       <Navbar />
       <div className="container calendar-fondo " style={{backgroundImage: `url(${fondo3})`}} >
-        <div className="row ">
+        <div className="row justify-content-center align-items-center">
           
             <div className="col-sm-12 col-md-8 col-lg-5 col-xl-5 trasparent text-center mx-auto my-auto">
               <Form>
@@ -51,6 +51,7 @@ const Contact = () => {
                 </Button>
               </Form>
             </div>
+            
             <div className="col-sm-12 col-md-8 col-lg-5 col-xl-5 trasparent mx-auto my-auto">
               <iframe width="100%" height="315" src="https://www.youtube.com/embed/ghM0aBOvDVE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               <h4 className="mt-3">Teléfonos</h4>

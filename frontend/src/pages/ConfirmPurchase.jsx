@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import  MercadoPago  from "../components/MercadoPago";
-import cartActions from "../redux/actions/cartActions";
+import Navbar from "../components/Navbar";
 
 const ConfirmPurchase = (props) => {
-  const [data, setData] = useState({ tip: 25 });
+  const [data, setData] = useState({ 
+    tip: 0,
+    name: props.loggedUser.firstname,
+    token: props.loggedUser.token,
+    urlPic: props.loggedUser.urlPic,
+    address:"",
+    phone:"",
+   });
 
   let parsedCart = JSON.parse(localStorage.getItem("cart"));
 
@@ -22,144 +29,130 @@ const ConfirmPurchase = (props) => {
     history.goBack();
   };
 
-  const sendCart = () => {
-    props.confirmPurchase({
-      cart: props.cart,
-      data,
-      confirmed: false
-    });
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
       ...data,
       [name]: value,
-      user: {
-        name: props.loggedUser.firstname,
-        token: props.loggedUser.token,
-        urlPic: props.loggedUser.urlPic,
-      },
       total: acc,
     });
   };
 
   return (
-    <div className="container p-5">
-      <form>
-        <div className="form-group">
-          <label htmlFor="address">Dirección</label>
-          <input
-            type="text"
-            className="form-control"
-            id="address"
-            name="address"
-            placeholder="Segurola y Habana 4310"
-            onChange={handleChange}
-          ></input>
+    <div className="container-fluid d-flex p-0 menu-responsive">
+      <Navbar />
+      <div className="container p-5">
+        <div className="row justify-content-center">
+          <div className="col-6 trasparent">
+            <form>
+              
+              <label htmlFor="address">Dirección</label>
+              <input
+                type="text"
+                className="form-control"
+                id="address"
+                name="address"
+                placeholder="Segurola y Habana 4310"
+                onChange={handleChange}
+              ></input>
+              <label htmlFor="phone">Teléfono</label>
+              <input
+                type="text"
+                className="form-control"
+                id="phone"
+                name="phone"
+                placeholder="+54 9 11 1111 1111"
+                onChange={handleChange}
+              ></input>
+     
+          <p className="h5">Propina</p>
+          
+            <input
+              className=""
+              type="radio"
+              name="tip"
+              id="inlineRadio1"
+              defaultChecked={true}
+              value={0}
+              onChange={handleChange}
+            ></input>
+            <label className="" htmlFor="inlineRadio1">
+              $0
+            </label>
+       
+            <input
+              className=""
+              type="radio"
+              name="tip"
+              id="inlineRadio2"
+              value={25}
+              onChange={handleChange}
+            ></input>
+            <label htmlFor="inlineRadio2">
+              $25
+            </label>
+
+            <input
+              className=""
+              type="radio"
+              name="tip"
+              id="inlineRadio3"
+              value={50}
+              onChange={handleChange}
+            ></input>
+            <label htmlFor="inlineRadio3">
+              $50
+            </label>
+
+            <input
+              className=""
+              type="radio"
+              name="tip"
+              id="inlineRadio4"
+              value={100}
+              onChange={handleChange}
+            ></input>
+            <label htmlFor="inlineRadio4">
+              $100
+            </label>
+        
+          
+            <label htmlFor="notes">Notas acerca del pedido</label>
+            <textarea            
+              className="form-control"
+              id="notes"
+              rows="3"
+              name="orderNotes"
+              placeholder="Sin lechuga/con ketchup... (Opcional)"
+              onChange={handleChange}
+            ></textarea>
+
+            <label htmlFor="notes">Notas acerca del domicilio</label>
+            <textarea
+              class="form-control"
+              id="notes"
+              rows="3"
+              name="addressNotes"
+              placeholder="Primer piso/rejas negras...(Opcional)"
+              onChange={handleChange}
+            ></textarea>
+      
+        </form>
+            <div className="container">
+              <p>
+                ${acc} + (Propina: ${data.tip})
+              </p>
+              <p className="h1">TOTAL: ${acc + parseInt(data.tip)}</p>
+              
+            </div>
+            <div className="container d-flex justify-content-around">
+              <button onClick={goBack} type="button" className="btn-danger">
+                Atrás
+              </button>
+                <MercadoPago data={data}/>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label htmlFor="phone">Teléfono</label>
-          <input
-            type="text"
-            className="form-control"
-            id="phone"
-            name="phone"
-            placeholder="+54 9 11 1111 1111"
-            onChange={handleChange}
-          ></input>
-        </div>
-        <p className="h5">Propina</p>
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="tip"
-            id="0"
-            value={0}
-            onChange={handleChange}
-          ></input>
-          <label class="form-check-label" htmlFor="inlineRadio1">
-            $0
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="tip"
-            id="25"
-            value={25}
-            defaultChecked={true}
-            onChange={handleChange}
-          ></input>
-          <label class="form-check-label" htmlFor="inlineRadio2">
-            $25
-          </label>
-        </div>
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="tip"
-            id="50"
-            value={50}
-            onChange={handleChange}
-          ></input>
-          <label class="form-check-label" htmlFor="inlineRadio2">
-            $50
-          </label>
-        </div>
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="tip"
-            id="100"
-            value={100}
-            onChange={handleChange}
-          ></input>
-          <label class="form-check-label" htmlFor="inlineRadio2">
-            $100
-          </label>
-        </div>
-        <div className="form-group">
-          <label for="notes">Notas acerca del pedido</label>
-          <textarea
-            class="form-control"
-            id="notes"
-            rows="3"
-            name="orderNotes"
-            placeholder="Sin lechuga/con ketchup..."
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label for="notes">Notas acerca del domicilio</label>
-          <textarea
-            class="form-control"
-            id="notes"
-            rows="3"
-            name="addressNotes"
-            placeholder="Primer piso/rejas negras..."
-            onChange={handleChange}
-          ></textarea>
-        </div>
-      </form>
-      <div className="container">
-        <p>
-          ${acc} + (Propina: ${data.tip})
-        </p>
-        <p className="h1">TOTAL: ${acc + parseInt(data.tip)}</p>
-        <MercadoPago />
-      </div>
-      <div className="container d-flex justify-content-around">
-        <button onClick={goBack} type="button" className="btn-danger">
-          Atrás
-        </button>
-        <button onClick={sendCart} type="button" className="btn-success">
-          Confirmar pedido
-        </button>
       </div>
     </div>
   );
@@ -172,8 +165,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  confirmPurchase: cartActions.confirmPurchase,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmPurchase);
+
+export default connect(mapStateToProps)(ConfirmPurchase);
