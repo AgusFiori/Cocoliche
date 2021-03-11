@@ -5,6 +5,7 @@ import  MercadoPago  from "../components/MercadoPago";
 import Navbar from "../components/Navbar";
 
 const ConfirmPurchase = (props) => {
+  console.log(props)
   const [data, setData] = useState({ 
     tip: 0,
     name: props.loggedUser.firstname,
@@ -149,7 +150,7 @@ const ConfirmPurchase = (props) => {
               <button onClick={goBack} type="button" className="btn-danger">
                 Atrás
               </button>
-                <MercadoPago data={data}/>
+                <MercadoPago data={data} history={props.history}/>
             </div>
           </div>
         </div>
