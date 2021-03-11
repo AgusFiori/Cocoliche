@@ -74,7 +74,6 @@ const userController = {
     },
     signin: async (req, res) => {
         const { username, password } = req.body
-
         const usuarioExistente = await User.findOne({ username: username })
         if (!usuarioExistente) {
             return res.json({ success: false, respuesta: 'wrong username or password' })
