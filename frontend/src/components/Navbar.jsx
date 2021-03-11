@@ -67,7 +67,7 @@ const Navbar = (props) => {
               <p className="h4 color-white">Contacto</p>
             </NavLink>
             <NavLink to="/reservation" className="text-decoration-none">
-              <p className="h4 color-white">HACER UNA RESERVA</p>
+              <p className="h4 color-white">HACE TU RESERVA!</p>
             </NavLink>
             {props.loggedUser&&
             <NavLink to="/" className="text-decoration-none">

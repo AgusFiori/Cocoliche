@@ -7,11 +7,11 @@ import cartActions from "../redux/actions/cartActions";
 import Navbar from "../components/Navbar";
 import fondo1 from "../assets/fondos/fondo-1.jpg";
 
+
 const Menu = (props) => {
   const { getProducts, getCart } = props;
   const [checked, setChecked] = useState("todos");
   const [preloader, setPreloader] = useState(false);
-
   let filteredMenu = [];
 
   useEffect(() => {
@@ -60,10 +60,8 @@ const Menu = (props) => {
   }
 
   return (
-    <div
-      className="container-fluid d-flex p-0 menu-responsive"
-      
-    >
+    <>
+    <div className="container-fluid d-flex p-0 menu-responsive">
       <Navbar />
       {preloader ? (
         <>
@@ -88,7 +86,7 @@ const Menu = (props) => {
                           defaultChecked={true}
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="todos">
+                        <label className="form-check-label" htmlFor="todos">
                           <span className="form-check-text mx-auto">Todas</span> 
                         </label>
                       </div>
@@ -101,7 +99,7 @@ const Menu = (props) => {
                           value="entrada"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="entrada">
+                        <label className="form-check-label" htmlFor="entrada">
                           <span className="form-check-text mx-auto">Entradas</span> 
                         </label>
                       </div>
@@ -114,7 +112,7 @@ const Menu = (props) => {
                           value="principal"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="principal">
+                        <label className="form-check-label" htmlFor="principal">
                           <span className="form-check-text mx-auto">Platos Principales</span>
                         </label>
                       </div>
@@ -127,7 +125,7 @@ const Menu = (props) => {
                           value="bebidas"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="bebidas">
+                        <label className="form-check-label" htmlFor="bebidas">
                           <span className="form-check-text mx-auto">Gaseosas</span>
                         </label>
                       </div>
@@ -140,7 +138,7 @@ const Menu = (props) => {
                           value="bebidas"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="bebidas">
+                        <label className="form-check-label" htmlFor="bebidas">
                           <span className="form-check-text mx-auto">Tragos</span>
                         </label>
                       </div>
@@ -153,16 +151,16 @@ const Menu = (props) => {
                           value="postre"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" for="postre">
+                        <label className="form-check-label" htmlFor="postre">
                           <span className="form-check-text mx-auto">Postres</span>
                         </label>
                       </div>
                     </form>
                   </div>
                   <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
-                    <div className="row">
+                    <div className="row justify-content-center">
                       {filteredMenu.map((product) => (
-                        <MenuItem key={product._id} product={product} />
+                        <MenuItem key={product._id} product={product} props={props.history} />
                       ))}
                     </div>
                   </div>
@@ -173,7 +171,10 @@ const Menu = (props) => {
       ) : (
         <Preloader />
       )}
+      
     </div>
+   
+    </>
   );
 };
 

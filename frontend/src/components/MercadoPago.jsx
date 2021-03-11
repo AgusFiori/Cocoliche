@@ -1,20 +1,35 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import '../index.css'
+import cartActions from "../redux/actions/cartActions";
+
 
 const MercadoPago = (props) => {
-    console.log(props.cart[0].subcategory)
-
     const [visible, setVisible] = useState(false)
+    const sendCart = () => {
+        props.confirmPurchase({
+          cart: props.cart,
+          data:props.data,
+          confirmed: false
+        });
+      };
+    var priceAmount=0
+    props.cart.map((item)=>{
+        priceAmount= item.subcategory.price* item.subcategory.qty + priceAmount
+    })
+    var quantityTotal=0
+    props.cart.map((item)=>{
+        quantityTotal = item.subcategory.qty +quantityTotal
+    })
     var orderData = {
-            quantity: props.cart[0].subcategory.qty,
-            description: props.cart[0].name,
-            price: props.cart[0].subcategory.price,
+            quantity: quantityTotal,
+            description: 'Cocoliche Resto Bar',
+            price: priceAmount
           };
-
     const sendData = e => {
+        setVisible(true)
         document.querySelector('#checkout').setAttribute("disabled", true);
-             
+        
         fetch("http://localhost:4000/api/create_preference", {
             method: "POST",
             headers: {
@@ -23,18 +38,15 @@ const MercadoPago = (props) => {
             body: JSON.stringify(orderData),
       })
         .then(function(response) {
-            console.log(response)
             return response.json();
         })
         .then(function(preference) {
+            
             createCheckoutButton(preference.id);
-            console.log(preference)
             
         })
-        .catch(function() {
-            alert("Unexpected error");     
-        })
-        setVisible(!visible)
+        .catch(error=>console.log(error))
+        
     }
 
     function createCheckoutButton(preference) {
@@ -44,50 +56,73 @@ const MercadoPago = (props) => {
         script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
         script.type = "text/javascript";
         script.dataset.preferenceId = preference;
-        document.getElementById("button-checkout").innerHTML = "";
+        document.querySelector("#button-checkout").innerHTML = "";
         document.querySelector("#button-checkout").appendChild(script);
       }
 
      return (
-        <div>
-            <button id="checkout" onClick={ sendData}>Comprar</button>  
-            <section class="payment-form dark">
-                {visible && 
-                <div class="container_payment">
-                    <div class="block-heading">
-                        <h2>Checkout Payment</h2>
-                        <p>This is an example of a Mercado Pago integration</p>
+         <>
+            <button 
+                id="checkout" 
+                onClick={ sendData} 
+                type="button" 
+                className="btn btn-primary" 
+             >
+                Comprar
+            </button>
+             {visible&& 
+            <div className="modalCasero">
+                <div className="modalCaseroContenido">
+                    <div className="text-center ">
+                        <h5 className="h1" id="exampleModalLabel">Resumen de la Compra</h5>
                     </div>
-                    <div class="form-payment">
-                        <div class="products">
-                            <h2 class="title">Summary</h2>
-                            <div class="item">
-                            <span class="price" id="summary-price"></span>
-                            <p class="item-name">Book x <span id="summary-quantity"></span></p>
-                            </div>
-                            <div class="total">Total<span class="price" id="summary-total"></span></div>
-                        </div>
-                        <div class="payment-details">
-                            <div class="form-group col-sm-12">
-                                <br />      
-                                <div id="button-checkout">
-                                </div>                 
-                                <br />
-                                <button id="go-back">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 10 10" class="chevron-left">
-                                    <path fill="#009EE3" fill-rule="nonzero"id="chevron_left" d="M7.05 1.4L6.2.552 1.756 4.997l4.449 4.448.849-.848-3.6-3.6z"></path>
-                                    </svg>
-                                    Go back to Shopping Cart
-                                </button>
-                            </div>
-                        </div>
+                    <div className="container-fluid">
+                        {
+                            props.cart.map((item)=>{
+                                return(
+                                    <>
+                                        <div className="container">
+                                            <div className="row mt-2">
+                                                <div className="col-3 menuCardImg" 
+                                                style={{
+                                                    backgroundImage: `url(${item.picture})`,
+                                                    width: "100px",
+                                                    height: "100px",
+                                                    borderTopLeftRadius:"0px",
+                                                    borderTopRightRadius:"0px"}}>
+
+                                                </div>
+                                                <div className="col-4 d-flex flex-column justify-content-center">
+                                                <span className="h3">{item.name}</span>
+                                                <span className="h5">Cantidad:{" "} {item.subcategory.qty}</span> 
+                                                </div>
+                                                <div className="col-3 d-flex align-items-center justify-content-end">
+                                                    <span className="h2">${" "}{item.subcategory.price* item.subcategory.qty}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
                     </div>
-              </div>
-                
-                }
         
-      </section>      
-        </div>
+                    <div className="modal-footer">
+                        <button type="button" class="btn btn-secondary" onClick={()=>setVisible(false)}>Close</button>
+                        <div id="button-checkout" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }  
+              
+        </>
+                    
+     
+
+
+        
+        
     )
 }
 
@@ -98,8 +133,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-
-}
+    confirmPurchase: cartActions.confirmPurchase,
+  };
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MercadoPago)

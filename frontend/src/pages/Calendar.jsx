@@ -86,7 +86,7 @@ const Calendary = (props) => {
 
   
   return (
-    <div className="container-fluid d-flex p-0 menu-responsive calendar-fondo" style={{backgroundImage: `url(${fondo5})`}}>
+    <div className="container-fluid d-flex p-0 menu-responsive cart-fondo" style={{backgroundImage: `url(${fondo5})`}}>
       <Navbar />
         <div className="container-fluid px-5 my-auto mb-3" >
           <FullCalendar

@@ -8,7 +8,22 @@ const authActions = {
     return async (dispatch, getState) => {
       const respuesta = await axios.post(`${API}/user/signup`, newUser);
       if (!respuesta.data.success) {
-        return respuesta.data;
+        swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: "Algo falló. Intenta otra vez",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return false;
+      } else {
+        swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Bienvenido a Cocoliche Resto Bar",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
       dispatch({ type: "LOG_USER", payload: respuesta.data.response });
     };
@@ -17,9 +32,23 @@ const authActions = {
     return async (dispatch, getState) => {
       const respuesta = await axios.post(`${API}/user/signin`, user);
       if (!respuesta.data.success) {
-        return respuesta.data;
+        swal.fire({
+          position: "top-end",
+          icon: "warning",
+          title: "Algo falló. Intenta otra vez",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return false;
+      } else {
+        swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Bienvenido a Cocoliche Resto Bar",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
-    
       dispatch({ type: "LOG_USER", payload: respuesta.data.response });
     };
   },
@@ -50,6 +79,7 @@ const authActions = {
 
   logoutUser: () => {
     return (dispatch, getState) => {
+      swal.fire("Nos vemos Pronto")
       dispatch({ type: "LOG_OUT_USER" });
     };
   },
@@ -68,9 +98,14 @@ const authActions = {
         );
         dispatch({ type: "LOG_USER", payload: respuesta.data.response });
       } catch (err) {
-        console.log(err);
-        if (err.response.status === 401) {
-          alert("Access denied");
+        if (err.response) {
+          swal.fire({
+            position: "top-end",
+            icon: "warning",
+            title: "Algo falló. Ingrese nuevamente",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           localStorage.clear();
           return "/";
         }

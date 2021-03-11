@@ -31,6 +31,8 @@ const Login = (props) => {
     const respuesta = await props.loginUser(users);
     if (respuesta && !respuesta.success) {
       setErrores(respuesta.respuesta);
+    }else{
+      props.history.goBack()
     }
   };
 
@@ -39,6 +41,7 @@ const Login = (props) => {
     const provider = new firebase.auth.GoogleAuthProvider()
     const dates = await firebase.auth().signInWithPopup(provider)
     props.loginWithGoogle(dates.user)
+    props.history.goBack()
   }
 
 
