@@ -5,6 +5,7 @@ import cartActions from "../redux/actions/cartActions";
 
 
 const MercadoPago = (props) => {
+    console.log(props)
     const [visible, setVisible] = useState(false)
     const sendCart = () => {
         props.confirmPurchase({
@@ -12,17 +13,15 @@ const MercadoPago = (props) => {
           data:props.data,
           confirmed: false
         });
+        props.history.push('/profile')
       };
     var priceAmount=0
     props.cart.map((item)=>{
         priceAmount= item.subcategory.price* item.subcategory.qty + priceAmount
     })
-    var quantityTotal=0
-    props.cart.map((item)=>{
-        quantityTotal = item.subcategory.qty +quantityTotal
-    })
+    
     var orderData = {
-            quantity: quantityTotal,
+            quantity: 1,
             description: 'Cocoliche Resto Bar',
             price: priceAmount
           };
@@ -109,7 +108,7 @@ const MercadoPago = (props) => {
         
                     <div className="modal-footer">
                         <button type="button" class="btn btn-secondary" onClick={()=>setVisible(false)}>Close</button>
-                        <div id="button-checkout" >
+                        <div id="button-checkout" onClick={()=>sendCart()} >
                         </div>
                     </div>
                 </div>

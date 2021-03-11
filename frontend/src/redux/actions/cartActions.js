@@ -79,7 +79,11 @@ const productActions = {
           }
         }
       )
-    console.log(response)
+      console.log(response)
+      dispatch({
+        type: "CONFIRM_PURCHASE",
+        payload: ""
+      })
     }
   },
   getCart: () => {
