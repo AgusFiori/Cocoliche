@@ -5,16 +5,41 @@ import { Form, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 const Contact = () => {
-  const [contactMsg, setContactMsg] = useState({});
+  const [contact, setContact] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    msg: "",
+  });
   const alertUser = () => {
-    Swal.fire({
-      title: "Gracias!",
-      text:
-        "Recibimos tu consulta y estaremos respondiéndote a la brevedad. 😉",
-      icon: "success",
-      confirmButtonText: "Ok!",
-    });
+    if (
+      !contact.name.length ||
+      !contact.email.length ||
+      !contact.phone.length ||
+      !contact.msg.length
+    ) {
+      Swal.fire({
+        title: "Uh!",
+        text: "Debés completar todos los campos primero.",
+        icon: "error",
+        confirmButtonText: "Ok!",
+      });
+    } else {
+      Swal.fire({
+        title: "Gracias!",
+        text:
+          "Recibimos tu consulta y estaremos respondiéndote a la brevedad. 😉",
+        icon: "success",
+        confirmButtonText: "Ok!",
+      });
+    }
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContact({ ...contact, [name]: value });
+  };
+  console.log(contact);
   return (
     <div className="container-fluid d-flex p-0 menu-responsive ">
       <Navbar />
@@ -31,15 +56,31 @@ const Contact = () => {
                 controlId="validationCustom03"
               >
                 <Form.Label>Nombre y Apellido</Form.Label>
-                <Form.Control type="name" required />
+                <Form.Control
+                  type="text"
+                  name="name"
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
               <Form.Group md="6" controlId="validationCustom03">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" required />
+                <Form.Control
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
               <Form.Group md="6" controlId="validationCustom03">
                 <Form.Label>telefono</Form.Label>
-                <Form.Control type="phone" required />
+
+                <Form.Control
+                  type="phone"
+                  name="phone"
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
               <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Motivo de consulta</Form.Label>
@@ -56,13 +97,15 @@ const Contact = () => {
                   as="textarea"
                   rows={3}
                   style={{ resize: "none" }}
+                  onChange={handleChange}
+                  name="msg"
                 />
               </Form.Group>
               <Button
                 className="mb-3"
                 variant="primary"
                 type="submit"
-                onClick={() => console.log()}
+                onClick={() => alertUser()}
               >
                 Enviar
               </Button>
