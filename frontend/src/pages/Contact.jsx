@@ -47,7 +47,7 @@ const Contact = () => {
         className="container calendar-fondo "
         style={{ backgroundImage: `url(${fondo3})` }}
       >
-        <div className="row justify-content-center align-items-center">
+        <div className="row justify-content-center align-items-center p-5">
           <div className="col-sm-12 col-md-8 col-lg-5 col-xl-5 trasparent text-center mx-auto my-auto">
             <Form>
               <Form.Group
@@ -112,7 +112,7 @@ const Contact = () => {
             </Form>
           </div>
 
-          <div className="col-sm-12 col-md-8 col-lg-5 col-xl-5 trasparent mx-auto my-auto">
+          <div className="col-sm-12 col-md-8 col-lg-5 col-xl-5 trasparent mx-auto my-auto p-3">
             <iframe
               title="Este lomo te va a volar la bocha"
               width="100%"

@@ -52,6 +52,9 @@ const SubCategory = (props) => {
 
   return (
     <div className="d-flex flex-column justify-content-between">
+      <div className="d-flex pl-1 pt-1 border-top">
+        <h3>{props.name}</h3>
+      </div>
       <div className="d-flex justify-content-around mt-2">
         <h3>$ {props.sub.subcategoryPrice}</h3>
         <div>
@@ -83,10 +86,16 @@ const SubCategory = (props) => {
           </select>
         </div>
       </div>
-      <span className="addCart" onClick={addToCart}>
-        Agregar al Carrito
-        <RiShoppingCart2Line />
-      </span>
+      <div className="addCart">
+        <span
+          className="addCartInner d-flex justify-content-center align-items-center"
+          onClick={addToCart}
+          style={{ cursor: "pointer" }}
+        >
+          Agregar al Carrito
+          <RiShoppingCart2Line />
+        </span>
+      </div>
     </div>
   );
 };
