@@ -5,6 +5,9 @@ import CartItem from "../components/CartItem.jsx";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import fondo6 from "../assets/fondos/fondo-6.jpg";
+import  Swal  from 'sweetalert2';
+
 
 
 const Cart = (props) => {
@@ -19,43 +22,56 @@ const Cart = (props) => {
   const history = useHistory();
 
   const goToPay = () => {
-    let path = `/confirm`;
-    history.push(path);
+    if(!props.loggedUser){
+      Swal.fire("Ingresa a tu cuenta para Finalizar la Compra")
+      props.history.push('/login')
+      return false
+  }else{
+    history.push(`/confirm`);
+  }
+   
+
   };
 
   return (
     <div className="container-fluid d-flex p-0 menu-responsive">
-    <Navbar />
-    <div className="container">
-      <h1>Carrito</h1>
-      {props.cart && props.cart.length ? (
-        <div className="container">
-          {" "}
-          {props.cart && props.cart.map((item) => <CartItem props={item} />)}
-          {props.cart.map((item) => {
+      <Navbar />
+      <div className="container-fluid d-flex align-items-center cart-fondo py-4" style={{ backgroundImage: `url(${fondo6})`, backgroundAttachment: "fixed",
+      }}>
+        {props.cart && props.cart.length ? (
+          <div className="col-sm-12 col-md-8 col-lg-8  trasparent px-4 mx-auto ">
+            <h1 className='text-center'>Mi carrito</h1>
+            <h5 className='text-center mb-3'>Haz click en “Finalizar Compra” para ingresar tus datos.</h5>
+
+            {props.cart && props.cart.map((item) => <CartItem props={item} />)}
+            {props.cart.map((item) => {
             acc.push(item.subcategory.price * item.subcategory.qty);
-          })}
-          <div className="p-4 mt-5 d-flex justify-content-between border border-dark rounded">
-            <p class="h1">TOTAL:</p>
-            <p class="h1">{acc.length && acc.reduce(reducer)}</p>
+            })}
+            <div className="text-center p-4 mt-3 border border-dark">
+              <span class="h1">{`Total: $ ${acc.length && acc.reduce(reducer)}`}</span>
+            </div>
+            <div className="container-fluid d-flex justify-content-center p-3">
+              <button
+                type="button"
+                class="btn btn-primary p-2 pr-5 pl-5"
+                style={{ fontSize: "32px" }}
+                onClick={goToPay}
+              >
+                Finalizar Compra
+              </button>
+            </div>
           </div>
-          <div className="container-fluid d-flex justify-content-center p-3">
-            <button
-              type="button"
-              class="btn btn-primary p-2 pr-5 pl-5"
-              style={{ fontSize: "32px" }}
-              onClick={goToPay}
-            >
-              Continuar
-            </button>
+              
+        ) 
+        : 
+        (
+          <div className="col-6 trasparent my-auto">
+            <Link to="/menu">
+              <h4>Agrega algun producto a tu carrito !</h4>
+            </Link>
           </div>
-        </div>
-      ) : (
-        <Link to="/menu">
-          <h4>Agrega algun producto a tu carrito !</h4>
-        </Link>
-      )}
-    </div>
+        )}
+      </div>
     </div>
   );
 };

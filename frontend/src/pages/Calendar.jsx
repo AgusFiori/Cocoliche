@@ -8,7 +8,7 @@ import eventsActions from "../redux/actions/eventsActions";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 import Swal from "sweetalert2";
 import Navbar from "../components/Navbar";
-import fondo1 from '../assets/fondos/fondo-1.jpg'
+import fondo5 from '../assets/fondos/fondo-5.jpg'
 
 
 const Calendary = (props) => {
@@ -86,9 +86,9 @@ const Calendary = (props) => {
 
   
   return (
-    <div className="container-fluid d-flex p-0 menu-responsive calendar-fondo" style={{backgroundImage: `url(${fondo1})`}}>
+    <div className="container-fluid d-flex p-0 menu-responsive cart-fondo" style={{backgroundImage: `url(${fondo5})`}}>
       <Navbar />
-        <div className="container-fluid px-5 my-auto" >
+        <div className="container-fluid px-5 my-auto mb-3" >
           <FullCalendar
             plugins={[interactionPlugin, dayGridPlugin, bootstrapPlugin]}
             locale="es-ES"

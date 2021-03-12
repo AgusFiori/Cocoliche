@@ -1,9 +1,24 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import cartActions from "../redux/actions/cartActions";
+import { GrEdit, GrTrash, GrCheckmark } from "react-icons/gr";
+import Swal from "sweetalert2";
+
 const CartItem = (props) => {
   const [visible, setVisible] = useState(false);
   const [newQuantity, setNewQuantity] = useState();
+
+  const removedItemToast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   const changeQuantity = (e) => {
     setNewQuantity(e.target.value);
@@ -18,71 +33,76 @@ const CartItem = (props) => {
 
   return (
     <div>
-      <div className="container-fluid p-3 d-flex align-items-center">
-        <img
-          src={`${props.props.picture}`}
-          style={{ width: "100px", height: "100px" }}
-          className="rounded-circle mr-3"
-          alt="producto"
-        ></img>
-        <p className="h1">
-          {props.props.name} {props.props.subcategory.subcategory}
-        </p>
-      </div>
-      <div className="d-flex p-3 align-items-center">
-        {visible ? (
-          <div class="container d-flex">
-            <p className="h1">x</p>
-            <div className="pr-3 d-flex justify-content-between w-25">
+      <div className="row justify-content-around border-bottom my-2 pb-2">
+        <div className="col-sm-12 col-md-7 col-lg-6 d-flex justify-content-between align-items-center">
+          <img
+            className="mr-2"
+            src={`${props.props.picture}`}
+            style={{ width: "100px", height: "100px" }}
+            alt="producto"
+          ></img>
+          <span className="h4 text-truncate">
+            {/* {props.props.name}  */}
+            {props.props.subcategory.subcategory}
+          </span>
+        </div>
+        <div className="col-sm-12 col-md-5 col-lg-6 d-flex justify-content-around">
+          <div className="row">
+            {visible ? (
               <select
-                className="form-select pr-5"
+                className="cartItemSelectCantidad px-3 align-self-center"
                 name="quantity"
-                style={{ fontSize: "36px" }}
+                style={{ fontSize: "20px" }}
                 onChange={changeQuantity}
                 defaultValue="default"
               >
                 <option value="default">{props.props.subcategory.qty}</option>
-                {[...Array(20)].map(() => {
+                {[...Array(10)].map(() => {
                   return <option key={qty}>{qty++}</option>;
                 })}
               </select>
-              <button
+            ) : (
+              <p className="h5 px-3 mt-1">
+                {`X ${props.props.subcategory.qty}`}{" "}
+              </p>
+            )}
+            {visible ? (
+              <span
                 type="button"
-                class="btn btn-success pl-3 pr-3"
+                className="bg-success rounded d-flex align-items-center p-1 m-1 bnt-cart"
                 onClick={confirmChanges}
               >
-                Confirmar
-              </button>
-            </div>
+                <GrCheckmark />
+              </span>
+            ) : (
+              <span
+                type="button"
+                class="bg-secondary rounded d-flex align-items-center p-1 m-1 bnt-cart"
+                onClick={() => setVisible(!visible)}
+              >
+                <GrEdit />
+              </span>
+            )}
+            <span
+              type="button"
+              class="bg-danger rounded d-flex align-items-center p-1 m-1 bnt-cart"
+              onClick={() => {
+                props.removeProduct(props.props.subcategory.subcategoryId);
+                removedItemToast.fire({
+                  icon: "error",
+                  title: "Producto eliminado",
+                });
+              }}
+            >
+              <GrTrash />
+            </span>
           </div>
-        ) : (
-          <div className="container">
-            <p className="h1">x{props.props.subcategory.qty}</p>
-          </div>
-        )}
-        <div className="ml-3 d-flex w-25 justify-content-around">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            onClick={() => setVisible(!visible)}
-          >
-            Modificar
-          </button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            onClick={() =>
-              props.removeProduct(props.props.subcategory.subcategoryId)
-            }
-          >
-            X
-          </button>
         </div>
-      </div>
-      <div className="p-3 mt-1 mb-1 border-top d-flex justify-content-between">
-        <p className="h3">Subtotal: </p>
         <p className="h3">
-          {props.props.subcategory.price * props.props.subcategory.qty}
+          Subtotal: ${" "}
+          <span>
+            {props.props.subcategory.price * props.props.subcategory.qty}
+          </span>
         </p>
       </div>
     </div>

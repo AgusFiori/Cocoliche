@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import SubCategory from "./SubCategory.jsx";
-//import SubCategoryName from "./SubCategoryName";
 import Rating from "react-rating";
 import productActions from "../redux/actions/productActions.js";
 import { connect } from "react-redux";
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai'
+import  Swal  from 'sweetalert2';
+
 
 const MenuItems = (props) => {
   const [displaySubcategory, setDisplaySubcategory] = useState([]);
@@ -22,11 +23,14 @@ const MenuItems = (props) => {
       })
     );
   };
-
   const handleChange = (e) => {
-    props.loggedUser
-      ? props.rateProduct(e, props.product._id, props.loggedUser.token)
-      : alert("logueate");
+    if(!props.loggedUser){
+      Swal.fire("Ingresa a tu Cuenta para poder calificar")
+      props.props.push('/login')
+    }else{
+    props.rateProduct(e, props.product._id, props.loggedUser.token)
+  }
+   
   };
 
   let arr = [];
@@ -38,8 +42,10 @@ const MenuItems = (props) => {
     var avgRating = arr.reduce(reducer) / arr.length;
   }
 
+
+
   return (
-    <div className="col-sm-11 col-md-6 col-lg-4 col-xl-4 my-2">
+    <div className="col-sm-11 col-md-6 col-lg-4 col-xl-3 m-4">
       <div className="d-flex flex-column">
         <div className="menuCardImg" style={{backgroundImage: `url(${props.product.picture})`}}>
           <Rating

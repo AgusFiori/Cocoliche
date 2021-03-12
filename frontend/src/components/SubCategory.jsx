@@ -2,6 +2,7 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import cartActions from "../redux/actions/cartActions";
 import { RiShoppingCart2Line } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const SubCategory = (props) => {
   const [productToAdd, setProductToAdd] = useState({
@@ -14,6 +15,18 @@ const SubCategory = (props) => {
       stock: props.sub.subcategoryStock,
       subcategory: props.sub.subcategory,
       subcategoryId: props.sub._id,
+    },
+  });
+
+  const addToCartToast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
 
@@ -31,6 +44,10 @@ const SubCategory = (props) => {
 
   const addToCart = () => {
     props.addToCart(productToAdd);
+    addToCartToast.fire({
+      icon: "success",
+      title: "Producto añadido!",
+    });
   };
 
   return (
@@ -66,9 +83,9 @@ const SubCategory = (props) => {
           </select>
         </div>
       </div>
-      <span className="addCart">
+      <span className="addCart" onClick={addToCart}>
         Agregar al Carrito
-        <RiShoppingCart2Line onClick={addToCart} />
+        <RiShoppingCart2Line />
       </span>
     </div>
   );

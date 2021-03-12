@@ -24,7 +24,7 @@ const Order = (props) => {
     );
     Swal.fire({
       title:
-        props.order.cart.data.user.name + " " + response.data.response.lastname,
+        props.order.cart.data.name + " " + response.data.response.lastname,
       text: `Telefono: ${props.order.cart.data.phone}. Direccion: ${props.order.cart.data.address}. Notas:${props.order.cart.data.addressNotes}`,
       imageUrl: response.data.response.urlPic,
       imageWidth: 100,

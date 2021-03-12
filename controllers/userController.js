@@ -109,6 +109,7 @@ const userController = {
                 }
             })
         } catch (error) {
+            console.log(error)
             res.json({
                 success: false,
                 error
