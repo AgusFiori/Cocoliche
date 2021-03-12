@@ -1,4 +1,7 @@
-
+@font-face {
+  font-family: "Asfalto";
+  src: url("Asfalto.woff2");
+}
 .hidden {
   display: none
 }

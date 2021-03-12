@@ -62,7 +62,7 @@ const MercadoPago = (props) => {
         id="checkout"
         onClick={sendData}
         type="button"
-        className="btn btn-primary"
+        className="btn-primary h1"
       >
         Comprar
       </button>
@@ -111,12 +111,13 @@ const MercadoPago = (props) => {
             <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn-secondary h2"
                 onClick={() => setVisible(false)}
               >
-                Close
+                Cerrar
               </button>
-              <div id="button-checkout" onClick={() => sendCart()}></div>
+              <div id="button-checkout"                 className="h4"
+ onClick={() => sendCart()}></div>
             </div>
           </div>
         </div>

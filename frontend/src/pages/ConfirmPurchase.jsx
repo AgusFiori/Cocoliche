@@ -44,32 +44,32 @@ const ConfirmPurchase = (props) => {
       <Navbar />
       <div className="container p-5">
         <div className="row justify-content-center">
-          <div className="col-6 trasparent">
+          <div className="col-8 trasparent p-4">
             <form>
               
-              <label htmlFor="address">Dirección</label>
+              <label htmlFor="address"className="h1">Dirección</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control h2"
                 id="address"
                 name="address"
                 placeholder="Segurola y Habana 4310"
                 onChange={handleChange}
               ></input>
-              <label htmlFor="phone">Teléfono</label>
+              <label htmlFor="phone" className="h1">Teléfono</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control h2"
                 id="phone"
                 name="phone"
                 placeholder="+54 9 11 1111 1111"
                 onChange={handleChange}
               ></input>
      
-          <p className="h5">Propina</p>
+          <p className="h3">Propina</p>
           
             <input
-              className=""
+              className="mx-2"
               type="radio"
               name="tip"
               id="inlineRadio1"
@@ -82,7 +82,7 @@ const ConfirmPurchase = (props) => {
             </label>
        
             <input
-              className=""
+              className="mx-2"
               type="radio"
               name="tip"
               id="inlineRadio2"
@@ -94,7 +94,7 @@ const ConfirmPurchase = (props) => {
             </label>
 
             <input
-              className=""
+              className="mx-2"
               type="radio"
               name="tip"
               id="inlineRadio3"
@@ -106,7 +106,7 @@ const ConfirmPurchase = (props) => {
             </label>
 
             <input
-              className=""
+              className="mx-2"
               type="radio"
               name="tip"
               id="inlineRadio4"
@@ -116,9 +116,9 @@ const ConfirmPurchase = (props) => {
             <label htmlFor="inlineRadio4">
               $100
             </label>
-        
+            <br/>
           
-            <label htmlFor="notes">Notas acerca del pedido</label>
+            <label htmlFor="notes" className="  h3">Notas acerca del pedido</label>
             <textarea            
               className="form-control"
               id="notes"
@@ -128,7 +128,7 @@ const ConfirmPurchase = (props) => {
               onChange={handleChange}
             ></textarea>
 
-            <label htmlFor="notes">Notas acerca del domicilio</label>
+            <label htmlFor="notes" className="  h3">Notas acerca del domicilio</label>
             <textarea
               class="form-control"
               id="notes"
@@ -139,15 +139,11 @@ const ConfirmPurchase = (props) => {
             ></textarea>
       
         </form>
-            <div className="container">
-              <p>
-                ${acc} + (Propina: ${data.tip})
-              </p>
-              <p className="h1">TOTAL: ${acc + parseInt(data.tip)}</p>
-              
+            <div className="container text-center my-2">
+              <span className="h1 text-center">TOTAL: ${acc + parseInt(data.tip)}</span>
             </div>
             <div className="container d-flex justify-content-around">
-              <button onClick={goBack} type="button" className="btn-danger">
+              <button onClick={goBack} type="button" className="btn-danger h1">
                 Atrás
               </button>
                 <MercadoPago data={data} history={props.history}/>
