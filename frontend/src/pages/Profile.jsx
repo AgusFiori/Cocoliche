@@ -27,13 +27,13 @@ const Profile = (props) => {
   return (
     <div className="d-flex">
       <Navbar />
-      <div className="container bg-dark p-5">
+      <div className="bg-dark p-5 w-100">
         <div className="row border rounded p-3">
           <div className="col-10 text-center mx-auto">
             <h2 className="text-white">Tu perfil</h2>
             <div className="text-white border-top border-bottom pl-5 pr-5 pt-3 pb-3">
               <div className="d-flex justify-content-center">
-                <p className="h3 text-primary">Tus reservas</p>
+                <p className="h3 text-secondary">Tus reservas</p>
               </div>
               {reservated.length ? (
                 reservated.map((res) => {
@@ -55,13 +55,19 @@ const Profile = (props) => {
                 </div>
               )}
             </div>
-            <div className="text-white border-bottom pl-5 pr-5 pt-3 pb-3">
+            <div className="text-white pl-5 pr-5 pt-3 pb-3">
               <div className="d-flex justify-content-center">
                 <h3 className="h3 text-secondary">Tus compras</h3>
               </div>
-              {props.loggedUser.purchases.map(
-                (purchase) =>
-                  purchase.confirmed && <Purchases purchase={purchase} />
+              {props.loggedUser.purchases ? (
+                props.loggedUser.purchases.map(
+                  (purchase) =>
+                    purchase.confirmed && <Purchases purchase={purchase} />
+                )
+              ) : (
+                <div className="d-flex justify-content-center">
+                  <p className="h3 text-muted">No tiene compras todavía</p>
+                </div>
               )}
             </div>
           </div>
