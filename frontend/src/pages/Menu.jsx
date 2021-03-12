@@ -28,6 +28,8 @@ const Menu = (props) => {
     setPreloader(true);
   }
 
+  console.log(checked)
+
   switch (checked) {
     case "todos":
       props.allProducts.map((product) => filteredMenu.push(product));
@@ -44,12 +46,18 @@ const Menu = (props) => {
           product.category === "principal" && filteredMenu.push(product)
       );
       break;
-    case "bebidas":
+    case "gaseosas":
       props.allProducts.map(
         (product) =>
-          product.category === "bebidas" && filteredMenu.push(product)
+          product.category === "gaseosas" && filteredMenu.push(product)
       );
       break;
+    case "tragos":
+    props.allProducts.map(
+      (product) =>
+        product.category === "tragos" && filteredMenu.push(product)
+    );
+    break;
     case "postre":
       props.allProducts.map(
         (product) => product.category === "postre" && filteredMenu.push(product)
@@ -121,11 +129,11 @@ const Menu = (props) => {
                           name="filterOption"
                           type="radio"
                           className="form-check-input"
-                          id="bebidas"
-                          value="bebidas"
+                          id="gaseosas"
+                          value="gaseosas"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="bebidas">
+                        <label className="form-check-label" htmlFor="gaseosas">
                           <span className="form-check-text mx-auto">Gaseosas</span>
                         </label>
                       </div>
@@ -134,11 +142,11 @@ const Menu = (props) => {
                           name="filterOption"
                           type="radio"
                           className="form-check-input"
-                          id="bebidas"
-                          value="bebidas"
+                          id="tragos"
+                          value="tragos"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="bebidas">
+                        <label className="form-check-label" htmlFor="tragos">
                           <span className="form-check-text mx-auto">Tragos</span>
                         </label>
                       </div>
