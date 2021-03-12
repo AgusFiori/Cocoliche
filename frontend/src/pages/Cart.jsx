@@ -36,7 +36,7 @@ const Cart = (props) => {
   return (
     <div className="container-fluid d-flex p-0 menu-responsive">
       <Navbar />
-      <div className="container-fluid d-flex align-items-center cart-fondo py-4" style={{ backgroundImage: `url(${fondo6})`, backgroundAttachment: "fixed",
+      <div className="container-fluid d-flex align-items-center justify-content-center cart-fondo py-4" style={{ backgroundImage: `url(${fondo6})`, backgroundAttachment: "fixed",
       }}>
         {props.cart && props.cart.length ? (
           <div className="col-sm-12 col-md-8 col-lg-8  trasparent px-4 mx-auto ">
@@ -65,9 +65,9 @@ const Cart = (props) => {
         ) 
         : 
         (
-          <div className="col-6 trasparent my-auto">
+          <div className="col-6 trasparent my-auto text-center p-4">
             <Link to="/menu">
-              <h4>Agrega algun producto a tu carrito !</h4>
+              <h1>Agrega algun producto a tu carrito !</h1>
             </Link>
           </div>
         )}

@@ -5,7 +5,7 @@ import productActions from "../redux/actions/productActions.js";
 import { connect } from "react-redux";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import Swal from "sweetalert2";
-
+import { IconContext } from "react-icons"
 const MenuItems = (props) => {
   const [displaySubcategory, setDisplaySubcategory] = useState([]);
   const [filteredDisplaySubcategory, setFilteredDisplaySubcategory] = useState([
@@ -47,12 +47,15 @@ const MenuItems = (props) => {
           className="menuCardImg"
           style={{ backgroundImage: `url(${props.product.picture})` }}
         >
-          <div className="bg-dark rounded-top d-flex justify-content-center align-items-center pb-1">
+          <div className="trasparent-light menuCardRating d-flex justify-content-center align-items-center pb-1">
             <Rating
               fractions={2}
               onChange={handleChange}
               placeholderRating={avgRating}
-              emptySymbol={<AiOutlineStar className="icon emptyStar" />}
+              emptySymbol={
+              <IconContext.Provider value={{color: 'black',  opacity: 1}}>
+              <AiOutlineStar className="icon emptyStar" />
+              </IconContext.Provider>}
               placeholderSymbol={
                 <AiFillStar className="icon placeholderStar" />
               }
@@ -62,6 +65,9 @@ const MenuItems = (props) => {
           </div>
         </div>
         <div className="menuCardBody">
+        {/* <div className="d-flex pl-1 pt-1 border-top"> */}
+        <h3 className="text-center my-2 menuCardTitle">{props.product.name}</h3>
+      {/* </div> */}
           {props.product.subcategories.length === 1 ? (
             <span className="menuCardBodyText">
               {props.product.subcategories[0].subcategory}

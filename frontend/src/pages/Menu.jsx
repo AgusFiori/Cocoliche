@@ -6,7 +6,12 @@ import productActions from "../redux/actions/productActions";
 import cartActions from "../redux/actions/cartActions";
 import Navbar from "../components/Navbar";
 import fondo1 from "../assets/fondos/fondo-1.jpg";
-
+import fondotodas from "../assets/fondos/fondo-todas.jpg";
+import fondoentradas from "../assets/fondos/fondo-entradas.jpg";
+import fondoplatos from "../assets/fondos/fondo-platos.jpg";
+import fondogaseosas from "../assets/fondos/fondo-gaseosas.jpg";
+import fondotragos from "../assets/fondos/fondo-tragos.jpg";
+import fondopostres from "../assets/fondos/fondo-postres.jpg";
 
 const Menu = (props) => {
   const { getProducts, getCart } = props;
@@ -94,7 +99,7 @@ const Menu = (props) => {
                           defaultChecked={true}
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="todos">
+                        <label className="form-check-label" htmlFor="todos" style={{ backgroundImage: `url(${fondotodas})`}}>
                           <span className="form-check-text mx-auto">Todas</span> 
                         </label>
                       </div>
@@ -107,7 +112,7 @@ const Menu = (props) => {
                           value="entrada"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="entrada">
+                        <label className="form-check-label" htmlFor="entrada" style={{ backgroundImage: `url(${fondoentradas})`}}>
                           <span className="form-check-text mx-auto">Entradas</span> 
                         </label>
                       </div>
@@ -120,7 +125,7 @@ const Menu = (props) => {
                           value="principal"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="principal">
+                        <label className="form-check-label" htmlFor="principal" style={{ backgroundImage: `url(${fondoplatos})`}}>
                           <span className="form-check-text mx-auto">Platos Principales</span>
                         </label>
                       </div>
@@ -133,7 +138,7 @@ const Menu = (props) => {
                           value="gaseosas"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="gaseosas">
+                        <label className="form-check-label" htmlFor="gaseosas" style={{ backgroundImage: `url(${fondogaseosas})`}}>
                           <span className="form-check-text mx-auto">Gaseosas</span>
                         </label>
                       </div>
@@ -146,7 +151,7 @@ const Menu = (props) => {
                           value="tragos"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="tragos">
+                        <label className="form-check-label" htmlFor="tragos" style={{ backgroundImage: `url(${fondotragos})`}}>
                           <span className="form-check-text mx-auto">Tragos</span>
                         </label>
                       </div>
@@ -159,7 +164,7 @@ const Menu = (props) => {
                           value="postre"
                           onChange={handleChange}
                         ></input>
-                        <label className="form-check-label" htmlFor="postre">
+                        <label className="form-check-label" htmlFor="postre" style={{ backgroundImage: `url(${fondopostres})`}}>
                           <span className="form-check-text mx-auto">Postres</span>
                         </label>
                       </div>

@@ -52,9 +52,6 @@ const SubCategory = (props) => {
 
   return (
     <div className="d-flex flex-column justify-content-between">
-      <div className="d-flex pl-1 pt-1 border-top">
-        <h3>{props.name}</h3>
-      </div>
       <div className="d-flex justify-content-around mt-2">
         <h3>$ {props.sub.subcategoryPrice}</h3>
         <div>
