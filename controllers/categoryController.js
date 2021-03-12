@@ -3,8 +3,6 @@ const Category = require('../models/Category.js')
 const categoryController = {
   addCategory: (req, res) => {
     const { category } = req.body
-
-
     const newCategory = new Category({ category })
     newCategory.save()
       .then(newCategory => { return res.json({ success: true, response: newCategory }) })
