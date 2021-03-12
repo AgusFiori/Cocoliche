@@ -110,7 +110,7 @@ const Admin = (props) => {
 
   return (
     <>
-      <div className="container-fluid d-flex p-0 menu-responsive">
+      <div className="container-fluid d-flex p-0 menu-responsive text-white">
         <Navbar />
         <div className="container-fluid p-0">
           <div className="col-12 mt-5">
@@ -198,10 +198,10 @@ const Admin = (props) => {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row text-white">
               <div className="col-sm-12 col-md-8 col-lg-8 mx-auto ">
                 <span className="h1">Listado de Productos</span>
-                <Table striped bordered hover>
+                <Table striped bordered hover className="text-white">
                   <thead>
                     <tr>
                       <th>Title</th>
@@ -237,7 +237,7 @@ const Admin = (props) => {
 
             <div className="row">
               <div className="col-sm-12 col-md-8 col-lg-8 mx-auto">
-                <Table striped bordered hover>
+                <Table striped bordered hover className="text-white">
                   <thead>
                     <tr>
                       <th>Pedido</th>
